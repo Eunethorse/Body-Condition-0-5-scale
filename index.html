@@ -1,0 +1,1748 @@
+<title>Equine BCS Tool</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Fraunces:wght@500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root {
+  --teal: #00755F;
+  --teal-deep: #0B2E24;
+  --lime: #92B93B;
+  --cream: #F5F7F0;
+  --paper: #FFFFFF;
+  --ink: #12281F;
+  --ink-soft: #4E6459;
+  --line: #D9E0D0;
+  --safe: #00755F;
+  --safe-bg: #DCEEE6;
+  --warn: #C8862B;
+  --warn-bg: #F5E9D3;
+  --danger: #B23B32;
+  --danger-bg: #F3DEDA;
+  --monitor: #D4A017;
+  --monitor-bg: #FFF8E1;
+  --score-bg: #F0F4EC;
+  --card-shadow: 0 1px 3px rgba(11,46,36,.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --teal: #3BAF8E;
+    --teal-deep: #B8E0CF;
+    --lime: #A8CC52;
+    --cream: #141E1A;
+    --paper: #1A2722;
+    --ink: #D8E8DF;
+    --ink-soft: #9AB3A5;
+    --line: #2A3D33;
+    --safe: #3BAF8E;
+    --safe-bg: #1A3329;
+    --warn: #E0A240;
+    --warn-bg: #2D2518;
+    --danger: #D4605A;
+    --danger-bg: #2D1A18;
+    --monitor: #E0B830;
+    --monitor-bg: #2D2810;
+    --score-bg: #1E2B24;
+    --card-shadow: 0 1px 4px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"] {
+  --teal: #3BAF8E;
+  --teal-deep: #B8E0CF;
+  --lime: #A8CC52;
+  --cream: #141E1A;
+  --paper: #1A2722;
+  --ink: #D8E8DF;
+  --ink-soft: #9AB3A5;
+  --line: #2A3D33;
+  --safe: #3BAF8E;
+  --safe-bg: #1A3329;
+  --warn: #E0A240;
+  --warn-bg: #2D2518;
+  --danger: #D4605A;
+  --danger-bg: #2D1A18;
+  --monitor: #E0B830;
+  --monitor-bg: #2D2810;
+  --score-bg: #1E2B24;
+  --card-shadow: 0 1px 4px rgba(0,0,0,.3);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* TOPBAR */
+.topbar {
+  background: linear-gradient(135deg, #0B2E24 0%, #0D3A2D 100%);
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.topbar .brand {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: #E8F0EB;
+  letter-spacing: .01em;
+}
+.topbar .brand small {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: .06em;
+  color: #9FC3AE;
+  display: block;
+}
+.lang-select {
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--teal);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Source Sans 3', sans-serif;
+  cursor: pointer;
+}
+
+/* TABS */
+.tabs {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--line);
+  padding: 0 16px;
+  background: var(--cream);
+  position: sticky;
+  top: 44px;
+  z-index: 90;
+}
+.tab-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color .15s, border-color .15s;
+}
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active {
+  color: var(--teal-deep);
+  border-bottom-color: var(--lime);
+}
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* MAIN */
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* CARDS */
+.card {
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: var(--card-shadow);
+}
+.card-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--teal-deep);
+  margin-bottom: 8px;
+}
+
+/* INTRO */
+.intro {
+  border-left: 4px solid var(--lime);
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.intro strong { color: var(--teal-deep); }
+
+/* FIELDS */
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.field label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 3px;
+}
+.field input, .field select, .field textarea {
+  width: 100%;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 4px;
+  padding: 8px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 2px solid var(--lime);
+  outline-offset: 1px;
+  border-color: var(--teal);
+}
+
+/* ZONE SCORING */
+.zones-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+@media (min-width: 600px) {
+  .zones-grid { grid-template-columns: 1fr 1fr; }
+}
+.zone-card {
+  background: var(--score-bg);
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  padding: 12px;
+  transition: border-color .15s;
+}
+.zone-card.scored { border-color: var(--teal); }
+.zone-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--teal-deep);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.zone-name .zone-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+.zone-desc {
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.35;
+  margin-bottom: 8px;
+  min-height: 32px;
+}
+.score-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.score-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  outline: none;
+}
+.score-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--teal);
+  border: 2px solid var(--paper);
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  cursor: pointer;
+}
+.score-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--teal);
+  border: 2px solid var(--paper);
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  cursor: pointer;
+}
+.score-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--teal-deep);
+  min-width: 32px;
+  text-align: center;
+}
+.score-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+  padding: 0 2px;
+}
+
+/* SUMMARY */
+.summary-box {
+  background: linear-gradient(135deg, #0B2E24 0%, #0D3A2D 100%);
+  color: #E8F0EB;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 16px 0;
+  text-align: center;
+}
+.summary-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #9FC3AE;
+  margin-bottom: 4px;
+}
+.summary-score {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900;
+  font-size: 42px;
+  line-height: 1.1;
+}
+.summary-class {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.summary-reco {
+  font-size: 13px;
+  color: #9FC3AE;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* BADGE */
+.badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.b-safe { background: var(--safe-bg); color: var(--safe); }
+.b-warn { background: var(--warn-bg); color: var(--warn); }
+.b-danger { background: var(--danger-bg); color: var(--danger); }
+.b-monitor { background: var(--monitor-bg); color: var(--monitor); }
+
+/* PHOTO */
+.photo-section {
+  margin: 12px 0;
+}
+.photo-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.photo-thumb {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1.5px solid var(--line);
+  cursor: pointer;
+}
+.photo-thumb:hover { border-color: var(--teal); }
+.photo-add-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  border: 2px dashed var(--line);
+  background: var(--score-bg);
+  color: var(--ink-soft);
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .15s, color .15s;
+}
+.photo-add-btn:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+/* BUTTONS */
+.btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 5px;
+  border: 1.5px solid var(--teal-deep);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.btn-primary {
+  background: var(--teal);
+  color: #fff;
+  border-color: var(--teal);
+}
+.btn-primary:hover { background: #006650; }
+.btn-secondary {
+  background: var(--paper);
+  color: var(--teal-deep);
+}
+.btn-secondary:hover { background: var(--score-bg); }
+.btn-danger {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-color: var(--danger);
+}
+.btn-danger:hover { background: #e8c5c2; }
+.btn-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+/* HISTORY */
+.history-item {
+  border-left: 4px solid var(--lime);
+  padding-left: 12px;
+  margin-bottom: 14px;
+}
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.history-name {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--teal-deep);
+}
+.history-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-soft);
+}
+.history-score {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--teal-deep);
+}
+.history-zones {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 4px 0;
+}
+.history-zone-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  background: var(--score-bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 6px;
+  color: var(--ink-soft);
+}
+.history-photos {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+.history-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+/* GUIDE */
+.guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin: 12px 0;
+}
+.guide-table th {
+  background: var(--teal);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 8px 6px;
+  text-align: left;
+  position: sticky;
+  top: 84px;
+  z-index: 5;
+}
+.guide-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  line-height: 1.35;
+}
+.guide-table tr:nth-child(even) td {
+  background: var(--score-bg);
+}
+.guide-table .score-cell {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--teal-deep);
+  text-align: center;
+  width: 44px;
+}
+.guide-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.85);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 6px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LEGAL */
+.legal-section {
+  margin-top: 24px;
+  padding: 14px 16px;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.legal-section summary {
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+footer {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-soft);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(60px);
+  background: var(--teal-deep);
+  color: #E8F0EB;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 10px 18px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.3);
+  opacity: 0;
+  transition: transform .3s, opacity .3s;
+  z-index: 200;
+  pointer-events: none;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand" style="display:flex;align-items:center;gap:10px;">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAABiCAYAAAB+koVqAABiX0lEQVR42u19d5xcVdn/9znnlpnZnp4AoYMkKEgHkU0C2H2x7QLSIWwoIqKkgOLsoAghNsRCCiWh76Kor2IDkoBKkSgKCb2Tutm+O3PbOc/vj3tmd3azJdQX+d3v57Ofnblzy7nt+T79AAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBAkSJEiQIEGCBP3IZrOirqlOvi9OhpmSO5ogQYL3gSzLCn4bBVqWIZjxtuwvm82K2myt9Q6ykkA2a6HufUJMCRIkSPDukMZK6+0iDuasyK58+wR9XVOdzHJWlC479baPTz/91mM+ddqNtam3rP1nsxaAd84KGIVA3QXn7vZWtk+QIEGM5EV5V4mjSQJrmSini8va2n47VQivp7q6vo2ZiYh4e4VkE+pEHZo1Efq2aXr4o7tuKYiWr8xc3WPuL2/v+Oqa6mRTXf/+zmiaNY21PF5r/T9Siv3LxqbQtamndsXJKx+oa6qTzfXN6g1ZG9PXEUq2cb41Z08S1pEohK/6i5bcB2bC9p7/m3nWL7oohcpeShX4Ti9Nx6OrjPGjH3lv5BolSJCgH1ZyCd4d4hCiXhHVKwBobW2eTlJ8QWn9yZoa9/AtLfmHABwBNG6PwKcmrhP11KzqEQvj2x449FBI8UWt9Mcqami/fMG7AcBZ2ZW1MjdzdTS6bM8KNAI5yikCcMYdRx+jQV/RCp+yXWGTkPB7w3/2bO5t1NpaAwDbTR59xJFTAJCee/4U2OpLGqinkA+k8RUp7bX9DcB9qK8XANRbutjZrCgPXh3b40xtRc4QdTa2plL5DV9CZH0VpPdPRWI1rJ6feNnsrQCodN1ttk+QIEFigbzbaGpqknV1dbpoVbR1/uozYD6XmY8tr0jbgR+CgDt78t4dE8cd/xsAGMkCaWqqk/VGcF9zzx7u2Kox9QKigRlHpsskersiuK5cUiiom0+b8cjfso2gXA56JCumtrFWrs7FJHP6bcfOAvElwhLHCEkI8hEYCIUgEhZtDbrV0beedf+67bQ+CNlaCbNv51vn7iMUfwXgE8lxalgpQGtF4K8Jn5p6yyduRS7Hb4c14M5vuMlvx9lYsiTss8Ka6iTqm5U7/+xfijHVX9BtHb/yFy79YnF533pZCNdruMFfuOT0kncksVASJEgI5N2yOJiAZlG0OLa2//LzkjDXdq3DBRG6uwsA2M9k0lZ3d8/lUyaddDnzSoto5pDWQpYhACBH0IsXH2iXT7dPI8JFjiumKQV4ecVECN2U4O7O8PTZH3/sjpUra62ZI1gfpSRw8h3H7msRGgXhiyQFgkKoicEgEgCImbWdsoRW3MqF4KDlZ6x+OZvNitxwGnq/UIZ7ccPuZMt5AJ9Kjp1iPwC0jkDEsCwLUfQbb+GSz6OuTqK5Wb8pYZ3NCuRynJrbUA/XOgVhNBOW9QiH6nb/pbYbMG0aozHHuPjkTEpmLmZb/o1C9RFP5b+P79+SR2OWsG4dubtVn0a2fTzC6KOw5Wr44Qpv0bI7kM1SYo0kSJAQyDuOlSuz1syZuQgA2tqaPyqkbLQda5ZmRk93QROByQhmAHrcuEqxaXPb13aYdNI1g0mEGdS4qt8NdfODh31eCnzbTcn9A18j8JWKjRYSzGAhATclqbcz+swZxz76++zKWmuwCyubhUBjFjnK6brFx1RlqugSAVwoHZHy833EsU1WFGtWTpktQz96PNWd/sjkhgO9HHKMkvhL0VWEXE5jfkOVK+XFBL6QbLuCPR9gjsy+yVhAisrTUvcWbvYXLjkV2ayFXC56Uxe+qUlibbN0/ZpbxLgxdXpr+wO+n/kEXn896COmwfvv/06oqxPYcUcn5fbeQ+PGzOCW9l95qUknYvp0hfp6lTzZCRIkBPKuuKvWr2+ami6TOSHodNu20NWV1wAgBIlBlgpLKbXrWrK7N/+JHSae9CfmJklUr0rdVSvuO2Q/6YorHEd8WmmGV1BKgAgEMcglpaVNREB3mOfDTvvYI08xZ4UJ2lNttt9ddeptx9QLSd+zXbm73xsCihUEyZEtK0SpCtvye8I7Vpx834m1K2ut1TFBEbJZWRTOqQVzToIQl5Nj7cZen8Uhh3neQkqnbM4XLvWuXnrlGyKR0qB7TF7CLWz4LtKpZ+F50/0UXYbcksI2Vk1s7ajB7jx8/aKU6/R8F6nUWniFvf128S1Mnqz6rI93NsifIEFCIP8/u6uy2ay44MIPXiAtuiyTTo1tb+9mAJpoeMHMzNpxLAJRR3dHcPDOO5/44mOPNVgHHbQkXPbrIyrS49QlRPR12xFuvjdS4NjiGGF/KpWWMgj0076Qh7z2kb/3YlWtKFoiJ908c2/bkVdJS35ORxpRoCMiyO19FhgIUxW2Xej0Lrzl1FU/mZatc9blmgMAsOc3fFAKuZBs+UmOFBBFIxFHyS6h4NiW9rxPB4uuv2dIAT/0s8sDPi9usLEBNnJL8shmHeBlgdxyb/tdYael0FbJuPZaH9mGDNAeIT63bY+VIEGChEDeLnfV5tY7PuJIe1GmPHV4d1ceYRgpIYSMJSSDGUPIHQIRoDWrqsqM7O7Nr5k49oRDiEjf+rfDP0fEV6VScu+ergjMrEYiokHupqii2rY6O8KmM2Y9ejwAnHZjbYrSzkUAX2I5siLoDRUTiDA8GQ0j7pkkNAmK8gEd1HTqX56c+I2TyzqcsrkEmg/bSsELFMAE2s59M2tYksDcRoT9CldctwGNjaPGHZy5c/YMoszr+NGPCgOJ4C24wobb/qKL0o5VmBosuu6Z5MlPkOB9QCCx9t9IwHQCgGYAdVjLjY1AY2Mj0xt0NzCDGgGa3lzXd13W1jVzo5H8xfqIuJ6j6K66dVym3P02M33FcSzq6SlEACQRkY5ZA7aQsKXEIA8WmBmaGYo1IqXVhPFj5dOvrfvF6qevc8eNrTkz8BUCT0VEJIkG3iuOxzvSyURjaiwr6Ilm3/lc+avl5eKHlmPtG/RGYKVHdVeNQlAqXWFL5YUP3PmfPX4Ugb5HrrsPFzyAoRBbNG/0ZiqkXYmC/0fv6qWfRFOTHDb2ML+hCqnJvlvYuIIIP/WAf6Md+QFZV2/eUhi4fbbOqfLHlXkc7AcWX/XT9qnw2cZVv2hPxEeChED+60gDBDSJWKCPHtyMYxPjzXm2MFBnUkUJROBioLpxxgxdWuA3jPZNfeFfgLZsvf1M27azmUx6p/b2bmYGC0GCjWRP2y4AoDXfxRu629BW6EGgIgLArmWjzHZR7qRRlUojbTl4aet/9Kvdj8u01YOooJgBZiKhOSaLImkwAEsAtgQEDe3TiTR4U8Hix7e6iFiKlEPwC2qAu4pGdizFZ8usmEgWdywFICWhs0fzq1t8er5nB/SKiaCgoEBCbMczxcOuwxxROmXpvHeWv2jpDcjWWsU0YGMZCORynF7QcAgLcSU0f5QFbYRSN/ip4Cpgl+BtzZbKZgXwspPy3bksZAMxTwbRgxSFlxSuXvZIkp2VICGQ/y6LQxCR7v/+p7Ju398p9P0xOogcJaRvQ3Yzo2Ps2PJ2oo/3bgch9GmpP1pZWz3WCXZkravBJAns2Ta6osDp2H3XsOOIqQ8XLGEj9B/8tBd0fNNJicN7ewsoeL4CsQRii8KWNgQRHt/4Iv/t1afwfPsmdPl5irQacOGlEBAkmMiFhkQUdaHcFro6JfQYN7LKbY2M1EhZDEcwSWLYkiAE0FkAr+8gbO4G8gGgQSSJOe2ALUG0wXOwObBBUlB1ivVYRw8I4jPzAFIqle4AIKQAmGG7ApGvIAzb9BQ0v94SYUNrRJFitgTxVrEXh0hJgh71BkKImLYZehtLhZkhJQPcSVG4b+Hq6zdu48oy7iVnXsNXZWXZNdzd+4L3YvveJmYynNVBI9DW6E67bFakvI1PU3lmT93T81V/4bJr37KbLEGC9wHe0Ur0bDYrGhsbATQCeOMupQGWBDdJIlIAxNb22z8nYB/f1t51hNJ6B8e1yU7b0FojDCMwo7CltaNjy9Y7txDoNRC9REQvCOBFOPRqwNam18t/33YQLQ3/9PgxZXm/qw4aXwq5cDBrmiBsggZBKSAKGOCg97mXqH3xvYetd6yx8sEXmw+qSFUDoRNl7AqRdsqEI10IYaHMttHa24Hl/17J/9r4IoEAV1pIWTYIdh9vaQb7CuiNAF8rYlYQVIauiOXrBUiww5YAScFwBLMjmDM2oIMQXZ0hv7KVqa1ApFSf/C9aVSK2FEK4MoQQ4E1SUFkKnLaJ066A6xBSNsG2CJYEpCASIrZIiKHsjCVVwW8mzd/LF9xLIkWf7+n25JYOUGuXplAxLEmwLUFgRVX8Om+l3UcnDykJWuchRAa2JeEFDLAu1puAiKCURtqt4UhfB6L/QV3d4DiKRl2dJAJzwf+oBh/o7DJmtwB4DszDmVVvtrsVAYCT37Q7C1xDvfnHwHQwsrUW1q3jPmIq5ayhnvHhmkXWmf/1b7L+5b9NWc1mR74L21pzNNBPS0Opv0lCw/8vFghzVqxaBTFjRqN6I2RSTG3tbP3D4XZaXWPZ8mDNGr35AsIgAjMMOTEREQkhIKWAZUlYtoQUAkRAGCkU8j6iKOpOOWVb1254dMPjr/9lklOW2r2tAPi+hgWtKizNGZuJAAoUkSJBJAhCCjAr9PQUNBOzJWwpyYJjpdiRaZQ5aUhZhd++2Ib13VtRk84AAGswWIMUM5QGKw1S8btBIEAMc1eKN0czQILQ0hLwlpaAtGbYVuzGooHZQQMsCeZ+6yJ2g/VfciEIUoAtYUhEEqQAhGAmYdOLPbv+uytIdYN4fFr6ezpRq0ijHY6MiEiU7IsgEKITO3I3TSSBaKjHikGkQcTE+kitkCFHzgfzx8m2ERcXcv9mRVeW553lL1x6wxBZWQMtjYYG28Q/htFkLqis8iPZyUoj5TLyvQxdo1HezegqY1S2MbCLBtYBG2sYx7RrNANoatIgAurqxHZkhf3/LUeYgcZGGoYIEiQE8sbx0ks3TqoaXzlRawpkBW2soc93lJLC4MaCQ5NHXFy3cWPzZ+AUfhlq3/EKUVTmVCBtlwkQiUgFUKxARMZt3yfduOQPAIihZVmqAs9sWYPH1t8LaMIfXkpFr+cFuQLCFkBaMqpdhZ3KIkzJREhLRsQEBWhikBBCFHfPJgguoMGssWqji61BGikh0NUdcqQ0E4hsm5BKSbiOICJAKTNKGvE+MAFkWYTNmzxu2RqQZcVhGON+GuyYGdZRQ7HI7Yvi9Jktg9xYBIV2nsp+ahJJqQDN0KEGSEBwhBp+mVPoIg2r73AEhXbszAUaQzQUgTBHlElb3Jv/prdo2feKi9OXnnMYM+YAXAdGBloDRASGhhSA1t1pYOf2hUs6B7gbi/UYdXUS06bxaALLnd+wCpb1QURhBCYCoEHMYCpaQHG6Nfd/jhmSNIgjuC6LvHcyS7kzp53LueAFYCIQx+uCIkgBKLXBf3jKiVidi0y8Rqe+efpOiOylcXIBacPlOtYrSMGSzGHhW8Gim54rbvMe9yMTGhtji2rdOt6O7gEEgKuyF1ZHKtopLEQKMmKwrSEjJrAGHE2sIi81+XVz/vHTelFdOlM5vop6tKZyrcm3mXyPqbJcd3oFRspSyP28N7FC3kcurKK1sKml+eia6sy9ICDf6yFqU5u2tt/1OBHu9nr9XxHVby2u39wM1NXVD+gqG2dYrbGIDgrZe2KfR19ruv2vL/zeUSFHrp22Mk4Fj8lMwNSavXjHmt0pZZchUgGUjuLabBMnLpWtmjXSdjlebHlaP/Ds7yClzRYJ+tAY39qpXHA+EthckNQTCQSehU0FCxW25l3LQ+xcHlG5raUGoLTu8/YLAtJSwIskHt2a4o7QonIH6OgM+PXX8kRxpi6EJFgWcSZjcVWVhfJyi4QgKMXQuiQ8PygYYdmEtragjzyKAn8YBYCGI5IBlDqIWIoRdUERChjDAY0jEXqaQ7MKEYEjaEh00g6wOQ+JCBoWBCJ4qOAC1RBBDUUeCq5j6YL3d//qpVci85yF6RMYa6dxIZd7GMDD6Uvn/IKBhyCEyXdmhpSSlX68vQN5ZLMCphgyPjOKz2/7W5+MJSnGQIn4hhFGc4sM8cXZpCk6TDjOhxCEwIB8AQZsC5wvbMHeGwmrAaxbRwCgdKpKutbHh9orMQO2DebgJwCeK27z3lY5iQEMjP1k65zy7prKoMIZB9/TwVXLnu0jAVNg6nve/1DaWS4kK5CUIM3QFJO01GDmLWh7fh8AXWhosLBkSZiyq49jLZZqGYXwIICQ2RaMfF67lmR4UYs/d+6hWLSoG0l9zvuDQBob18Y3UdFLhYK3PAzUBAY+PGZMxaQoUp/Qmj9BwOUdXb9c4RfUEqL65wdaJeMJaGET7whf23Tbh7qDF/93XPnk8p2rp0eaI2trzya057dQl9eKl9ueRlVqDO8+/kPYfdy+VJGqhtYRIh2BuV+Zk8JCyirDy21P84PP/1ZY0oGAgGbGlLIIO5aBGEA+Eniqw+YXum1yBFCIiP7d7uK5Lhs7lkW8U1mEKkfDFkwAwVfAaz0WP9XhoDsUZAuNSAGZjEVTd86wihiFgkJPT4QoYurqCtHVFSKdllxTY6OiwibbJlIarHX//CBCxozSujXgzVs8kpJGTtsdQut7IxYmQSNiFx00JVYKt6nhiC2NCClqpd25itfDRoEULHTTpKF5i8GQEohUnjWdDiJGNqtRX9old51VyC1+NDXv7G9ReeZ77AUoxjIE9AIsWRaWxBAYBGQWzD4wf9Wyf26vwCBAQ+lYg4AW27jXht+SIYg4DDvy31+6yZ3fIBEEGpGKAGWVxDs0mAWBOjD5mYH7UxGDtRoiv4CZiBEpIhbBe15SGOvIuaThA2TZJ1CgJgF6BwYmUoHHhxYqJGOshrgbwBfQVCdKW/eDuc9+7H+giMAsIASgtQUVDLhKrDlFlihHgDj5ovh0MQNSgJWW8Lyklu39RCDFBnuTJn3pRQCnA0B7+93VHR35U4REjoCaMFQTa2rK52pdOK+t45fN0HxjTc3Yvw/sA/XrivbO6DQQfYdJVVdYE/Qxe3/JUlqhN+jmZzf/C2s3PUogoDfopsdevR9Pb16DXcbsw7uNnYaazARyLNcorRq9fjf/e/3f8OTGR2KLgCTYPMuhpj7Z50jGQeN8qnE0r2l1iRC7tEImPNvl0IvdNsoszRkrFuc9kUBvKEgDcAX3ZzEJoLIy7isCBnuewuZNHvIFBSkJBU9Tfr0H1w24qtJGebkFyyEmImjNKOQVOtoDdPdEJMQQMYXRyWEwiYywTezV6cQOrOAMF8foI5EQGWqlPSDhgyGhYFGcgTV4G1bk2pYu+BcHi5Y8F6fllmQuxc9KgKY66dUvvdKd39BBQpwPS06A5zcVFi172AguBQBll5w1EY7NUUH9KDP/nAtZB5sLL3dvHjU+wSxiC49jobWt/55RzO4rneSLoCGFJK1fAwDSSCEOWYkBBBtvIwAmrJswkEA0SwiSGDLkxwwiQvQGk0sYhOY6gbXTSs9FvwH3VxzQnl5i8aydxqN0QxYANGlxhCzLZBmF2L+qGdAapHRszjK8oYdczDjvewz7bWJmAkgh7Q48tgQQF1NF0Nrq36IYPSQPSiXxlvcTgZS6oFatapQzZjRqIuoAcO2rm25ZVZFKN1dUZvZube3ypJRllZWZ0z0vOL2lteWZzS13/JMZrQBNbNnqH1JdU75zEEbo7ipoIUh4YQgQIW1n6KCdZ2FC5U784Au/pSDykHHKEUQFrN34MD275V+oyYzn6vR4OJbDvX43be3diE6vlWzpQgprQEC51NmlGfCZsHtlSGmL+dEWlwpKwBGMtGRoAHklqCcqkR0E7F4WcosvkY+IivJeq5hQBIHSaYmpO2ewcaPHHR0hWRYBghCGTFtafGxtDWDbxIKIlWZEEZPSTJZ8U+QxkESKoYphVhGI0INxXKDqEcijlETidzaCC+rzK2Fb11XKtbjg/8FfuOQXI6a91jcrMJNP9AsA143JXlDRtmhpF4rzdJj6j4jlfhTRlWRbByjmu0HW91CH6zFt1NiBGNFWsSyCFHKbjCrNglIpcNT7mtmLPfJDT4xp0wYJQYtGIQOQEAMTBErH0R+YjoV7U50ENStgCNIcrQVM6aRe8f4w5D4ADLEfgWzWosJGxflCxH4QAbBNQI4QewwsMMep1hvbJLJZQlubjF1e23QlKFFsiABm6PGD7qHJzmND/FRKoYIABaS7eMTzBQSmr+M+giwS59ppZGI46k3GiAemhzUNIPRtybx47QeSPkrG9kaIsF8BWLsl3t+6CWySPvh9QSDU5yvNgZlpzZol1tRJJz/x/PMrjqoZx03jx1fXtrZ26fb27pCIpOs6e7uutTcAaM1Ip120tHR0gfAv17VrgyDkomhWrBCFvdipenf6xD4n8arn7kZbfgul7AzS0oFmhdbeTdTSs6How0ekQ9SkJyBllfHW3vUkhT2kslW8u74mTM5ENGuy5sfbXGwsSFI6foapxNta6SjetybAhJTCn17PDMwiJaOWEkgpBhGwww5psm2BrVt9EMXZUEULI4qYitPcas2oKLfYcYjb20NRYoW8UZOdRtqCoBEijS6aQmKoGMaIO+bhtAcNKQlh2E6SzgaD0DhKkQhR35wdbblruwY0LoxJxPJzuT+78xo+JirLp6O7+3lv4dIlIwSeSyywYVuqMIQgVuoVRGoTiGUcZGcBIiJmRhQ6YF5dooUPL2sIavBYbJDQhGIKHA0ph6TiAUJ7YPiOB5Nt1YJzawqCDyPWexCTCynXA/xX74pfvDZsw8e6Olm05JBtyNiB3EOwmiKY0kqSZ0FszNvyReSu7SpxWfVbJLlcAAA0b04vhLDMOGVfII1ZG6dU3igKRWUh/i9YjnL/h7iHo7TCIWaUZ3hI4mjMsYmb6UEuEn4DxDu6MC4+f8PNj7OdiR5gJjTXixFTurNZAawSyK2OhjyP+D6Mvp//BgIZgkxCE2Df8thji4/dbQ+60nGsC8vKUq7vhwhDBc8LYDuxUtPb6z1KjAYwH1FZmandurVTFcdL5kn1ogKq0+PoE9NOwqMv38svta0jzQqSLBAJSBLQHIFAmFqzN39kt0/hyQ0P8abuV8iSzgArZCjpE2hCxmY6cmIBWzzJm/IWeiIBxbFba0I6wuS0IlcyeiJRzO8pFRPcF80vWiWaMXGii3RacEtLAM9TVBQt1K8Q89gxDiZMTFFrq99X3sD8FsrhRkAn7cAMOXQQ/M3dcU22ZXHBO7+waNl67F8ivEZCcWKn/kB56YuvkD0tBZ9fVj1dHyKIo8suOWtiby63edQAKvFwle+KXNuivP/jwtVLfjyKJovt0O6GeqkFht+MAEIYIUQ2a6X8jX9hiHJorcxV0AAUCaEs+PU9V964NXXJuZd5AucIISeTsPs8YRxFPal5DVd7RN8ZRKpkHiCVmdtwgLbFeRzgWGI9FbYNJoJgho4UXF9txDfPXUk6WuLlcjFpFifimtswk8rcw3TB31+EEQAWg54VgUiBGdPc+WefCQBkWxGFuruwcPHdUHpkMtDMiCK9jXE84jbQ6GrnIYkyB6QXnH0wkzyawfuDMRnMKRB5IGwkwhOQ1v3ed372EJqb1ZCKyAUXuNjFEnjZjGvMJsbGGsbkZxi51ZEha43aWss5fJ9PCUHTCdStIv++4Orrny7tUJ3Ozt5R+fJDBOxGjDEgJia0MdMLgvlJj+hVFGfjHGos/QqAxuIG237N2ou0niq0riRCyBAt5MgXCkQbRtzPfyOB9L9Lccfagw6aEwK4ePPmO24mwila8eFK8wQi8sMwWksazU1Nf/rNnDlLws0tTZ9UWg/5BgoSCFUAR7qo3fM42rNzP36p9Sm057cgVD6ksFCTmYBdx+yDKVW7kG25KIT5vqrq7fH/KAYUCBNSmial/VidKalXCzXB04SUZMpYzAUlYMVeIxbD6P5RxKiosKmszEJvr+JCQUFFGiQIritQXm7BtuN035LsqbeZPGLXVTcmsofK7XBdbbfvUsXtSAp3+IuW3Y5s1kL9G6rYHq7oj4FdAv+q3E/N92f9omAfiTzq6gSY5EirMNhBQ4ONsjILlZUD60kaGxUaG0UszEcQgmRE2jZRIBW3Dhj+eoEiodDWJpHBEeTaDpTut3WYQa6DqFc1pOY3HE4Z99PIe0AUKh7gh6VyqshcnprX0Ovlcj80gl8jmyUQaXf+Od/VkhaQbUmEYeyrDcJSUpckxGSS8stM9OXUgnOu9/zWC9CMwOgEnxXp1EU6CMGxK1kMJkoOIpBlHU62dTg0AykHHPY8DuBuSLJGtUC7ugjZrEBbm0A2K5DfMPI2gjQqSywQY0mk5jccBSlzDMwgxwLpON2+zx4lAgQdz2GE1KXnPKI1vhvkcr/rE7jmv1vm34wOfQQyYQSAqFCtUY0IvC/pBXt9PSD6rX1RwwdlStxEjnUANIPK0hCt0U/B/FUQRe782bNI2hexr2cI2yqPK3aLeg3AWgNhlE9des4jDF7hP9d2m7H2+pWi4nl948yd2XHPp5f5c2C1R1wJbEJDSoODqDt16TmPgXCjd8V1t5Sey/uCQIpB9mI/K6L6fwP4d/yeDJ5MqUk2NEwWm7fqp1WkCcPWNxAUK6hIYXLVzrRD1W4IdZzOK0jCkQ4YjCDyAEUIIs/4dHi7SQQAQkZclTFI1ywOzCLG5HSELZ6ERaNEEeI6EBABFRUWVVYOvA1aM5SKC7dTKRn37HrbLQ8NBRu9NJ7EkAHwN0UeGlIK7Qeb3QyfbwS8fhsfHm3qEGhYd8RgbNlC2K2GRoxBAJ2mEDEc4phANltcV456UQfDJlPuycM3H3O0BlsC5PciDCWUHpDWzUEESPldWALc3asQB/HlgP0xa84XAHC2YsEpy7vrb24tJi248xqWizL3VO4tMEdRBED2ZUABqi+xQClmpTSIQGXps1IYs5s3jT8DRgHz4HGhEEEpBSJ32JclipijSAEUkYQF8MMxkY4QPyKAmBWW97Xe9wEA885Wo3iwNJAvZvRJ5HJRat7Z82BbC0EE+EFxLAMcubElz3GY3rEPFZb4X3fBnEV+LjcPdXUS69YV7/dkknIHCFXqQgC5DsgLD6y68LQH/BTdC9uawAU/AigCkcVCrwERuwvOvppsZy6IgEADfmBqgAbFloTIQMqZQoiZqT3HfZUXnD3Pv3LJfWhs7ItZuXPPPhOO/X1hyxoOIkDrWAHoL3wgCFEBS84kIWa6l57TwKF3ZpDLvaP1Re86gRgBykC9Ys4KYIYAZigiiorEUUzljR9q/VB3d2/etq1MGEZM22bRmIQMIIyCWIElAWmyrPyoEK9BAkor+FEhVp7eoHeQRvktZMIuFRG90G3DVwRrJMfFIJcWD1WbQcVYkCTHERyGDHrbKIQgoNCDsRyNmHX1xlmJXNtC3ru2K3d92zvSL6roRmLuJ5CRJnrae28aNnZBRFAamujw1IKGDiOUIghSKmJtZdJa9XpP+evWvWy4RtDIBLrtGCIlYInh3F1xOwIlFCp7CR6kiSsMtDapqFVoVUx1GtJVpljBdSt9Dx8B8FvkVkepeWdfQuXpU7mnEIBgg4wlwAxISeTYFisFBCEbIomnIOjJB1SemZnqyf/MI5yB+bDj6ziKGy82m+NzYJJgei6WkiPEMxhgguUsmL0XwY4AEhR6IUhMHDF3nYgxpYbN/Y+cebO/RmXphZz3tMmskyUyjs0y6hMYQNyegsGiPD3XnXe29q9eugDZrGVeTo0o0tBamXMCiBT8UIKwp59yrqZUagL35gMQOWCWrDWxEA878xq+KsrL5nJ3rzLKQzFzT5ixFIVAnAXoB8zgkKoqP4yunuNAdC+ydTbqm4PU3IZvUJn7ffYDcD6MjAJRzPyLnwkyrWGDUDMzi5R7JCP1gDP3zBlBLvfMO0Ui/ycE0n//cxqIT4r7HBdrmWiAv3zz5q13fDeTcb/X2Rnp4gM+nDzo8yWwjvuakOj7LVQB+5E3RCbn2yA5GchYGvuN8fmhLWlYpuSZt49Qh/NuwLYIO02w8dxrPmzrDdWCjOgl0pDI09i31GVwiIC05ILfLaVetl2B87dyLCKk5805pKB614Jo+KaZkycTexvFMGJPchiCLHkapDyt1BcmhAK7NsjzLkFz81V9Ea2RAyB6sL7BmiUG5a9u+xZKjgPGoSiaREM+DFJasC0gioAhs1eZSRALQXsCgDP3nL0huJHznjKN2KiP6CyLWKmt7Pl/AHgfsq2DEEbc93IQOdxbiCjlnu4smH0lWPiwHYFCIEYLeEIIgNmOy/vxXN/yITPDSUApEGgnYloHjhhEcVNN1oL9AH2kN1hrY2ZsmEIggn3p7P0FrB9wwVdx2vYQWV+2HTe405pLhIAEgTnvhZRy57vzZ//Zz+XuNw9BcT9csj/BQQhi/ixADucLDCIntk8lcRC1SuhqFuIq7i0Ux0LbXCMpTE8CrQGKXQCO43JXz1Neyp9rlK/AXdDwMTj297ngR2ZfVqngoJRrMTPg95USxS4LLwiRciaJSN2F7GkHAwjwDhRbCrxHEM8VDibKaeaV1oaupvGtrb/cd+vW5o9JKQo9PV7Q30JkNE8KsxCCOEbE0BFBqCD0ESofRAL8lq4jDRt0n1oe0QHjPPb1mxPNVOL+IgJCxZgyzsKkGgtByKOowNtvfXio4gAZEzh/O0Q6K0o5BNY39155/WY0170TGg8BQObShsnuN7+yK7O+Mm1nPuXMnbMnLrhgaLdKWxuNehvCSMMLVN+fHyhEkQ8vUKSpUMIQclSf/DYUJUdvb89ao61z+Fb4RYEPbmXfO4Mj9RBsGwMqZUvNceZUPBx1AaUcB3EMkQZpLKEgfMZfuORUPxV8FEo/bTQUPYC0hGChcSGA9Yii55l5s9l+mCwgXWCtt7DmVvb8FghDIMy0HXdXQggLRDaEcPqyvUZyGW7cyABYKvFdWJYYRA5FxSa+hlH0FJhDSEmDBABBa9PgTXyn5FqJYTU7IcpBcAaSsgQIT4PocHLdtPFT0zbXSHOeI90GzQFcR1DatSCENBZsA3LLPUxfx7jgApc0/xSaTRMiEiUKFAPs64J3C3v+b0ycrbQ2wYYXhFSW3jdVcM8z8RD5dsvt9wyBMDMxr0xt2dq0oqun/SkrwDOK1ROpjPOnskz6R1prh7fjIdSa2bYtYq0jx7FpzJgKq7qq3CovS8sIPoU6IHoTGjeV3D/Nqk95IhJ97lUC4CvCfmN8qp2UZ81xkP2NGDy+IgSajDyKl3WHhGk7Ozy2UrIf8pu8vkVyYmhY6KHxoLcr9mE0NPYDn7X4IQDC2mlvfwph3M2VoGgCsboBrjOLhbxOCP6c+X3b53lMF436nMc3Ufb9ARIcf9aiVEhrMbxbjeKsoCHfMRrJ3cNkCVU1Zlzs3uBh3XYBtKr3Fy67iQQ9TLFbTA8dUCDPSJPPcRDxoPNXcGziKPxn4aolj8RxnuUeFN9LtjVonyQ5CIhBX/RT6dsLumZvBl1NrhPX+Qx8wKJ4OW72U+6evrD3Tnn+XkErXjABC9qOp4jNPAPcN9/AaPrEkiWh+43Zu4LoY/CDottq8PULNdFnvYVLpkHrowHkzctVmoQgEYQgIQ6358/5kBmQNYq70owTURzzERExntOEyUO6VBkKjg0QrvCvXjLWE3ISh+HH2Q+XwrE9BNE13sIlf8UFF7iob1apdOE4Srt7IggHTn3A0OTYxKCv+1cvPcW/eunnWOvbyHVo4H1hyUHIAM5Dts4xWVz0viMQQwwEIFJafd627T2IUMPM6Okp6M7OXrWdQlKnUg601pvZEgcEUXh4T493fmd34fogiP7R63e3a1bMxnHDb4A8Ih3CC/NgMNJ2hpkZfpiHHxUQ6TDuU0gESQK+Jj2txuPPTO3h8amIAzU6iWgGXMk4YkKedyoLmQAUIoJiQj4iUiA6YE+XJo+1+M24sSwJhBGgtYKHSg6ogt7YVRjF+ki7Akrf6H9/yQtoqntngnZGi8ovXPxvVqoJtuyGUuu9hUsW4dpr/SGD6l15GlX7jQWXHvAXm2aqT1uIXRqj1DKU3Jm6PmYVo72yFIaMVJqGzD9jZkghOIra/KDiIWRrLegRBFtcb9+bnnvmFLKsHaDUwIwp7uPMDvuSc/a1L569v3NJwwcg2DUCmwY8+EozSTkxnS/sgVxOC/Dw50MASOSRu7YLV/2stfOa5R2YPJmNNkTb9aoN/Ns+L4CUs8h1bCM8aVuyjB4KFi75PbJZy1u07EEodR8cO9alBj/Hrk0W80zjspQjDoAZsCRR2rFgCYfSaQukX4CmwpAvPEHEbgQxL3XJOTe6RAf4Vy35s3fVdQ1WSFO9jH0Z6uokxvxHGdPphDjgP4CMGJIk+0G372du7Bfk/KttLEMigTACLLl7ulC5PwAeYnqE/94YSBFr1iyxDjpoTrhp0x2zMmWu7u0tREqxIIKgUebVLmZUEEELIbRtSzvwotMnTax/wqzycHHd2x+c9ZUpY+1ru7tVqDQsxQTNBD1owiEa5K6MVIiJFTvx7uM+iOr0OJS5lej1u7g1vxmtPRvRXtiCLq8DgSpQpCKkXVsqYWF8KsJnpnZHf3itAuvzlkhJppGyqQjAPtUBfXCMjzZf8ms9Nl7tsbHFk7TFEzwxpWn/3V1a86zHW7s0WbKkiy7FbnEqiakQAZECxlUKnrazi83tETZ3CHT1dqI8fIV75WSCkBBQ2+VhGOYGaEgp2PPbpdSNyGYF1r6DBUyNjQrT10ms0QV09XyQpH2wM/ecvYNF1z0zIDDZ92a5Io4vMIaPQZRUcxbjq1q7cGyw75f4nEe4SKVpvMxAc33RYz7ahdVgrXVntxix5JMAuF4KudUFzNtrhMp6Apg8htyTHAucVwO1V4JEEALAxyXzx2NffBx4YS/AEBq8hiUllJ4KYM12ToVMWNxgoWFJhMbtdP8Vn6XBJtqI16TIePrDw8SNmISABv6NbFaga52NbFazt/FJIeizPFRyY5yf9UEjlYe/zkW3otYb2A+vAKunVXfvblpYDwsdHTTMC1UMYlaR65wOrU93L5nzOgF/VuwvQc5YhNmswAUfckH+gYgUDai5YWaQJIbqTIuefaNLZ4cIWGvFU0ipoYwCRbZlaa0OAPAopk2j9xWBmPTdcMPmO76YSju3RZF2lNLFbKtiz3OO01WoNPWd4jCXIMuSICJZXVkpN7e0XjVp4gl/ZF5sNzfX6Lq68fTyqpusXWYs95ev7BpbVe4ikIpImr7dDNZMrDSgONb4B5CKIfKDph6NyVU7kx/mocFIWRkeX7GjpomQofLRG3RzZ2GrbvdaaHPHM68GwUYStj21PEPW5z7g4TcvlmFDF8GBZqbhZj2KXVhMQLWjadw4D/uO8dDmS36528ZW3+aNHZrbezSZCQNBAGsGhxGLqjLBYZxQU3IExo7jLaRcop0m2thxvIWuvOaW9jas7+jljcEOCFBBtqVBrOPOQ6OQ9qB3XJHr2FzIf633qus3FwvP3sFgGQPQPnCTWfJKCblQ39wdxQrglnWE8vQIhYSO1H60EKT+CIYNEc++Aq1JBLYU0lrbV6k8qhA0ArCxkTC97/W1MEoYhDilY0k3pHe1yIoavV3muo5MSqS1IqKxceLTCBngA9+lYa0zEgQGKoytJkfxJigAjA2TY0M/u53eDiLAsgZaN1oPkyxgRsxU9CXvwHGYZ8jgpCBsja3X0xi5nKb5De3DPlzx5ZpsqHPYaRbiuArymujj4ZXXPWmW3w8Aqa+f28nkFSClgzgtWmwTpC34GmAiy9qRbOtMVurM1KXn/FH3hl8Pcrmn3IsbdiTmSX1THJRaFUqBgB3ZkY9KZiPFOXYxDPXuxjrVLu/E6/h/SSDEvFISzYw2brnzzHTKWRJFkY4ipYhIMkMTQdi2BSljkrAs2d/2Q2kEfgjfD8MoUm2OY2/d2tbx6MTx4lsc57dH9fWx6ZddWYvpzXWCJryys9YDnTaSQJK0tkW/M7tIKpoF8qGPCeW7YkxmPPX4HRAkwAzNQotUWsru7gIECS53q6gyVaP2G3Ow1dVRu3zZX869atdd9/pgZ3f+wxlLH1Y7vvvDv8+X7ZuHJTnUTGJorxYRNBgUMSjUBEHAWFfR5IxCl+/zj5+SFCnANp2btCCSgmin8aR2nmjzmud8afpvIVJAdbnksZWSglDr4nwglRlB1eUZ7DxJUVvXa/x8+1h+pWtcqCzHsSwG+yFvZ6paSGVpm7t7F3uLlq14x8mj9AUujXcU3WXmf2re2Sd4Vy+9AwAw90waPs+NGEKAoP7pLVy2aoTYi9XvKRjRI7ytj1mPZoGQpsBntiEwEtMwGCnTbJDkyMJYkAKPqgSYeU/6Pg9VHsUgKNYMCApGjAP1H3sYic9iWKvDtgRC9TxInwkowUo4xho5RaTt09gPFYbKvuybQ5nTo5ypt00sYiSvGMMtck9skjANqrlRlHItnS80h4uWPYkLLnCxaVOEadMIGzeS98NfvJaef/YlyLg/NplYapBlR7FVSEAUaY4r8AWlU58Q5eJQ+xtnHgVLeRCmqHQ4gh+cHDHCnSbmyv8qAmFmGm7WwTjm0SyIZkYbNt3+9XFjK34QRQqua0nPCxAEETIZRxQKAUeR6lRKtXp+uFkA64noNRLiVWi8DpvWOxZtVqq8tbryU13DjWUGgJn1zWr5ykOmajXQlaGYletKSRRXiLNiCIqNREEaPYHmXcdOh5QWIh1Ba1aptCsFUdTT7f+QiP6Tybi39PZ6OmKGH/UiH/RUfKP+9QKw/lGAHwWwWBBwTtOMQ1s9+t/IonFeyFppImUM8WI0QlokrHgsDGLNAAeKpG2B/vK0wJYeULkLRBF0CKKMpBc/sJMVTt0xtXdPXiEMNRczD5kZO423iAiQjhSWI6BChlY6ztgUQk8cK9SUce3c4Re2PPLy2Ac35Ct3dRzrMA7VyA8ns6ZM2tb5wgp/0bJzUWcqn98tDIyxxNlZC849IBK0I6Lgu6lvnesgiJ73iNaCR9Z+GaIMF1zgwnEsBEF/3coeAFK+xoaX44aAjHAEnRRgpPqE8dpphGxWsLe+jASN1AYl6qXIT0cyE7vIhg24q75256RH0+ZZE3cJHqkBMxFsW/aXZ5f8JEwIgjXAsNixwYWw3fDA6C65IR8XGp4d4+yOLu/K6x4sXZya33BwXwbV8EY7MFQB6MD9D6qah4OR9kamkHE40iMijifx+ZXpT6Vw7ep+Uqqrk4WFS69JzT27Cq6Ti1M0Q4C5tIaDSsYWp1AVCiHS6RphWcsli9lFf8CIgXwiPaKKACgQg8H+fxWBxK3omgzr1ukimRQD5kT1anPLHZdPGDf+spbW1tdA+JdW+jVBYhaR2MsPwi+kXfksoFsrKsa3l1apD4empiZZX18/oInY4sUH2jNnrg5vuu/QM5yU+KhXUJpAkjme9KKyypb5XvWcUryAGAvctDjYK2gtBERPqNm1x9BONbsjUiGYOaqsLLN8P3g1AH1p0oTj//HYY4vtnabSVa5r7xgEYSRi08IFgxh32o2rfqanz5jA9fXAz+uaHznjllmnCUfeE5JiZkLE4FATAiYQOApC3mRZPFbalHFcKUkQtBfhiQ3QD7xIotwB/Ch+5T81XeuZezCHpD+9aqPct7tHnKHI+h/JAYdKoCIt9LgqSZBCKF/9Q4X6FUH4ADMmEWGslZJCSCGYgXEZveNnqjbN1PlXT1386H41mQq6U/thqfmtzIMep3ratmA/uMS/aslVJUVK/zcT+pi5ttnfIATLHFVW7K7z3uVgOgsqH8HKyGH7PoIhhGjFtdf6KFZAD2FpxeYHbRgy/5tZIPY/74bsaSnkch6ydRZyzRHNPXs/EmaWzIFabFw3wFErqnfp4ui1qlHEYH/jwJHcSMyItXj5EkcRAJYD52hhDccWHIRr4HvfZJIZCYW4qSRZEEyK0QMAQvMYSABBJKwy8c/tkkBaKzTVSWwsduHts8TEaAon6uoktmwh7LKLhXw+ZKYy2h6y0miJJ7Ic2l3HQFUs6F8GslnB/oYxw/k0zX429cWLhrGzEClYQrwSxIkdAFb3/2p6a3m53OWpS85eDbK+DUEzyXHjos0wQl9R4wChKWwUPE2WdYCO1ExmtJMUY4a1NBx7Wz+GqSks+rahtaRUCpQPOv6rCOTJJ5vKiep7+m9Nk1y1ai0BUESkt7Tc+ZPx4yZd0N659e+s8MWJE+s3AcDmljtvF0T7bK7BH/elLwWDrZa4Sh1YtWoVWmZM5zqsZaCRiYjr6+sHmKaLFx9oz5mzJlx+3yGnpMrEDWGgWWsAzJGblhYzUMirn4RRIXvGzH93LF916D62Iw72PaUVS9HtB7TPpD25zK2kgt8b1dRUWJ4XrO1s7/7Mrrue8TLzjSmiM7xNW+68u6wsdUEQRNoUnTogMHi8zs1cHcUyLiuQzYp1etVzKZ9ARIIIcAhwBTNZIBXqnic3Zw4+cnI3hULs4OejHSNFH0i7aEynZIrAylckx2dYn3ZIpHeZaFnkWrtvbYnOu6nuvm/gwvNeKSsLjytXG7QjOsSuO7nSEoiUZpaOGNPbiWOb59zbeVbTx8ZA6YlRoHbWrHbTwJ4BYxdhyc+mbLF4UlXPHW2qrF9tZ2Y4tux78EFMUkD7QbrEvx3h/wqmW2/hqqX/SM1tWM2ARhi94C9ael/FgvPHBhwO5+oXCCOw1hel5jd8xkRQ4+wrJmbBEaRk0rrdu2rJd1jqNVBq27TgeBIXRa491vWR8y+qa0SuuZC5ePb+SsoGk3stB7uuYEkipf6DXE7rBbNdMWyVuUkS7irjUeMJzGAtnODlthdTu9V0Qsqqga1RiKA0Q4ipvuutRm7ZNvN3ZBace6DS4f7eomXXl8pW5K4DUFIXM3iQ8bz2HzBuTDXoSovRXHmmIy5h770Jy5crzG3Y3qZ164ZpdBQLUcaeJgYC5HKa5s7ed6SYCRH9pyjRh1E8CMyj8H0M78qlqwEcnVlw7oE6DD/DzJ8mKQ4GCYKZnmIbt6olmVW0EwGbIcQYk0nXr/FIQRxFneyrL0MwQWuCECQ1JAhCgQvEKhDSGsNaky6QxUI92peEksu9Nwmk2M9q05Y7L62uLv/m1tamX9mWdVtnZ7SKqL4QrzPD2rK16cbxYyef3Nqx+Q8tmzqO32ef2d0vvXRjapdddom2bG1xAWBMN6qYs61AYxxEjy2YYfzr216QxY8daM85aE14w30Hf9nNyBVhoHUUMQsiUV5tW35BrQ0CfO20mQ/fCwBZhsAqnhlFsYsrHxJL4dBuY/dBFEXRmLGVVr7Xe2jrls7j9trrrJaVK1daQEv8DGm6PZ/3L2BmGTdtiwu5Vq1aNUjO5fSXbzkmLai/64WZwFVBMzGA1yLJ9TP/sRnAJgBrAPzmhnsP+fu+k/Vvzj1K1Cx5UEUdqMLq16sXfnDyuhe6qeZ6SboXAMrLgp2VdLld7wKXO16oSW98XZY5tao3hHTk7umy8HdgHHU9/bkNQBuAp0rHd/KKo08SNe4tNc7WS1raXUiLBGtm2BZxGP2NmA+HFAJKEwcBk2NfZl981i/DXO4/o85F8c6TSIRsQ4Z9/MH/1o8udBecfUzVhadVd/Z2hG46M4wrAgJKA441g6ScMUSQDnBscFdvB+rqvuc54T9cT7xOljUFUTQ4OCoRhEy2Nc/lmuNpfkOnBvYhQTaiaIiYEsP4eO8wskr0TS4znLuirc3MFEIj+5EEbDQ3K55/9n3CsT7PBV8BZPV535XS5NjjU37qIZo354rIUs9DSZas94GgE7TEcSJTjvTFZ3cUvr/0l7jgAheNjQpABOJNGEohJljsByASx6Xmn30DW1YFgijv53KnDelGGpAUQQNdX8XU31HqbthYhgTxAMeex8GuqvieSDramTtnzyC3+Dl7/pz9IOmouHXLYFIjyX7IiuT9g5xaIydNDBUzy+Uid27D5cK1jybN5+e/9/M15n3OOQtm70UkV5BtH4K4R5EYYAUJQczIM+hJYckPmBiJHHj/nAoKwl5v4dLV2ygAF583SbvWqYUrfnH1MEkobxve5jqQGZqZSRI9HEb+E+UVmZMrK6vvKasQL21uueOaDVturd3Usvmu8WOnnNzavvH2l19oPW6ffWZ3M7PYZZeykGhmVKweijRU3OokrlB/Qx6NlbXWnIPWhDfdd3B9JmPdEkVaqQgqnZHScgi9PeoHr/fkDz1t5sP3Ln7sQBsM2mXVwROI6PDQVwiUFPkwognlU3hc+ZSoakzK6ukp/NEv5I/da6+zWpib5MyZMyOiesXMNHEiHvUK/jrXtW2tNdg0m5sxY/o24x7K+WqlpWWnLGmnrZpyUs+fesusrafeMmvzqbfMWn/6bbNeua+l+tsPvyx/8eEd1ZavHi0sK+wWd/8nc37ub9OPcEIf6/PujqfdNuuGCemeg0MtyE6T8HRV062n3j8j7A1OJ6L1JAipSvfIU26ZdTkAalh8oF3XVCdrV9Za2ZW1VsPiA+1bTr3v1tbN3p0IWrmM2pXSQpNjESL1jP9iey2TOAuWZXKGWcGSJIT8Cd4ryC3J+1ct+SMA+FctvbfzmuUd5XaZQ6MlBISR4oIXbfPn+QHnCxGALZiWsZFb7hHzNeQ6w1lchCDUJOXOsK0PgYYhD2YFx7G44D/tpfy74khIxCM2miBiVFaOYoEUG6zF2Umk+ceshqhkJYrrEaTcn12rWSrxLwl+HK57OxznOISRZs9T7MjF6XmzdzTuvfjAUj/JYTS8e4dZUso9g6T8Ern2qakFDYcjzscasZkiSlOg+w42St2NCYYXDmpbA6WegGPTICWT4iwmUU1C/zU1v+EewXolgDLoQcFphoJrg7V6JLzyF0/ELi+mEV2FsT9jaPK4ePYFIu1cBsIRmvWj7iVzmlLzG05Oz204yGJd1jfPxFACnYhB9DoJ/BIy9n8OYVoJSPErd37DBakFDYdn5jYc4Myfc1zqkjk3aEu9SBVlC925Z/8oHtNpqTefp/8uEggRaSLi8ePr76/IfP6w3u7Cvq3tbY3M6J4wbsxXJ48fv2rS+PHHtbRvuG7cmPovH3hgQ8ScFUSkgXaxcmXWorfYMrCpqU7mZq6ObvzLoV9MZazbw1ArFTFVVFu2UvxvHdGMU456+OK5H/9Pb1NTndzQXc4gwALNLCuXmTDkyFOSNCvsMm6faNzYMXZ7e9cdTzz+5GcnTz61l5kFUamrbJUkqlcgakqlTNYe87ZtNRqLhroYkKpIBESF6K9Bb/jH0FP3EfAkgJcA2ghQh9JUyLh0zGuq/Ky/viiv33s8t1w0S4k9x26q/scGe/Y9/9aocKMN5DpnHLln2xkV3HNrWFC+k8YlmUsarr3pywtvu/GEv+wcFNRlQSFqJ6JvnrL8mJ2WzFkTTlvbzKtnro5yM1dHSzaUMxj0h2d2vK2gU1RDr2uLwrj9DuvT0dys/IWLb4IXnArLEpBCwvNCkXZrUxc3nIzm5tj3/X+NODuL0GTib2FIJcGBof5i64HI2uYPMJ+ZsC4fIpsVXrrjJzpf+Dtl0g6Yg21EPpFAFGkEoR7Sz80cQUoJ1hE0zkTOdKC1rNJWFduo92DW8H3dF3MZ6T0UHAGAt2jZg/DDpVSWtsxYB7rdwlAPaOkemFYuRAKRAqQcy0Q34aKL0li3jpHNivxWsRZKPQdL8pCtVABwIYjg+T6EABTnQGDQaBNKDdWWZZS6m2IfnvpmBdbfNdN36m3OM4qYhJwA1/kkSVmDSG3b7oSgiYhAlDX3VAw7sUBx14491JwdUWru2adQ2v0JB6FiP1DQ2ibbroPr3MyW+Ie2Uv8ky/qIqceR27BHGJLQ+IfX6/5a572tsKQYcK3j4jSAaAy5zk8gxN+1pDXCsX5NjnMGgDS3dwWUcr7mzG/4NHLLPdTXi/c8gfS/I1nBzDR2bN3acWO+lBtb88TeXV29H+npzf+ipbX1WxPG1J8bd+JdYgHTzYRLc8KZM3MRg/24iUGG3wx51NU16xUPHrKfW0Z3RCEr2xaW7Qou5KMr/Wfdw06ufeiB7MpaCwyqr29W01smMABWoM8QAQVtcagUyp3KaL/dDrDbOjp+PnHciSfOmNGo+smuFKs0AOiIm3p6vNCyBMhkeTQ3DxH1Exz34WEjwIigXXXGzafc/8mbT77vmBWn3H/EipPvP3jFyfftv+Lk+6bffPJ9H8h3ejNdS1e/zhVn/P1FsXynGto6d2YXdnc2eM1PZyh779TIUeEJ5VXWlBMOemVcmS7M6i1Yv/GtzFfcS5a+MGbeCfUpCh+ShE4G8p1hph0Aco2lwm9GXEsmqj/VSTvCRkGVWy3kFfjbhauXPYxsrRVX8i69GV5wPKTUEFJyGCqWdHXVhadVY+00Hu2le1fiIXHFbdyk03HJEAEhznAoFqeNVO1syIWK90mjuVkjl2PkmkMrEp/XfvgwlWUc0wU1AkOZl9x0fKX+HklxdXsEZk0p14KgXh2oOu/7Sx5CQ0OsmStl9jPoDyj+DwcRStw+fMh1487WaGiwvR1TF3C+cC+VZxwzDtVHejFhyQFuOILoO48oAlWUH512ej6F5maFtjYbS5aEDPygzwrjIaf1tEDkwg8UHPtoZ+45ewPoNBlDxWr/gW1LYGo6iq36izGIvr5PQ5K/aeVea3lXL2vSee92KkvbYA4GzllNBKUYXqDieFAJecTnGlFZxuZC8BP/qiV/RjYrsG6daQHDw+VqMfwSoV6cs2PBnBMp7a5AEAbQmkz6Lvf1WdMaCEPGUO21mQMqS0kE4T2FzOR/4tprfWK+iBxHgIQadE4YcE4cz+/CBS8y19SC0ooELXMXnLsbmpv1kK1+3osEQpTTcRZWVsRxkZyuqvr83yvKP3fehHH1V8QpvjlNNCcsavPthbt32dp+1xdtS36ICGSLvPXmjg1WAa50HGm5aWEz82NRITrqpCMfufSMM1Z7RQvFNFGm+vpmtfixAzMCPLO7lxEqITUHet9d97fIS18xtuYL55u6EtM9eNtzZc6KKVNOfCqK1MOukwIbc72ubu22Tx8pR8RFjAwCaa214wtZ11Qns9laK5vNimy2T/uhuqY6eesZq1f1dgTHpCRXv84Vpz78srxlYrlqnXt0b2qPqijKZ8Znlzwy/aDC1u5LZGXZx7/w4ZcvPPND//nzRyY83za17OWdqiu23Pbv16J7CxHvkrGi6387+7fddU11csCctLmcQjZrSfZn5VUlOtV4a6fKdjr1w08/BQB10ycwcrkIDQ2294NlTdoPvggpFTRLkXIme45zGXI5jea690x/tfh6FwQAH5oDMAfQg4R98WUs/gkRzzMsBUGShGURQE6f0MhmqfcH123xva2ztO9dBSE6KZ2ykHIkbEtA9JFH/F9KgmMLSqcs2LZgpf6k/OCIYNGSX6OpTmLy5LhtRWg5lElblEkN/Eu7DmXSFsA1OKa9WPdQQ5mURa6T6l8v/o50ymLN8XgntxMuvNb3et3PcN5fDMcWlHLjYqpYyAwiLDMlpWMLyqQsJvEqd+dPK+RT8WRL114bIJsVfnrKUt2bv4sqyhwIivsvDbUvZqLyjCChvgtQGlIKCOHAsgQsSbAkQQoLlqQ4W2zQu6Vgm/1bfaRcbDkfJy7EK66bwMhmhV9IncF579dUlnHihokD7jXQX9ehzXIFSwpKp2zuzV/vLVryNTTVyf4UcYrXA6l4faiYtGEIvYRApk0rzqOZZ61aKOU6cddWjgU6QZRMAVw8j37lAlCUSTvs+U8JbZ9l5m+3vIVLbtG9+Ssp49rmvkV95xMrQ7JEEZIgKjZl1IiUFJXlk6DVV/qsqv+WLKx+gds/gRQwnkxgWb36alM6lcJxwqKjARxls9iruroKXtCLzs7ev1MQ5PkN+O2amupkfX2zumX1wUc5aeuTvqd8MF/17L3d38vl1gXZlbVWbuZqVV9S6LZqVa1kPp9vXf3jQ60UT27pIs2sUZYpE7og55ZVffL7K1dmLZM5NoJFNEMAOW0Juo0gPwqCFd/URi4G+BvRyDnkiCOxSbHOC4vSHJdaBNoK8831zSqbhcjlVuvSvIDm+mZlxv7XL98445hMlfOXV8KKE60Nvb/70OToS+ccqXjevd1rW2omXLziPx9ccaJ+anHVlIo5WnH9XnY+mFKmH//nC3h9bcekTz3VWy1UKIIx2Q9VNtdf24Vie2eThmt7m6ZDyD1IRdxFO0S7jH+lw3LFL069adZDK+qbN8SUtyREQ4MdfH/Jb5xvNHxepORy9vwakuIr9rzZN4T1y9a+G1NpbsfDxwCQPyTfkno4sz/SJNgLBEgIWIqYSEBJApFgDgWkRdAsEUVkO0JwCAHJhCiUhMhH/9zg2hSWFXzgkvS82T8D4/OAPgYa0wCeACBt5o8ImNEJqJeh9d9B+lfeFUv+2qexFqfwBRC61utU8L8mNMcuMyYJMq3AI2UxoRX1cYNKIrqVewpP6ihiBNoGIIghTYdWWwptsoiao/ieXet7wDmpS2bfqrV1LsBHk21PIEtaJcVzsdwJwpCV/pdW6rYg7y3HNcs7Bll4ADP8+voT3D1kjgSdT65bPbCQBHGLhyDyuKd3JTF+BOBohNFr0Foxaxvc14WUESmbQC3buuLgQeneOCtOx/PvxrUyGswWCeH3Ce+4D5rvAZ9PXXLON0C4mNKpSXFWmo6r2ouxfxJEUsRVu2H0Kvv+d/2FS5YOmFdm2jRib2M1pRyJMOqbvIuKBYDMQODRAMuXQQVa/JvU/FP+pXXZFSTECX3zrUQqnrbXdNQwxxKwLCLbEqwUtB822wjO7/n+jS3mHYpQVyf9Rcsudec3rCdLXkEpp4qDCFDKxIBK4yOGUGybyJaCg6iTO7q/73N0jdnf257k8q67G8y86Kql5Y6Z48ZNvt+PutHdXXiNgAeJeKVjuY8+88ymp8y0t2/IbUaU0zfdf8jfyiutwwo90YxTZjz6IDOoublOFImDmam5uVmMH7+WVq3K6VwOevnKgxZaZZl5W9qUn0kLR4TRP88+5qGDmrhO1qFZjxbEz2azIpfL6c09TZMcJV8reMG6KRNP3G9wMWVdU51srm9Wpyw/+jgrLX6tI2ZWuiMl1F5LTlq9NX7Zhz6WIZHo+BtmHlFR7azu7Y4e/dTU7qhyjH1UoSu8b/Y9+78epstOo57eX558wLN3WzZtzHhd//nhSWu2AoC85OvHSi5cJarKDkBH1388HR2JzE4FbNxImDxZAohS3sYL4TiLhCTKt+O88z6ydjeqylzctqlwxO0vHvlI3fR11Fwk4OxpKeSWe6m5Z16KsvIr4AcaoT7S+/6Sh/7PM7LeIUraVmupEwMq7+vqnLKpY6ujlFXGQWgJwb6XcjuQu7ZrUIwG7zLBErJZKh6zMnvWmCByp0Hp3cF6AogcIvSA8KoSeDL47uLnBrtmhrgWDMSt9TWLmczYD9CTwMTxnOP0BDM97F/1ixf7gsttbRJjughdYwiVvQRYAnmPICyBqCLCD34wcF6XuWdWZDKpMoQRcWgTyBdMQsCKiJERIsj7hUU3bBjiHnH51xvGhS4dB+BYYuzD4HFgOACFRGhhIZ4k4j96kf4tFi7p3EbpYSZ3/jnHCCkqoCNiFhLQJZNCkfB0eDcW3dCNIaafBQD7knM/JMAnEPhjYN4bQpaj2ERAMxBFEQS9DOABCF7uXbHkgb5npHQsxSl2vzF7Vzj2uQT+HJj3hGP31XwU0zk5CBkCaxn0K1L6em/hklff3ZfiXcJLL92YqqysnKE1vzxu3BefobeQXtbEdbKemtWN9x/y6UlTUr/btN5bdsbRj559z7OfcD+556EKmIFVq1Zh1SroXMmNYV5sd3fvdMTdj//w+q4gvysriiaOISfq9c5/duWnr5sxY5WYaeo4RreAmmR9fb3auOWOP2TSqWNCP9hl3Lj69UVi24ZEbj76vHSl/TM/H20NtbfXbSf9tR0M0d+eYVsUtz1+6VH7VFVY6Y9O6mmClLtWV0A8s16snPfA/odnRPBwz5VLZ+LC8+bYVdaXpe9f73rebzuNJule0vA9UVV5iW7tONdftOy60v2n5p39e6os/xR35+9TEa/Za8Jr5+1e1dv6+3Me2EUZXzMwQ5dOs0kp52fQOtBBcGKw6Pp73hPWxxB+TQDAt78tcPnluu8zgL7vWsdT5Ra/F5cddJCFz3xGDXFOEoAy/nILd90VjNB+nMxcDHqEaxPPA75xYzzYYirrI49ITJ2qsXiyAuWKQp36muJt3Eh49dX4XAqFeNmMGYE5jhzwjtfVMbZsIawe9ZmW+MQeFv74fGmSQLFiujh9pYU99hB4/vmR6wuLPcn6z1sMSmDY9pq+eTe8NsS+bUud884rrxpvW53lVoi5g4iqX+jToDjHm0/kWLeOSok3nT1/CsJoRx1RDVsQgkQ3K2zy3ZZXkWsO+rZrzPGQSmQpkS9usO2X5T4W8Z6aMYk0MprgS4H1kRBPh3L8U33Xu6mvQwS/rwhkKMskLhKcoeO6j+3vtp5l0PTmOvInvPq4mxF7+L1qz+dnPLohN4QwfvbZe9wxY7o+DCHrGLp+XM3kHf/58io8+MxvUZN2WEJ1dXlir/M+/tAWk0PD2zf+lRYwU23e2nTixHETb928ddO5k8Yff93gud4BoGHxgfaSOWvCk1fMurJyYnpBz9bCnStOuv+E2myttTq3Wo10s4uuuscf/1DZk92Z7iDQv6rJ0Ma/b5Rf+flDE9Hr7/Tp7JH33vv9f33kfG05i5BJSe7q3crg68HBEjuwu6K0eBpKd2rNXxEkxoN4MjTtBInZJKWlC2LPilTbSRVy/Xe68mXodndvtsNCrvfqZWv7yGZ+w6VUUXaFLnjrpRcel//BsjXvUctDAvgwgBcR177sDiADYK0ROOMBVAN4FXEl+g4A0kaQvVKS1VMDIGU+b0K/Q6R4ryYDqALR0wCAqVPjdV95ZXChng0gfAPvJ5e4m6O3760vaRF22WUWvvOdCGDgsm+/MQWgGDu67DIL37k8Ht9l37aAVcDlD0QlpCqwbZsTMhlQGLZgr7ZW4oEHBp73l74Uk9Lll+thSZv6Y/Bx3cqgX4tzVMa/DTU2MwlWI6FxlUDjDNMoEwLTTXr+oK4X2xyjrk5g2jQadVrnpjqJn20hrF49MDmg2PmhuL8DDyR8ppyR2w6l9hOfcNHSorFmTXGf6n1HIDFprGUg94ZrPQa7dlbcf/BJE3fK3LL+5fzVZx77j/lNTXXyiCNOrC6v5oMjT32ABe3LSu/LwF4TxlXXAAKt7R0vA2iCFnff88RVl02Ykv7UxvX+DWfMeuSsolWz/ecSu6s6OprGMOQGzw/+OXniiUcMtkCK1712Za1cPXN1dMrNs26pnlJ2UvtrvT+85fT7v1E8n2HPlyHQCOxwxCE7j59gv9DdHlxz2qx/XLTnt2a+Xp72pzQcpL59zscf+S4A7JQ9YcrWoOp4JjqPysv24N4CEIUF2HYaWgNSglKu8eeGYOZu4RW+k190w6LZd8w4yWexfOVTY57cTDvuZ3EI7Qc/hqKfEumv0diar3BXzxr09HzB+8nNr74j85+/9WebAYwFsBXAKQBuAfAPAAcB2B/AvwHcA+ATAI4E8HcAzwGoBNBphPY3ANwNYBWAfQwJuQC+B2CZIYSfAvg8AA9AL4ATAKwH8DiAC8z2EsAjAH5h9nsqgI+YdS8B8H0zvq8AOALAieY8TgKwwJDXejOef5r9ReZcLjO/++ZYNxoS/AGAiWaMPoDZRihdAWA/AK8D+DmABwCcb9ZZao5ZZX4rWgUfBvBxAFcB2BXAFwwRS0POKxDPglJuPisAXwSwDv0FqwcDOM5cw1+a4x+NuNOvMMT6JwCFQfdwF7NeK4DflxDwbuZeFeeRfxZAT4nisKM597g+5EC8hjV9204312hNCQmkzPrd5nsxHd83y9lcc9G3z+0XEIT6eoG77lIDCPONT+5jSNe4ri77dhzHLioA/XU/70pbof/TjBmiehVnY73Jk2UQVq3WN66sTZElrmjb6ndI4GrmrKivb1aWHdxcVbbDH8aOrf5RWcY9i0EfsCzxfHtn94/b29s/OraG9xg3pm7+uHFffFhBnN/ZHvamUvSRpscOrFqLZuY3kJJa7P1VXV3f5vnhH8vLyw5ra7tr52KW1uCRr56xWmU5K9L5zjO6tuTvr5qS+fpJN824MDdzddSw+MBhi66mN9dRYyPYcfCVdIVNE8ujR/jk7+z6rL/32KnVKdp1B/mdm1YddukF13zCfS13xwbvysU/2s1una66eo+DVr8DxMMcRsuhdYGDYBO6er+ArsLhOtB7Wr3hboVFNywCM/mhPLO8IiXnHrPp2LDTO4qVekRUVX6NJJ6n6oqvcGf3PV531yzvJze/ajJX3kvkse2TEs8JXRQSCsDhRsjsa36faH6fBOAGAIcasrnNvCeTDIkcCeA3RtDaRvA2GOG6L4AXDCltNZrkCeal/wCAAwH81Qi+fc3xdgTwIUMSDGBnMzYYAXyLIYQTzbYuBs6vvjOA/wHwO0MsNxii8AGca8b4IIBHjWC8A8CnAFxnCO+zZn/nAjjD7PNMAF8rEcQA8FEAV5rP+xnCOwDANHMOAPBdc/yjzfiWA/ic+e0CQ6D7mmvydbPvPxmimwvgq+ivtbXMuE40JHQWgB+ae1K8V7eac7sZwO3GekTJfXzC/P4nAHdiDWxDOH8CcB+Auwy57We2udIsL2IFip0C4mPdYj5fDuBpALPMeV4H4Brz2w+NYvIYgP8A+IwREHY8JQCfC82rwfwAmB8yhApzLe8BcF7J8T8LoAnAb805HmOuSQrM10Lz95DLRcjlImj9TWj+AYjSZp16AH8A8L8ATjfPDSHBQOsDAG687+AL/vxCLd9w78HzAeCxx+Lc+g1bmmp7C/97bktL84x8/q6dme/ZpsBv5cqVVtOTdQ4A3HT/oQ1/ebGWb7zvkKWl+99+JWOlxQzavPWOLzKv4k1bmi7sd28N5SqNCbxu6cfGnH7HsWvn/O8n+eQbZ3xxuGNnTVfZFasP2fV36z7KN6487GEpgMz82de4Cxdw7Y9POvmuvx70yJ9fnMG3/vXQ/9y06tBPDjfW1Pw5v0hfPY/t+Wd+uHR5bTY+7qkrZn7rpOWzfj5gmwVzTkpddv5TqQUNS1Bnigbr3gPFgyNb1+PNC/X5YvgNcee76wEcYl70F0pe3DyAi8zn8822thFii83yr5nlZUZI/arkuAeWaM2XAShmF30VQHEeip8YlxnMOmsN4RxsrJHi/BJPDhJoQyl/nxvk2tpshF0xJvCpQdttMWQzGA8aYQMAvzbWGEoE+jnobzb5P8O44R4w51vc/3oAc0q099wg12KVGeMxw9y7CnPMRSVjaTfkDQDPGMIa6rpMMcf8rPleZv4vMdblRCNUHwDwvPntRvN8lJ5P8To8bL4D8Vw0XHKe95dcu7+a+/lRc17jS1yXMOPtMhbcCeY5gSEgNoRWlFPfKSH3FebzIcbKK7qmJhj3avF7pVFm2BBdI4CHSkj3/TWh1Jt3f4GIVqsbV+5X7dry2y0bvY3WOP+n2SzEQQcuiQBgyoT61RjQJrPYlHGVBFoYqNfF+IRxWS1ZvvKQL42f5M6+4f6D7zpz5uo/FWMO2zeqGYoI3NYm7m3v3JrXOjoVwDWNjauG9CnnctAmMN528tLa44Skv7mVzq0nLjtqQ27m6odqV9Zaq0vcWcWYTqFMvd7VHn25q6AfVPG05n+RHa169ZW33nLWnz50t7++MJcEZceOt++55a+HNkW+vPT0B459qRarxGrMALAKVFBXcG+ehWV1xYHOLYTGVWo1xUVoK05d+d3BATzvqsW3Gk1P95nlRO/1bKuiQAmMEBlvXtbPAjjNWBUfNS9ikUDqjbvqdKP5hWb7Lxghv7MhmV6j9d5vBKI27hdt1rnLvMRVRpisNC9w6fwVZQA2GEG1wFgKxXu+i3HZSCNAJhht9Frz7gbm/KQRsikjfK43//NGI54L4C/G7fZVI8R6zb3MGkFfqqE6Qwhzq8QaEeb7dUbAX2+07fFGYz4ewN5mfHljfQFAs9lOmN9sc67Hm+v1rCGyonvuADOW5SXb/Na4HGHuSyWAqebzxkEEpQHsZKyeFjOWE824N5v1rjbCv9xck9KkAFVClFGJa8019+lwY+m0lcQtFICXzXkMtoKLpP7SIKVDGkvkWwAuNErI382132Tcnr8wbtiDjPKxyfx+oBnzBnOtMsY9B2PZdaKvDwbeNdfWex4rjYa+YtUh8/70fC0vv+/Qs0uXG7IQsVXQJIvV8SPFFphBt688dJemRw/vue1vh71y88OHVGbZFPa9obgOsGnzHXfmC7/jzZub9oiXD18FWtT6v7x0xkfO+tXH/TOaP7bp+MUzdy/9bbssspJ5L5bdd9Detz54WPPvnzqKb/3rYXzjykN3AYO21y2X5ayoG9yapPi9fw77/wbimGRe6mONq0UZgfI34y8/1HwuuiBajBb5oxL3E4yVstxohZ3oz3B61ZDMYAvkYPO9zbi4niuJa1xfoukuNNrtXsbH31wifDoA/Ngc59NGaNw9yD//JSOUbjHH/VqJ5eUZrfo8c/7Fc5lqSKXLxABgBOJvzec/GgFmGYIjQzxFN+AXzLGWGzI6yCzfaEj5HqPp/9sIvcPNdf+AuW4p83+CEepPGO3+64MI7Diz3V4lRPkLY0UVrYJuc29WDFKKdzHjfc1YGF9HfwbYXLMvgXi6oMgQzU+Na6r4fD9oiLd4rD+WXJ/rjCtsobn/d5nf7jFE9IxRTpxBFsjPze+xWy0+zmHmXsG46BaZ5d8xy79pzq/FEO1HzHN3h4lJ5cwYNpprPd5YrwzgzwCOeqdi3uK/lUBa4hYkYMIzYaChNO9dutzEJTRR3PSwWB0/3P5yBN24qlaeOPORl7s7o7njJrpTVQ8vylFOT/nsgTK7stZaubLWGo1MTMt6kgK3pFMZsNDGxzlj2O1W51ZHtStrrdvOXvW3Qmd4spO2JmZq7D8cv3jm7qtzq6O6IXpMZUvHEreKt3IEzQzKrqy1Zh/92DMnffThutbNwf+wxjVWgdtAJd3hGGRm2qOhr0dONw+2vIqFb/2tJf4bUBQUypCJMALlaSPI/mFe7klm/XFGM7+oxP8No9m1GJcTSgR2s7FYiv73iw0RFN1QvzfbUIkwKr1+RVfYs0bgfhr9QdyHzXc2+3kW2wZui5r2ycbFdqFZXgz8LjdC6y9mPzVG+CxCHJA/oES7D0oETbcRrL3or2IOS4R0ZMjiTOMGLGrpkdHq682xInO9BeIpupQRiqqECM8xQu6HJfuBGacAMMaco0KcRVes/RhjBPcBJsaCEkug2EL/VHPcH5rz6kWcWKHMuuPMeq3mPvgl96c0tbe0z1YxiL7QEORkQ4QwFtG/zP34Rsm5cMn5dhqyvt8s/4I51mlmv58oiXP5Rhk5BcCXEWcG7mrG3GziTTONReMYV1WLIaXTzLneX6LY/NfK/Lc/BmIE6PKVhz7e9Mjh/s2rD5xcuvzNoIljYb185aH3/u8TH+UVqw499o251mIZvXlzU/nWtubCppY7nmviJrk9VfXFuMeXl886Z87vPsVnNh37av3Pa/eNz+mN9bHJZiHeynV4H6B47hOMYP6w0dyeNMQxxrhZYLS3G0piJA1GSJa6df5TohmeZgTRvoZY/mC04meNO6i2ZBxFAri1ZNlNiDOXYCydotb7JbPuvea36cbqeNwcQxmNs9QCOd1sU2WEBSMOBhfjDuuMi+YuI0ifMN9/ZCycP5ac95+KepARXLcYIXWUIdSiEDzVfL7auOjOHCJ+9JpZ57SSOEEb4sSAeSbWU23WudYQTjGzCyUWx1pjJX2gxPI53ayzCXEmXKl2Xbzvu5Wsu4s596L112FiJBkzrl+WWIOeIYG0ibcsMb/9syTO8RejZMBYlp6JaxUtuV+OEC64ucTqQ0msa60ZyyPmOqbMtX3NrPO4USKK8bT1xu0WGfKrMMT05SFCE2wUm//qsMXbTyBFN9bKQz73h2eO4uWrDl1USgJvap/GlXXTfQfufufDhxdu/euh4S0PHPqnm1cd+tM7Hzn8qytWHrRvMQYzmhtrw+bbr9nccsdjxeD69riPas05nXzTzFPP/vUn+IzmY1tPvXXWIWBQ9k00Q2tqqpMr32AywPsYNIKVUnQxpIZ5ySpLhFvRRVRd8n0/QxyZIWIHexptvLhsRxNjKX6eXrLuESXfixZRgxG6HzXrlE5qNRVx+myRUGYZYewaLfhCAPNNfKUSwAeNb/xW4+4qxmMajICGiUlcaYTiYqPhH4w48wqGjH9mhGEz4uwrGDdg0VV2orHgDjffq4z76VmjoZ9qxvN74zJ8xLjNJpfck6Ir6s9G837ZnAdKBPm3USxsHEggu5Zs86IR0NVG0P7BCOAN6M/0qjRW6D+MK2i9UTymlhDD3SXHbTLHLWbPFa2nB02s5F/mmMcPIvxfmWtQjCkdbLY/1PxeXjKmnCEIae49m1ha0Y0Kc0+yJURxvnHRPWGW/9ZYlvsNem4SFDXtpqY6uXzloS8sX3nIZo7rON+Sj77JuIyu/8shpzb94/Anb159SKH50SN45WszecXKQ+8tXWc0YcVvojttkRhPvrH2cw3/+8meU1fMvLh0eYK3jUzEW9i29DO9Q65h8RbG9X4j/IoSUqHtOF8yykCZ2bZi0PXc3QjtixDHgo4pIa7DDJGXvuM7lpDb1BKXZcoI52Iq817G0p0F4GOIYyul9/KD6E/TBuKYxmeN+6l4vM8hrlPa11ilRXzZEPRhhmAGP4fnm9/GIQ7I/8ZYu4e9U8/Hf/0DV6wWX7HysD00c9Xpsx5Z80YqyEfbLwAs++sRFWXABJninfMevXL6kX9/4e04xkgoti2pu+bI8Zg8ua25/n3XW+q9KKwGV5cP9a7wMN+LfvGhqpMHt++gknVLPxcFWGk1MpUIlqEqiou/R4M0dzWEJVUsgisVpMXOB6XbyUGyQZUQbjRoTKXjKh374OtR3F5hYCHeYJLUw5Bo6fVRb4PMK71Hk4wLcqjY3kjTfL2Tz+H2Li+9b29mvwneMeuG37omyW9hfowsZxNzM0GC4S297d1mOCtRDEGyVPIbDVqfhvhMQ/wmS/6GOq4cQgEYTApiiHWtYZYP/r3o0rNKliUYzZXF75DAZQZlGaKJ6+S7HZhmTqpHEyR4F8gpQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgQYIECRIkSJAgwX8t/h9vSV5ahJa+HgAAAABJRU5ErkJggg==" alt="EUnetHorse" style="height:36px;width:auto;filter:brightness(1.1);">
+      <div>Equine BCS<small>EUnetHorse · Horizon Europe #101086551</small></div>
+    </div>
+    <select id="langSelect" class="lang-select" aria-label="Language"></select>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs" role="tablist">
+  <button class="tab-btn active" data-tab="assess" role="tab" id="t-assess"></button>
+  <button class="tab-btn" data-tab="history" role="tab" id="t-history"></button>
+  <button class="tab-btn" data-tab="guide" role="tab" id="t-guide"></button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ASSESS TAB -->
+  <div class="tab-panel active" id="panel-assess" role="tabpanel">
+    <div class="card intro" id="intro-card"></div>
+
+    <div class="card">
+      <div class="card-title" id="horse-info-title"></div>
+      <div class="field-row">
+        <div class="field"><label id="lbl-name"></label><input type="text" id="horse-name"></div>
+        <div class="field"><label id="lbl-breed"></label><input type="text" id="horse-breed"></div>
+        <div class="field"><label id="lbl-id"></label><input type="text" id="horse-id"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label id="lbl-date"></label><input type="date" id="assess-date"></div>
+        <div class="field"><label id="lbl-category"></label>
+          <select id="horse-category">
+            <option value="general" id="opt-general"></option>
+            <option value="sport" id="opt-sport"></option>
+            <option value="broodmare" id="opt-brood"></option>
+            <option value="pony" id="opt-pony"></option>
+            <option value="draft" id="opt-draft"></option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" id="zones-title"></div>
+      <p style="font-size:12px;color:var(--ink-soft);margin-bottom:10px" id="zones-instr"></p>
+      <div class="zones-grid" id="zones-grid"></div>
+    </div>
+
+    <div id="summary-container" style="display:none">
+      <div class="summary-box">
+        <div class="summary-label" id="sum-label"></div>
+        <div class="summary-score" id="sum-score">—</div>
+        <div class="summary-class" id="sum-class"></div>
+        <div class="summary-reco" id="sum-reco"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" id="photo-title"></div>
+      <p style="font-size:12px;color:var(--ink-soft);margin-bottom:8px" id="photo-instr"></p>
+      <div class="photo-grid" id="photo-grid">
+        <button class="photo-add-btn" id="photo-add" aria-label="Add photo">+</button>
+      </div>
+      <input type="file" id="photo-input" accept="image/*" multiple style="display:none">
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <label id="lbl-notes"></label>
+        <textarea id="assess-notes" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btn-save"></button>
+      <button class="btn btn-secondary" id="btn-reset"></button>
+      <button class="btn btn-secondary" id="btn-export" style="display:none"></button>
+    </div>
+  </div>
+
+  <!-- HISTORY TAB -->
+  <div class="tab-panel" id="panel-history" role="tabpanel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div class="card-title" id="history-title"></div>
+      <div class="btn-row" style="margin:0">
+        <button class="btn btn-secondary" id="btn-export-all" style="display:none"></button>
+        <button class="btn btn-danger" id="btn-clear-all"></button>
+      </div>
+    </div>
+    <div id="history-list"></div>
+  </div>
+
+  <!-- GUIDE TAB -->
+  <div class="tab-panel" id="panel-guide" role="tabpanel">
+    <div class="card intro" id="guide-intro"></div>
+    <div class="guide-table-wrap">
+      <table class="guide-table" id="guide-table"></table>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="card-title" id="interp-title"></div>
+      <div id="interp-table"></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="card-title" id="formula-title"></div>
+      <p id="formula-text" style="font-size:13px;color:var(--ink-soft);line-height:1.5"></p>
+    </div>
+  </div>
+
+  <!-- LEGAL / FOOTER -->
+  <div class="legal-section">
+    <details>
+      <summary id="legal-title"></summary>
+      <p id="legal-text" style="margin:6px 0"></p>
+      <p id="legal-data" style="margin:6px 0"></p>
+      <p id="legal-license" style="margin:6px 0;font-style:italic"></p>
+      <p style="margin:6px 0 0;font-size:11px">(c) 2023-2027 EUnetHorse · <a href="https://www.eunethorse.eu" target="_blank" rel="noopener" style="color:var(--teal)">www.eunethorse.eu</a></p>
+    </details>
+  </div>
+  <footer>
+    <span>(c) 2023-2027 EUnetHorse · eunethorse.eu</span>
+    <span>Martin-Rosset et al. (2008) · INRA, France</span>
+  </footer>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <img src="" alt="">
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════
+// TRANSLATIONS — 9 languages
+// ═══════════════════════════════════════════════
+const I18N = {
+en: {
+  meta: { name: "English", flag: "\u{1F1EC}\u{1F1E7}" },
+  tabs: { assess: "Assessment", history: "History", guide: "Guide" },
+  intro: "<strong>Body Condition Scoring (BCS)</strong> — Assess the amount of adipose tissue in your horse by visual observation and palpation. Score each of the 7 anatomical zones on a scale of 0 (cadaverous) to 5 (obese). Half-point scores are allowed.",
+  horseInfo: "Horse Information",
+  fields: { name: "Name", breed: "Breed", id: "ID", date: "Date", category: "Category", notes: "Notes / Observations" },
+  categories: { general: "Adult horse (general)", sport: "Sport horse", broodmare: "Broodmare", pony: "Pony / Easy keeper", draft: "Draft horse" },
+  zonesTitle: "Zone Scoring",
+  zonesInstr: "Slide each zone's score from 0 to 5. The description updates to match the selected score.",
+  zones: [
+    { key: "neck", name: "Neck / Crest", icon: "1" },
+    { key: "withers", name: "Withers", icon: "2" },
+    { key: "shoulder", name: "Behind the shoulder", icon: "3" },
+    { key: "ribs", name: "Ribs", icon: "4" },
+    { key: "back", name: "Back line", icon: "5" },
+    { key: "croup", name: "Croup / Hindquarters", icon: "6" },
+    { key: "tail", name: "Tail head", icon: "7" }
+  ],
+  zoneDescs: {
+    neck: ["No crest. Cervical vertebrae visible.", "Bony structure of the neck visible. Crest not apparent.", "Crest visible, with a slight groove at its base.", "Well-defined crest, slightly convex.", "Neck crest can be grasped with the whole hand and feels firm.", "Very prominent crest, immersed in the mass of the neck."],
+    withers: ["Very prominent. Spinous processes visible.", "Prominent. Upper part of the shoulder blade visible.", "Pronounced and dry.", "Slightly prominent.", "Blended into surrounding tissue.", "Obscured and enveloped in a rounded mass of fat."],
+    shoulder: ["Deep depression. Prominent, dry shoulder.", "Depressed.", "Slightly concave. Thin fat deposit.", "Becomes flat. Well-defined fat deposit.", "Slightly raised, convex. Thick, soft fat deposit.", "Clearly convex. Shoulder obscured by fat. Mass trembles during palpation."],
+    ribs: ["Attachment of ribs to transverse processes visible. Very deep intercostal depressions. Dry skin tightly adhering.", "Very prominent. Skin tightly adhering to the ribs.", "Ribs can be felt beneath supple skin. Slight intercostal depressions.", "Not visible. Barely palpable.", "Cannot be palpated beneath the fat deposit.", "Thick layer of fat that rolls beneath the hand."],
+    back: ["Spinous processes of lumbar vertebrae very prominent. No fat cover.", "Spinous processes clearly palpable. Minimal fat cover.", "Spinous processes palpable with light pressure. Thin fat layer.", "Spinous processes palpable only with firm pressure. Smooth, even fat cover.", "Cannot be palpated. Back appears flat or slightly rounded.", "Thick fat deposits along the spine. Median groove may be visible."],
+    croup: ["Very prominent bony structure. Points of buttocks and hips very prominent.", "Pointed. Concave contours.", "Points of buttocks and hips discernible.", "Slightly rounded. Convex contours.", "Well rounded. Points of buttocks and hips obscured.", "Rounded. Median groove forming a double croup."],
+    tail: ["Vertebrae at the base of the tail visible. Sacrotuberous ligament clearly defined.", "Prominent. Tail head clearly defined.", "Clearly defined. Tail head clearly visible.", "Covered. Tail head slightly defined. A slight fat deposit obscures vertebrae and ligaments.", "Poorly defined. Thick, soft fat deposit.", "Massive. Fatty tissue forming a firm cushion around the tail head."]
+  },
+  sumLabel: "Weighted BCS",
+  photoTitle: "Photos",
+  photoInstr: "Add photos of the horse for this assessment (optional). Photos are stored locally in your browser.",
+  buttons: { save: "Save assessment", reset: "Reset", export: "Export JSON", exportAll: "Export all", clearAll: "Clear all" },
+  historyTitle: "Saved Assessments",
+  emptyHistory: "No assessments saved yet. Complete an assessment and save it to see it here.",
+  guideIntro: "<strong>Reference Guide</strong> — Detailed descriptions for each body zone at each BCS score (0–5). Use this as a visual reference while performing your assessment.",
+  guideHeaders: { score: "BCS", neck: "Neck", withers: "Withers", shoulder: "Behind shoulder", ribs: "Ribs", back: "Back line", croup: "Croup", tail: "Tail head" },
+  interpTitle: "BCS Interpretation",
+  interp: [
+    { range: "> 4.5", label: "Very fat", badge: "b-danger", reco: "Danger — High risk of metabolic disease" },
+    { range: "4.0 – 4.5", label: "Fat", badge: "b-warn", reco: "Caution — Weight reduction recommended" },
+    { range: "3.5 – 4.0", label: "Slightly fat", badge: "b-monitor", reco: "Monitor — Adjust diet and exercise" },
+    { range: "2.5 – 3.5", label: "Optimum", badge: "b-safe", reco: "Good condition — Maintain current management" },
+    { range: "2.0 – 2.5", label: "Slightly thin", badge: "b-monitor", reco: "Monitor — Increase nutrition" },
+    { range: "1.5 – 2.0", label: "Thin", badge: "b-warn", reco: "Caution — Veterinary assessment advised" },
+    { range: "< 1.5", label: "Very thin", badge: "b-danger", reco: "Danger — Immediate veterinary attention" }
+  ],
+  formulaTitle: "Weighted Formula",
+  formulaText: "BCS = 0.50 × Ribs + 0.15 × Behind shoulder + 0.15 × Neck + 0.10 × Withers + 0.05 × Tail head + 0.05 × Croup. The back line score is used for qualitative assessment and not included in the weighted calculation.",
+  legal: {
+    title: "Legal notice",
+    text: "This tool is provided for educational and informational purposes only and does not constitute veterinary advice. It should not replace a professional veterinary examination. Always consult a qualified veterinarian for decisions regarding the health, nutrition and welfare of your horse. The authors and the EUnetHorse project accept no liability for any actions taken based on the results provided by this tool.",
+    data: "This application does not collect, store or transmit any personal data or images to any server. All information entered remains exclusively on your device.",
+    license: "Free tool developed within the EUnetHorse project (Horizon Europe #101086551). Reproduction permitted with attribution."
+  },
+  toast: { saved: "Assessment saved", cleared: "All assessments cleared", resetDone: "Form reset", deleted: "Assessment deleted" },
+  confirm: { clearAll: "Delete all saved assessments? This cannot be undone.", deleteOne: "Delete this assessment?" },
+  scoreLabels: { min: "0 Cadaverous", max: "5 Obese" }
+},
+de: {
+  meta: { name: "Deutsch", flag: "\u{1F1E9}\u{1F1EA}" },
+  tabs: { assess: "Bewertung", history: "Verlauf", guide: "Leitfaden" },
+  intro: "<strong>Body Condition Scoring (BCS)</strong> — Bewerten Sie die Menge an Fettgewebe Ihres Pferdes durch visuelle Beobachtung und Palpation. Bewerten Sie jede der 7 anatomischen Zonen auf einer Skala von 0 (kachektisch) bis 5 (adipös). Halbpunktwertungen sind zulässig.",
+  horseInfo: "Pferdeinformationen",
+  fields: { name: "Name", breed: "Rasse", id: "ID", date: "Datum", category: "Kategorie", notes: "Anmerkungen" },
+  categories: { general: "Erwachsenes Pferd (allgemein)", sport: "Sportpferd", broodmare: "Zuchtstute", pony: "Pony / Leichtfuttrig", draft: "Kaltblut" },
+  zonesTitle: "Zonenbewertung",
+  zonesInstr: "Schieben Sie den Bewertungsregler jeder Zone von 0 bis 5. Die Beschreibung passt sich an die gewählte Punktzahl an.",
+  zones: [
+    { key: "neck", name: "Hals / Kamm", icon: "1" },
+    { key: "withers", name: "Widerrist", icon: "2" },
+    { key: "shoulder", name: "Hinter der Schulter", icon: "3" },
+    { key: "ribs", name: "Rippen", icon: "4" },
+    { key: "back", name: "Rückenlinie", icon: "5" },
+    { key: "croup", name: "Kruppe / Hinterhand", icon: "6" },
+    { key: "tail", name: "Schweifansatz", icon: "7" }
+  ],
+  zoneDescs: {
+    neck: ["Kein Kamm. Halswirbel sichtbar.", "Knochenstruktur des Halses sichtbar. Kamm nicht erkennbar.", "Kamm sichtbar, mit leichter Rinne an der Basis.", "Gut definierter Kamm, leicht konvex.", "Halskamm kann mit der ganzen Hand gegriffen werden und fühlt sich fest an.", "Sehr prominenter Kamm, in die Halsmasse eingebettet."],
+    withers: ["Sehr prominent. Dornfortsätze sichtbar.", "Prominent. Oberer Teil des Schulterblatts sichtbar.", "Ausgeprägt und trocken.", "Leicht prominent.", "In umgebendes Gewebe übergehend.", "Verdeckt und in eine abgerundete Fettmasse eingehüllt."],
+    shoulder: ["Tiefe Vertiefung. Prominente, trockene Schulter.", "Eingesunken.", "Leicht konkav. Dünne Fettauflage.", "Wird flach. Gut definierte Fettauflage.", "Leicht erhaben, konvex. Dicke, weiche Fettauflage.", "Deutlich konvex. Schulter von Fett verdeckt. Masse zittert bei Palpation."],
+    ribs: ["Ansatz der Rippen an den Querfortsätzen sichtbar. Sehr tiefe Interkostalräume. Trockene, eng anliegende Haut.", "Sehr prominent. Haut eng an den Rippen anliegend.", "Rippen unter geschmeidiger Haut tastbar. Leichte Interkostalvertiefungen.", "Nicht sichtbar. Kaum tastbar.", "Unter der Fettschicht nicht tastbar.", "Dicke Fettschicht, die unter der Hand rollt."],
+    back: ["Dornfortsätze der Lendenwirbel sehr prominent. Keine Fettabdeckung.", "Dornfortsätze deutlich tastbar. Minimale Fettabdeckung.", "Dornfortsätze mit leichtem Druck tastbar. Dünne Fettschicht.", "Dornfortsätze nur mit festem Druck tastbar. Glatte, gleichmäßige Fettabdeckung.", "Nicht tastbar. Rücken erscheint flach oder leicht gerundet.", "Dicke Fettablagerungen entlang der Wirbelsäule. Mediane Rinne kann sichtbar sein."],
+    croup: ["Sehr prominente Knochenstruktur. Sitzbeinhöcker und Hüfthöcker sehr prominent.", "Spitz. Konkave Konturen.", "Sitzbeinhöcker und Hüfthöcker erkennbar.", "Leicht gerundet. Konvexe Konturen.", "Gut gerundet. Sitzbeinhöcker und Hüfthöcker verdeckt.", "Gerundet. Mediane Rinne bildet eine Doppelkruppe."],
+    tail: ["Wirbel am Schweifansatz sichtbar. Ligamentum sacrotuberale deutlich definiert.", "Prominent. Schweifansatz deutlich definiert.", "Deutlich definiert. Schweifansatz klar sichtbar.", "Bedeckt. Schweifansatz leicht definiert. Leichte Fettauflage verdeckt Wirbel und Bänder.", "Schlecht definiert. Dicke, weiche Fettauflage.", "Massiv. Fettgewebe bildet ein festes Polster um den Schweifansatz."]
+  },
+  sumLabel: "Gewichteter BCS",
+  photoTitle: "Fotos",
+  photoInstr: "Fügen Sie Fotos des Pferdes für diese Bewertung hinzu (optional). Fotos werden lokal in Ihrem Browser gespeichert.",
+  buttons: { save: "Bewertung speichern", reset: "Zurücksetzen", export: "JSON exportieren", exportAll: "Alle exportieren", clearAll: "Alle löschen" },
+  historyTitle: "Gespeicherte Bewertungen",
+  emptyHistory: "Noch keine Bewertungen gespeichert. Führen Sie eine Bewertung durch und speichern Sie sie.",
+  guideIntro: "<strong>Referenzleitfaden</strong> — Detaillierte Beschreibungen für jede Körperzone bei jedem BCS-Wert (0–5).",
+  guideHeaders: { score: "BCS", neck: "Hals", withers: "Widerrist", shoulder: "Hinter Schulter", ribs: "Rippen", back: "Rücken", croup: "Kruppe", tail: "Schweif" },
+  interpTitle: "BCS-Interpretation",
+  interp: [
+    { range: "> 4,5", label: "Sehr fett", badge: "b-danger", reco: "Gefahr — Hohes Risiko für Stoffwechselerkrankungen" },
+    { range: "4,0 – 4,5", label: "Fett", badge: "b-warn", reco: "Vorsicht — Gewichtsreduktion empfohlen" },
+    { range: "3,5 – 4,0", label: "Leicht fett", badge: "b-monitor", reco: "Beobachten — Fütterung und Bewegung anpassen" },
+    { range: "2,5 – 3,5", label: "Optimal", badge: "b-safe", reco: "Guter Zustand — Aktuelles Management beibehalten" },
+    { range: "2,0 – 2,5", label: "Leicht dünn", badge: "b-monitor", reco: "Beobachten — Ernährung erhöhen" },
+    { range: "1,5 – 2,0", label: "Dünn", badge: "b-warn", reco: "Vorsicht — Tierärztliche Untersuchung empfohlen" },
+    { range: "< 1,5", label: "Sehr dünn", badge: "b-danger", reco: "Gefahr — Sofortige tierärztliche Versorgung" }
+  ],
+  formulaTitle: "Gewichtete Formel",
+  formulaText: "BCS = 0,50 × Rippen + 0,15 × Hinter Schulter + 0,15 × Hals + 0,10 × Widerrist + 0,05 × Schweifansatz + 0,05 × Kruppe. Die Rückenlinie wird qualitativ bewertet und nicht in die gewichtete Berechnung einbezogen.",
+  legal: {
+    title: "Rechtlicher Hinweis",
+    text: "Dieses Tool dient ausschließlich zu Bildungs- und Informationszwecken und stellt keine tierärztliche Beratung dar. Es sollte eine professionelle tierärztliche Untersuchung nicht ersetzen. Konsultieren Sie immer einen qualifizierten Tierarzt.",
+    data: "Diese Anwendung sammelt, speichert oder überträgt keine persönlichen Daten oder Bilder an einen Server. Alle eingegebenen Informationen verbleiben ausschließlich auf Ihrem Gerät.",
+    license: "Kostenloses Tool, entwickelt im Rahmen des EUnetHorse-Projekts (Horizon Europe #101086551). Vervielfältigung mit Quellenangabe gestattet."
+  },
+  toast: { saved: "Bewertung gespeichert", cleared: "Alle Bewertungen gelöscht", resetDone: "Formular zurückgesetzt", deleted: "Bewertung gelöscht" },
+  confirm: { clearAll: "Alle gespeicherten Bewertungen löschen? Dies kann nicht rückgängig gemacht werden.", deleteOne: "Diese Bewertung löschen?" },
+  scoreLabels: { min: "0 Kachektisch", max: "5 Adipös" }
+},
+es: {
+  meta: { name: "Español", flag: "\u{1F1EA}\u{1F1F8}" },
+  tabs: { assess: "Evaluación", history: "Historial", guide: "Guía" },
+  intro: "<strong>Puntuación de Condición Corporal (BCS)</strong> — Evalúe la cantidad de tejido adiposo de su caballo mediante observación visual y palpación. Puntúe cada una de las 7 zonas anatómicas en una escala de 0 (caquéxico) a 5 (obeso). Se permiten puntuaciones de medio punto.",
+  horseInfo: "Información del caballo",
+  fields: { name: "Nombre", breed: "Raza", id: "ID", date: "Fecha", category: "Categoría", notes: "Notas / Observaciones" },
+  categories: { general: "Caballo adulto (general)", sport: "Caballo de deporte", broodmare: "Yegua de cría", pony: "Poni / Fácil mantenimiento", draft: "Caballo de tiro" },
+  zonesTitle: "Puntuación por zonas",
+  zonesInstr: "Deslice el marcador de cada zona de 0 a 5. La descripción se actualiza según la puntuación seleccionada.",
+  zones: [
+    { key: "neck", name: "Cuello / Cresta", icon: "1" },
+    { key: "withers", name: "Cruz", icon: "2" },
+    { key: "shoulder", name: "Detrás del hombro", icon: "3" },
+    { key: "ribs", name: "Costillas", icon: "4" },
+    { key: "back", name: "Línea del dorso", icon: "5" },
+    { key: "croup", name: "Grupa / Cuartos traseros", icon: "6" },
+    { key: "tail", name: "Base de la cola", icon: "7" }
+  ],
+  zoneDescs: {
+    neck: ["Sin cresta. Vértebras cervicales visibles.", "Estructura ósea del cuello visible. Cresta no aparente.", "Cresta visible, con un ligero surco en su base.", "Cresta bien definida, ligeramente convexa.", "La cresta del cuello se puede agarrar con toda la mano y se siente firme.", "Cresta muy prominente, inmersa en la masa del cuello."],
+    withers: ["Muy prominente. Apófisis espinosas visibles.", "Prominente. Parte superior de la escápula visible.", "Pronunciada y seca.", "Ligeramente prominente.", "Integrada en el tejido circundante.", "Oculta y envuelta en una masa redondeada de grasa."],
+    shoulder: ["Depresión profunda. Hombro prominente y seco.", "Deprimido.", "Ligeramente cóncavo. Depósito de grasa fino.", "Se vuelve plano. Depósito de grasa bien definido.", "Ligeramente elevado, convexo. Depósito de grasa grueso y blando.", "Claramente convexo. Hombro oculto por la grasa. La masa tiembla a la palpación."],
+    ribs: ["Inserción de las costillas en las apófisis transversas visible. Depresiones intercostales muy profundas. Piel seca adherida.", "Muy prominentes. Piel adherida a las costillas.", "Las costillas se palpan bajo piel flexible. Ligeras depresiones intercostales.", "No visibles. Apenas palpables.", "No se pueden palpar bajo el depósito de grasa.", "Gruesa capa de grasa que rueda bajo la mano."],
+    back: ["Apófisis espinosas de las vértebras lumbares muy prominentes. Sin cobertura grasa.", "Apófisis espinosas claramente palpables. Cobertura grasa mínima.", "Apófisis espinosas palpables con presión ligera. Capa fina de grasa.", "Apófisis espinosas palpables solo con presión firme. Cobertura grasa lisa y uniforme.", "No se pueden palpar. El dorso aparece plano o ligeramente redondeado.", "Depósitos gruesos de grasa a lo largo de la columna. Puede ser visible el surco medio."],
+    croup: ["Estructura ósea muy prominente. Puntas de las nalgas y caderas muy prominentes.", "Puntiaguda. Contornos cóncavos.", "Puntas de las nalgas y caderas discernibles.", "Ligeramente redondeada. Contornos convexos.", "Bien redondeada. Puntas de las nalgas y caderas ocultas.", "Redondeada. Surco mediano formando una doble grupa."],
+    tail: ["Vértebras de la base de la cola visibles. Ligamento sacrotuberoso claramente definido.", "Prominente. Base de la cola claramente definida.", "Claramente definida. Base de la cola claramente visible.", "Cubierta. Base de la cola ligeramente definida. Un ligero depósito de grasa oculta vértebras y ligamentos.", "Mal definida. Depósito de grasa grueso y blando.", "Masiva. Tejido graso formando un cojín firme alrededor de la base de la cola."]
+  },
+  sumLabel: "BCS Ponderado",
+  photoTitle: "Fotos",
+  photoInstr: "Añada fotos del caballo para esta evaluación (opcional). Las fotos se almacenan localmente en su navegador.",
+  buttons: { save: "Guardar evaluación", reset: "Reiniciar", export: "Exportar JSON", exportAll: "Exportar todo", clearAll: "Borrar todo" },
+  historyTitle: "Evaluaciones guardadas",
+  emptyHistory: "Aún no hay evaluaciones guardadas. Complete una evaluación y guárdela para verla aquí.",
+  guideIntro: "<strong>Guía de referencia</strong> — Descripciones detalladas para cada zona corporal en cada puntuación BCS (0–5).",
+  guideHeaders: { score: "BCS", neck: "Cuello", withers: "Cruz", shoulder: "Detrás hombro", ribs: "Costillas", back: "Dorso", croup: "Grupa", tail: "Cola" },
+  interpTitle: "Interpretación del BCS",
+  interp: [
+    { range: "> 4,5", label: "Muy gordo", badge: "b-danger", reco: "Peligro — Alto riesgo de enfermedad metabólica" },
+    { range: "4,0 – 4,5", label: "Gordo", badge: "b-warn", reco: "Precaución — Se recomienda reducción de peso" },
+    { range: "3,5 – 4,0", label: "Ligeramente gordo", badge: "b-monitor", reco: "Vigilar — Ajustar dieta y ejercicio" },
+    { range: "2,5 – 3,5", label: "Óptimo", badge: "b-safe", reco: "Buena condición — Mantener manejo actual" },
+    { range: "2,0 – 2,5", label: "Ligeramente delgado", badge: "b-monitor", reco: "Vigilar — Aumentar nutrición" },
+    { range: "1,5 – 2,0", label: "Delgado", badge: "b-warn", reco: "Precaución — Se aconseja evaluación veterinaria" },
+    { range: "< 1,5", label: "Muy delgado", badge: "b-danger", reco: "Peligro — Atención veterinaria inmediata" }
+  ],
+  formulaTitle: "Fórmula ponderada",
+  formulaText: "BCS = 0,50 × Costillas + 0,15 × Detrás del hombro + 0,15 × Cuello + 0,10 × Cruz + 0,05 × Base de la cola + 0,05 × Grupa. La línea del dorso se evalúa cualitativamente y no se incluye en el cálculo ponderado.",
+  legal: {
+    title: "Aviso legal",
+    text: "Esta herramienta se proporciona con fines educativos e informativos únicamente y no constituye asesoramiento veterinario. No debe sustituir un examen veterinario profesional. Consulte siempre a un veterinario cualificado.",
+    data: "Esta aplicación no recopila, almacena ni transmite datos personales ni imágenes a ningún servidor. Toda la información introducida permanece exclusivamente en su dispositivo.",
+    license: "Herramienta gratuita desarrollada dentro del proyecto EUnetHorse (Horizon Europe #101086551). Reproducción permitida con atribución."
+  },
+  toast: { saved: "Evaluación guardada", cleared: "Todas las evaluaciones eliminadas", resetDone: "Formulario reiniciado", deleted: "Evaluación eliminada" },
+  confirm: { clearAll: "¿Eliminar todas las evaluaciones guardadas? Esta acción no se puede deshacer.", deleteOne: "¿Eliminar esta evaluación?" },
+  scoreLabels: { min: "0 Caquéxico", max: "5 Obeso" }
+},
+fr: {
+  meta: { name: "Français", flag: "\u{1F1EB}\u{1F1F7}" },
+  tabs: { assess: "Évaluation", history: "Historique", guide: "Guide" },
+  intro: "<strong>Note d'État Corporel (NEC)</strong> — Évaluez la quantité de tissu adipeux de votre cheval par observation visuelle et palpation. Notez chacune des 7 zones anatomiques sur une échelle de 0 (cadavérique) à 5 (obèse). Les demi-points sont autorisés.",
+  horseInfo: "Informations sur le cheval",
+  fields: { name: "Nom", breed: "Race", id: "Identifiant", date: "Date", category: "Catégorie", notes: "Notes / Observations" },
+  categories: { general: "Cheval adulte (général)", sport: "Cheval de sport", broodmare: "Jument poulinière", pony: "Poney / Facile d'entretien", draft: "Cheval de trait" },
+  zonesTitle: "Notation par zone",
+  zonesInstr: "Faites glisser le curseur de chaque zone de 0 à 5. La description s'adapte au score sélectionné.",
+  zones: [
+    { key: "neck", name: "Encolure / Crête", icon: "1" },
+    { key: "withers", name: "Garrot", icon: "2" },
+    { key: "shoulder", name: "Arrière de l'épaule", icon: "3" },
+    { key: "ribs", name: "Côtes", icon: "4" },
+    { key: "back", name: "Ligne du dos", icon: "5" },
+    { key: "croup", name: "Croupe", icon: "6" },
+    { key: "tail", name: "Attache de queue", icon: "7" }
+  ],
+  zoneDescs: {
+    neck: ["Pas de crête. Vertèbres cervicales visibles.", "Structure osseuse du cou visible. Crête non apparente.", "Crête visible, avec un léger sillon à sa base.", "Crête bien définie, légèrement convexe.", "La crête de l'encolure peut être saisie à pleine main et paraît ferme.", "Crête très proéminente, noyée dans la masse de l'encolure."],
+    withers: ["Très proéminent. Apophyses épineuses visibles.", "Proéminent. Partie supérieure de l'omoplate visible.", "Prononcé et sec.", "Légèrement proéminent.", "Fondu dans les tissus environnants.", "Masqué et enveloppé dans une masse arrondie de graisse."],
+    shoulder: ["Dépression profonde. Épaule proéminente et sèche.", "En dépression.", "Légèrement concave. Mince dépôt de graisse.", "Devient plat. Dépôt de graisse bien défini.", "Légèrement surélevé, convexe. Dépôt de graisse épais et mou.", "Nettement convexe. Épaule masquée par la graisse. La masse tremble à la palpation."],
+    ribs: ["Attache des côtes aux apophyses transverses visible. Dépressions intercostales très profondes. Peau sèche adhérente.", "Très proéminentes. Peau adhérant étroitement aux côtes.", "Côtes palpables sous une peau souple. Légères dépressions intercostales.", "Non visibles. À peine palpables.", "Non palpables sous le dépôt de graisse.", "Épaisse couche de graisse qui roule sous la main."],
+    back: ["Apophyses épineuses des vertèbres lombaires très proéminentes. Aucune couverture graisseuse.", "Apophyses épineuses nettement palpables. Couverture graisseuse minimale.", "Apophyses épineuses palpables avec une pression légère. Mince couche de graisse.", "Apophyses épineuses palpables uniquement avec une pression ferme. Couverture graisseuse lisse et uniforme.", "Non palpables. Le dos paraît plat ou légèrement arrondi.", "Épais dépôts de graisse le long de la colonne. Sillon médian parfois visible."],
+    croup: ["Structure osseuse très proéminente. Pointes des fesses et des hanches très proéminentes.", "Pointue. Contours concaves.", "Pointes des fesses et des hanches discernables.", "Légèrement arrondie. Contours convexes.", "Bien arrondie. Pointes des fesses et des hanches masquées.", "Arrondie. Sillon médian formant une double croupe."],
+    tail: ["Vertèbres à la base de la queue visibles. Ligament sacro-tubéral nettement défini.", "Proéminente. Attache de queue nettement définie.", "Nettement définie. Attache de queue clairement visible.", "Couverte. Attache de queue légèrement définie. Un léger dépôt de graisse masque vertèbres et ligaments.", "Mal définie. Dépôt de graisse épais et mou.", "Massive. Tissu adipeux formant un coussin ferme autour de l'attache de queue."]
+  },
+  sumLabel: "NEC pondérée",
+  photoTitle: "Photos",
+  photoInstr: "Ajoutez des photos du cheval pour cette évaluation (optionnel). Les photos sont stockées localement dans votre navigateur.",
+  buttons: { save: "Enregistrer", reset: "Réinitialiser", export: "Exporter JSON", exportAll: "Tout exporter", clearAll: "Tout supprimer" },
+  historyTitle: "Évaluations enregistrées",
+  emptyHistory: "Aucune évaluation enregistrée. Effectuez une évaluation et enregistrez-la pour la voir ici.",
+  guideIntro: "<strong>Guide de référence</strong> — Descriptions détaillées pour chaque zone corporelle à chaque score NEC (0–5).",
+  guideHeaders: { score: "NEC", neck: "Encolure", withers: "Garrot", shoulder: "Arr. épaule", ribs: "Côtes", back: "Dos", croup: "Croupe", tail: "Queue" },
+  interpTitle: "Interprétation NEC",
+  interp: [
+    { range: "> 4,5", label: "Très gras", badge: "b-danger", reco: "Danger — Risque élevé de maladie métabolique" },
+    { range: "4,0 – 4,5", label: "Gras", badge: "b-warn", reco: "Attention — Réduction de poids recommandée" },
+    { range: "3,5 – 4,0", label: "Légèrement gras", badge: "b-monitor", reco: "Surveiller — Ajuster alimentation et exercice" },
+    { range: "2,5 – 3,5", label: "Optimal", badge: "b-safe", reco: "Bon état — Maintenir la gestion actuelle" },
+    { range: "2,0 – 2,5", label: "Légèrement maigre", badge: "b-monitor", reco: "Surveiller — Augmenter la nutrition" },
+    { range: "1,5 – 2,0", label: "Maigre", badge: "b-warn", reco: "Attention — Évaluation vétérinaire conseillée" },
+    { range: "< 1,5", label: "Très maigre", badge: "b-danger", reco: "Danger — Soins vétérinaires immédiats" }
+  ],
+  formulaTitle: "Formule pondérée",
+  formulaText: "NEC = 0,50 × Côtes + 0,15 × Arr. épaule + 0,15 × Encolure + 0,10 × Garrot + 0,05 × Attache de queue + 0,05 × Croupe. La ligne du dos est évaluée qualitativement et n'est pas incluse dans le calcul pondéré.",
+  legal: {
+    title: "Mentions légales",
+    text: "Cet outil est fourni à des fins éducatives et informatives uniquement et ne constitue pas un avis vétérinaire. Il ne doit pas remplacer un examen vétérinaire professionnel. Consultez toujours un vétérinaire qualifié.",
+    data: "Cette application ne collecte, ne stocke et ne transmet aucune donnée personnelle ni image. Toutes les informations saisies restent exclusivement sur votre appareil.",
+    license: "Outil gratuit développé dans le cadre du projet EUnetHorse (Horizon Europe #101086551). Reproduction autorisée avec attribution."
+  },
+  toast: { saved: "Évaluation enregistrée", cleared: "Toutes les évaluations supprimées", resetDone: "Formulaire réinitialisé", deleted: "Évaluation supprimée" },
+  confirm: { clearAll: "Supprimer toutes les évaluations ? Cette action est irréversible.", deleteOne: "Supprimer cette évaluation ?" },
+  scoreLabels: { min: "0 Cadavérique", max: "5 Obèse" }
+},
+it: {
+  meta: { name: "Italiano", flag: "\u{1F1EE}\u{1F1F9}" },
+  tabs: { assess: "Valutazione", history: "Storico", guide: "Guida" },
+  intro: "<strong>Body Condition Score (BCS)</strong> — Valutate la quantità di tessuto adiposo del vostro cavallo mediante osservazione visiva e palpazione. Assegnate un punteggio a ciascuna delle 7 zone anatomiche su una scala da 0 (cachettico) a 5 (obeso). Sono ammessi mezzi punti.",
+  horseInfo: "Informazioni sul cavallo",
+  fields: { name: "Nome", breed: "Razza", id: "ID", date: "Data", category: "Categoria", notes: "Note / Osservazioni" },
+  categories: { general: "Cavallo adulto (generale)", sport: "Cavallo sportivo", broodmare: "Fattrice", pony: "Pony / Facile mantenimento", draft: "Cavallo da tiro" },
+  zonesTitle: "Punteggio per zona",
+  zonesInstr: "Spostate il cursore di ogni zona da 0 a 5. La descrizione si aggiorna al punteggio selezionato.",
+  zones: [
+    { key: "neck", name: "Collo / Cresta", icon: "1" },
+    { key: "withers", name: "Garrese", icon: "2" },
+    { key: "shoulder", name: "Dietro la spalla", icon: "3" },
+    { key: "ribs", name: "Costole", icon: "4" },
+    { key: "back", name: "Linea del dorso", icon: "5" },
+    { key: "croup", name: "Groppa", icon: "6" },
+    { key: "tail", name: "Attaccatura della coda", icon: "7" }
+  ],
+  zoneDescs: {
+    neck: ["Nessuna cresta. Vertebre cervicali visibili.", "Struttura ossea del collo visibile. Cresta non apparente.", "Cresta visibile, con un leggero solco alla base.", "Cresta ben definita, leggermente convessa.", "La cresta del collo può essere afferrata con l'intera mano e risulta soda.", "Cresta molto prominente, immersa nella massa del collo."],
+    withers: ["Molto prominente. Processi spinosi visibili.", "Prominente. Parte superiore della scapola visibile.", "Pronunciato e asciutto.", "Leggermente prominente.", "Integrato nel tessuto circostante.", "Nascosto e avvolto in una massa arrotondata di grasso."],
+    shoulder: ["Depressione profonda. Spalla prominente e asciutta.", "Depresso.", "Leggermente concavo. Sottile deposito di grasso.", "Diventa piatto. Deposito di grasso ben definito.", "Leggermente rialzato, convesso. Deposito di grasso spesso e morbido.", "Chiaramente convesso. Spalla nascosta dal grasso. La massa trema alla palpazione."],
+    ribs: ["Inserzione delle costole ai processi trasversi visibile. Depressioni intercostali molto profonde. Pelle secca aderente.", "Molto prominenti. Pelle aderente alle costole.", "Costole palpabili sotto pelle morbida. Leggere depressioni intercostali.", "Non visibili. Appena palpabili.", "Non palpabili sotto il deposito di grasso.", "Spesso strato di grasso che rotola sotto la mano."],
+    back: ["Processi spinosi delle vertebre lombari molto prominenti. Nessuna copertura adiposa.", "Processi spinosi chiaramente palpabili. Copertura adiposa minima.", "Processi spinosi palpabili con leggera pressione. Sottile strato di grasso.", "Processi spinosi palpabili solo con pressione decisa. Copertura adiposa liscia e uniforme.", "Non palpabili. Il dorso appare piatto o leggermente arrotondato.", "Spessi depositi di grasso lungo la colonna. Il solco mediano può essere visibile."],
+    croup: ["Struttura ossea molto prominente. Punte delle natiche e delle anche molto prominenti.", "Appuntita. Contorni concavi.", "Punte delle natiche e delle anche discernibili.", "Leggermente arrotondata. Contorni convessi.", "Ben arrotondata. Punte delle natiche e delle anche nascoste.", "Arrotondata. Solco mediano che forma una doppia groppa."],
+    tail: ["Vertebre alla base della coda visibili. Legamento sacrotuberoso chiaramente definito.", "Prominente. Attaccatura della coda chiaramente definita.", "Chiaramente definita. Attaccatura della coda chiaramente visibile.", "Coperta. Attaccatura leggermente definita. Un leggero deposito di grasso nasconde vertebre e legamenti.", "Mal definita. Deposito di grasso spesso e morbido.", "Massiccia. Tessuto adiposo che forma un cuscino sodo attorno all'attaccatura della coda."]
+  },
+  sumLabel: "BCS Ponderato",
+  photoTitle: "Foto",
+  photoInstr: "Aggiungete foto del cavallo per questa valutazione (opzionale). Le foto sono archiviate localmente nel vostro browser.",
+  buttons: { save: "Salva valutazione", reset: "Ripristina", export: "Esporta JSON", exportAll: "Esporta tutto", clearAll: "Cancella tutto" },
+  historyTitle: "Valutazioni salvate",
+  emptyHistory: "Nessuna valutazione salvata. Completate una valutazione e salvatela.",
+  guideIntro: "<strong>Guida di riferimento</strong> — Descrizioni dettagliate per ogni zona corporea a ogni punteggio BCS (0–5).",
+  guideHeaders: { score: "BCS", neck: "Collo", withers: "Garrese", shoulder: "Dietro spalla", ribs: "Costole", back: "Dorso", croup: "Groppa", tail: "Coda" },
+  interpTitle: "Interpretazione BCS",
+  interp: [
+    { range: "> 4,5", label: "Molto grasso", badge: "b-danger", reco: "Pericolo — Alto rischio di malattia metabolica" },
+    { range: "4,0 – 4,5", label: "Grasso", badge: "b-warn", reco: "Attenzione — Riduzione del peso raccomandata" },
+    { range: "3,5 – 4,0", label: "Leggermente grasso", badge: "b-monitor", reco: "Monitorare — Regolare dieta ed esercizio" },
+    { range: "2,5 – 3,5", label: "Ottimale", badge: "b-safe", reco: "Buona condizione — Mantenere gestione attuale" },
+    { range: "2,0 – 2,5", label: "Leggermente magro", badge: "b-monitor", reco: "Monitorare — Aumentare nutrizione" },
+    { range: "1,5 – 2,0", label: "Magro", badge: "b-warn", reco: "Attenzione — Visita veterinaria consigliata" },
+    { range: "< 1,5", label: "Molto magro", badge: "b-danger", reco: "Pericolo — Cure veterinarie immediate" }
+  ],
+  formulaTitle: "Formula ponderata",
+  formulaText: "BCS = 0,50 × Costole + 0,15 × Dietro spalla + 0,15 × Collo + 0,10 × Garrese + 0,05 × Attaccatura coda + 0,05 × Groppa. La linea del dorso è valutata qualitativamente e non inclusa nel calcolo ponderato.",
+  legal: {
+    title: "Avviso legale",
+    text: "Questo strumento è fornito esclusivamente a scopo educativo e informativo e non costituisce consulenza veterinaria. Consultate sempre un veterinario qualificato.",
+    data: "Questa applicazione non raccoglie, archivia o trasmette dati personali o immagini. Tutte le informazioni inserite rimangono esclusivamente sul vostro dispositivo.",
+    license: "Strumento gratuito sviluppato nell'ambito del progetto EUnetHorse (Horizon Europe #101086551). Riproduzione consentita con attribuzione."
+  },
+  toast: { saved: "Valutazione salvata", cleared: "Tutte le valutazioni cancellate", resetDone: "Modulo ripristinato", deleted: "Valutazione cancellata" },
+  confirm: { clearAll: "Cancellare tutte le valutazioni? Questa azione non può essere annullata.", deleteOne: "Cancellare questa valutazione?" },
+  scoreLabels: { min: "0 Cachettico", max: "5 Obeso" }
+},
+nl: {
+  meta: { name: "Nederlands", flag: "\u{1F1F3}\u{1F1F1}" },
+  tabs: { assess: "Beoordeling", history: "Geschiedenis", guide: "Gids" },
+  intro: "<strong>Body Condition Score (BCS)</strong> — Beoordeel de hoeveelheid vetweefsel van uw paard door visuele observatie en palpatie. Beoordeel elk van de 7 anatomische zones op een schaal van 0 (cachectisch) tot 5 (obees). Halve punten zijn toegestaan.",
+  horseInfo: "Paardinformatie",
+  fields: { name: "Naam", breed: "Ras", id: "ID", date: "Datum", category: "Categorie", notes: "Opmerkingen" },
+  categories: { general: "Volwassen paard (algemeen)", sport: "Sportpaard", broodmare: "Fokmerrie", pony: "Pony / Makkelijke houder", draft: "Trekpaard" },
+  zonesTitle: "Zonebeoordeling",
+  zonesInstr: "Verschuif de schuifregelaar van elke zone van 0 tot 5. De beschrijving past zich aan de geselecteerde score aan.",
+  zones: [
+    { key: "neck", name: "Hals / Kam", icon: "1" },
+    { key: "withers", name: "Schoft", icon: "2" },
+    { key: "shoulder", name: "Achter de schouder", icon: "3" },
+    { key: "ribs", name: "Ribben", icon: "4" },
+    { key: "back", name: "Ruglijn", icon: "5" },
+    { key: "croup", name: "Kruis / Achterhand", icon: "6" },
+    { key: "tail", name: "Staartaanzet", icon: "7" }
+  ],
+  zoneDescs: {
+    neck: ["Geen kam. Halswervels zichtbaar.", "Botstructuur van de hals zichtbaar. Kam niet zichtbaar.", "Kam zichtbaar, met een lichte groef aan de basis.", "Goed gedefinieerde kam, licht convex.", "Halskam kan met de hele hand worden vastgegrepen en voelt stevig.", "Zeer prominente kam, verzonken in de halsmassa."],
+    withers: ["Zeer prominent. Doornuitsteeksels zichtbaar.", "Prominent. Bovenkant van het schouderblad zichtbaar.", "Uitgesproken en droog.", "Licht prominent.", "Opgegaan in omringend weefsel.", "Bedekt en omhuld door een afgeronde vetmassa."],
+    shoulder: ["Diepe depressie. Prominente, droge schouder.", "Ingedeukt.", "Licht concaaf. Dunne vetlaag.", "Wordt vlak. Goed gedefinieerde vetlaag.", "Licht verheven, convex. Dikke, zachte vetlaag.", "Duidelijk convex. Schouder bedekt door vet. Massa trilt bij palpatie."],
+    ribs: ["Aanhechting van ribben aan dwarsuitsteeksels zichtbaar. Zeer diepe intercostale depressies. Droge, strak aanliggende huid.", "Zeer prominent. Huid strak op de ribben.", "Ribben voelbaar onder soepele huid. Lichte intercostale depressies.", "Niet zichtbaar. Nauwelijks voelbaar.", "Niet voelbaar onder de vetlaag.", "Dikke vetlaag die onder de hand rolt."],
+    back: ["Doornuitsteeksels van lendenwervels zeer prominent. Geen vetbedekking.", "Doornuitsteeksels duidelijk voelbaar. Minimale vetbedekking.", "Doornuitsteeksels voelbaar met lichte druk. Dunne vetlaag.", "Doornuitsteeksels alleen voelbaar met stevige druk. Gladde, gelijkmatige vetbedekking.", "Niet voelbaar. Rug lijkt vlak of licht afgerond.", "Dikke vetafzettingen langs de wervelkolom. Mediaangroef kan zichtbaar zijn."],
+    croup: ["Zeer prominente botstructuur. Zitbeenknobbels en heupknobbels zeer prominent.", "Puntig. Concave contouren.", "Zitbeenknobbels en heupknobbels waarneembaar.", "Licht afgerond. Convexe contouren.", "Goed afgerond. Zitbeenknobbels en heupknobbels bedekt.", "Afgerond. Mediaangroef vormt een dubbelkruis."],
+    tail: ["Wervels aan de staartbasis zichtbaar. Ligamentum sacrotuberale duidelijk gedefinieerd.", "Prominent. Staartaanzet duidelijk gedefinieerd.", "Duidelijk gedefinieerd. Staartaanzet duidelijk zichtbaar.", "Bedekt. Staartaanzet licht gedefinieerd. Lichte vetlaag bedekt wervels en ligamenten.", "Slecht gedefinieerd. Dikke, zachte vetlaag.", "Massief. Vetweefsel vormt een stevig kussen rond de staartaanzet."]
+  },
+  sumLabel: "Gewogen BCS",
+  photoTitle: "Foto's",
+  photoInstr: "Voeg foto's van het paard toe voor deze beoordeling (optioneel). Foto's worden lokaal in uw browser opgeslagen.",
+  buttons: { save: "Beoordeling opslaan", reset: "Herstellen", export: "JSON exporteren", exportAll: "Alles exporteren", clearAll: "Alles wissen" },
+  historyTitle: "Opgeslagen beoordelingen",
+  emptyHistory: "Nog geen beoordelingen opgeslagen. Voer een beoordeling uit en sla deze op.",
+  guideIntro: "<strong>Referentiegids</strong> — Gedetailleerde beschrijvingen voor elke lichaamszone bij elke BCS-score (0–5).",
+  guideHeaders: { score: "BCS", neck: "Hals", withers: "Schoft", shoulder: "Achter schouder", ribs: "Ribben", back: "Rug", croup: "Kruis", tail: "Staart" },
+  interpTitle: "BCS-interpretatie",
+  interp: [
+    { range: "> 4,5", label: "Zeer vet", badge: "b-danger", reco: "Gevaar — Hoog risico op stofwisselingsziekte" },
+    { range: "4,0 – 4,5", label: "Vet", badge: "b-warn", reco: "Voorzichtig — Gewichtsvermindering aanbevolen" },
+    { range: "3,5 – 4,0", label: "Licht vet", badge: "b-monitor", reco: "Monitoren — Voeding en beweging aanpassen" },
+    { range: "2,5 – 3,5", label: "Optimaal", badge: "b-safe", reco: "Goede conditie — Huidig beheer handhaven" },
+    { range: "2,0 – 2,5", label: "Licht mager", badge: "b-monitor", reco: "Monitoren — Voeding verhogen" },
+    { range: "1,5 – 2,0", label: "Mager", badge: "b-warn", reco: "Voorzichtig — Diergeneeskundig onderzoek aanbevolen" },
+    { range: "< 1,5", label: "Zeer mager", badge: "b-danger", reco: "Gevaar — Onmiddellijke diergeneeskundige zorg" }
+  ],
+  formulaTitle: "Gewogen formule",
+  formulaText: "BCS = 0,50 × Ribben + 0,15 × Achter schouder + 0,15 × Hals + 0,10 × Schoft + 0,05 × Staartaanzet + 0,05 × Kruis. De ruglijn wordt kwalitatief beoordeeld en niet opgenomen in de gewogen berekening.",
+  legal: {
+    title: "Juridische kennisgeving",
+    text: "Dit hulpmiddel is uitsluitend bedoeld voor educatieve en informatieve doeleinden en vormt geen diergeneeskundig advies. Raadpleeg altijd een gekwalificeerde dierenarts.",
+    data: "Deze applicatie verzamelt, slaat op of verzendt geen persoonlijke gegevens of afbeeldingen. Alle ingevoerde informatie blijft uitsluitend op uw apparaat.",
+    license: "Gratis tool ontwikkeld binnen het EUnetHorse-project (Horizon Europe #101086551). Reproductie met bronvermelding toegestaan."
+  },
+  toast: { saved: "Beoordeling opgeslagen", cleared: "Alle beoordelingen gewist", resetDone: "Formulier hersteld", deleted: "Beoordeling verwijderd" },
+  confirm: { clearAll: "Alle opgeslagen beoordelingen verwijderen? Dit kan niet ongedaan worden gemaakt.", deleteOne: "Deze beoordeling verwijderen?" },
+  scoreLabels: { min: "0 Cachectisch", max: "5 Obees" }
+},
+pl: {
+  meta: { name: "Polski", flag: "\u{1F1F5}\u{1F1F1}" },
+  tabs: { assess: "Ocena", history: "Historia", guide: "Przewodnik" },
+  intro: "<strong>Ocena Kondycji Ciała (BCS)</strong> — Oceń ilość tkanki tłuszczowej konia poprzez obserwację wizualną i palpację. Oceń każdą z 7 stref anatomicznych w skali od 0 (wyniszczony) do 5 (otyły). Dozwolone są połówki punktów.",
+  horseInfo: "Informacje o koniu",
+  fields: { name: "Imię", breed: "Rasa", id: "ID", date: "Data", category: "Kategoria", notes: "Uwagi" },
+  categories: { general: "Koń dorosły (ogólnie)", sport: "Koń sportowy", broodmare: "Klacz hodowlana", pony: "Kuc / Łatwy w utrzymaniu", draft: "Koń zimnokrwisty" },
+  zonesTitle: "Ocena stref",
+  zonesInstr: "Przesuń suwak każdej strefy od 0 do 5. Opis dostosowuje się do wybranej oceny.",
+  zones: [
+    { key: "neck", name: "Szyja / Grzbiet szyi", icon: "1" },
+    { key: "withers", name: "Kłąb", icon: "2" },
+    { key: "shoulder", name: "Za łopatką", icon: "3" },
+    { key: "ribs", name: "Żebra", icon: "4" },
+    { key: "back", name: "Linia grzbietu", icon: "5" },
+    { key: "croup", name: "Zad", icon: "6" },
+    { key: "tail", name: "Nasada ogona", icon: "7" }
+  ],
+  zoneDescs: {
+    neck: ["Brak grzbietu szyi. Kręgi szyjne widoczne.", "Struktura kostna szyi widoczna. Grzbiet szyi niewidoczny.", "Grzbiet szyi widoczny, z lekkim rowkiem u podstawy.", "Dobrze zdefiniowany grzbiet szyi, lekko wypukły.", "Grzbiet szyi można chwycić całą dłonią i jest twardy.", "Bardzo prominentny grzbiet szyi, zanurzony w masie szyi."],
+    withers: ["Bardzo prominentny. Wyrostki kolczyste widoczne.", "Prominentny. Górna część łopatki widoczna.", "Wyraźny i suchy.", "Lekko prominentny.", "Wtopiony w otaczające tkanki.", "Zakryty i otoczony zaokrągloną masą tłuszczu."],
+    shoulder: ["Głębokie wgłębienie. Prominentna, sucha łopatka.", "Wklęsła.", "Lekko wklęsła. Cienka warstwa tłuszczu.", "Staje się płaska. Dobrze zdefiniowana warstwa tłuszczu.", "Lekko uniesiona, wypukła. Gruba, miękka warstwa tłuszczu.", "Wyraźnie wypukła. Łopatka zakryta tłuszczem. Masa drży przy palpacji."],
+    ribs: ["Przyczepy żeber do wyrostków poprzecznych widoczne. Bardzo głębokie wgłębienia międzyżebrowe. Sucha, ściśle przylegająca skóra.", "Bardzo prominentne. Skóra ściśle przylegająca do żeber.", "Żebra wyczuwalne pod elastyczną skórą. Lekkie wgłębienia międzyżebrowe.", "Niewidoczne. Ledwo wyczuwalne.", "Niewyczuwalne pod warstwą tłuszczu.", "Gruba warstwa tłuszczu, która toczy się pod ręką."],
+    back: ["Wyrostki kolczyste kręgów lędźwiowych bardzo prominentne. Brak pokrycia tłuszczem.", "Wyrostki kolczyste wyraźnie wyczuwalne. Minimalne pokrycie tłuszczem.", "Wyrostki kolczyste wyczuwalne przy lekkim nacisku. Cienka warstwa tłuszczu.", "Wyrostki kolczyste wyczuwalne tylko przy mocnym nacisku. Gładkie, równomierne pokrycie tłuszczem.", "Niewyczuwalne. Grzbiet wydaje się płaski lub lekko zaokrąglony.", "Grube złogi tłuszczu wzdłuż kręgosłupa. Rowek środkowy może być widoczny."],
+    croup: ["Bardzo prominentna struktura kostna. Guzy kulszowe i biodrowe bardzo prominentne.", "Spiczasta. Kontury wklęsłe.", "Guzy kulszowe i biodrowe rozpoznawalne.", "Lekko zaokrąglona. Kontury wypukłe.", "Dobrze zaokrąglona. Guzy kulszowe i biodrowe zakryte.", "Zaokrąglona. Rowek środkowy tworzący podwójny zad."],
+    tail: ["Kręgi u nasady ogona widoczne. Więzadło krzyżowo-guzowe wyraźnie zdefiniowane.", "Prominentna. Nasada ogona wyraźnie zdefiniowana.", "Wyraźnie zdefiniowana. Nasada ogona dobrze widoczna.", "Pokryta. Nasada ogona lekko zdefiniowana. Lekki złóg tłuszczu zakrywa kręgi i więzadła.", "Słabo zdefiniowana. Gruba, miękka warstwa tłuszczu.", "Masywna. Tkanka tłuszczowa tworząca twardą poduszkę wokół nasady ogona."]
+  },
+  sumLabel: "Ważony BCS",
+  photoTitle: "Zdjęcia",
+  photoInstr: "Dodaj zdjęcia konia do tej oceny (opcjonalnie). Zdjęcia są przechowywane lokalnie w przeglądarce.",
+  buttons: { save: "Zapisz ocenę", reset: "Resetuj", export: "Eksportuj JSON", exportAll: "Eksportuj wszystko", clearAll: "Wyczyść wszystko" },
+  historyTitle: "Zapisane oceny",
+  emptyHistory: "Brak zapisanych ocen. Wykonaj ocenę i zapisz ją, aby zobaczyć ją tutaj.",
+  guideIntro: "<strong>Przewodnik referencyjny</strong> — Szczegółowe opisy dla każdej strefy ciała przy każdym wyniku BCS (0–5).",
+  guideHeaders: { score: "BCS", neck: "Szyja", withers: "Kłąb", shoulder: "Za łopatką", ribs: "Żebra", back: "Grzbiet", croup: "Zad", tail: "Ogon" },
+  interpTitle: "Interpretacja BCS",
+  interp: [
+    { range: "> 4,5", label: "Bardzo tłusty", badge: "b-danger", reco: "Niebezpieczeństwo — Wysokie ryzyko choroby metabolicznej" },
+    { range: "4,0 – 4,5", label: "Tłusty", badge: "b-warn", reco: "Ostrożność — Zalecana redukcja masy ciała" },
+    { range: "3,5 – 4,0", label: "Lekko tłusty", badge: "b-monitor", reco: "Monitorowanie — Dostosuj dietę i ćwiczenia" },
+    { range: "2,5 – 3,5", label: "Optymalny", badge: "b-safe", reco: "Dobra kondycja — Utrzymaj obecne zarządzanie" },
+    { range: "2,0 – 2,5", label: "Lekko chudy", badge: "b-monitor", reco: "Monitorowanie — Zwiększ żywienie" },
+    { range: "1,5 – 2,0", label: "Chudy", badge: "b-warn", reco: "Ostrożność — Zalecana ocena weterynaryjna" },
+    { range: "< 1,5", label: "Bardzo chudy", badge: "b-danger", reco: "Niebezpieczeństwo — Natychmiastowa opieka weterynaryjna" }
+  ],
+  formulaTitle: "Formuła ważona",
+  formulaText: "BCS = 0,50 × Żebra + 0,15 × Za łopatką + 0,15 × Szyja + 0,10 × Kłąb + 0,05 × Nasada ogona + 0,05 × Zad. Linia grzbietu jest oceniana jakościowo i nie jest uwzględniana w obliczeniu ważonym.",
+  legal: {
+    title: "Nota prawna",
+    text: "To narzędzie jest udostępniane wyłącznie w celach edukacyjnych i informacyjnych i nie stanowi porady weterynaryjnej. Zawsze konsultuj się z wykwalifikowanym weterynarzem.",
+    data: "Ta aplikacja nie gromadzi, nie przechowuje ani nie przesyła żadnych danych osobowych ani zdjęć. Wszystkie wprowadzone informacje pozostają wyłącznie na Twoim urządzeniu.",
+    license: "Bezpłatne narzędzie opracowane w ramach projektu EUnetHorse (Horizon Europe #101086551). Reprodukcja dozwolona z podaniem źródła."
+  },
+  toast: { saved: "Ocena zapisana", cleared: "Wszystkie oceny usunięte", resetDone: "Formularz zresetowany", deleted: "Ocena usunięta" },
+  confirm: { clearAll: "Usunąć wszystkie zapisane oceny? Tej czynności nie można cofnąć.", deleteOne: "Usunąć tę ocenę?" },
+  scoreLabels: { min: "0 Wyniszczony", max: "5 Otyły" }
+},
+pt: {
+  meta: { name: "Português", flag: "\u{1F1F5}\u{1F1F9}" },
+  tabs: { assess: "Avaliação", history: "Histórico", guide: "Guia" },
+  intro: "<strong>Escore de Condição Corporal (ECC)</strong> — Avalie a quantidade de tecido adiposo do seu cavalo por observação visual e palpação. Pontue cada uma das 7 zonas anatómicas numa escala de 0 (caquético) a 5 (obeso). Meios pontos são permitidos.",
+  horseInfo: "Informações do cavalo",
+  fields: { name: "Nome", breed: "Raça", id: "ID", date: "Data", category: "Categoria", notes: "Notas / Observações" },
+  categories: { general: "Cavalo adulto (geral)", sport: "Cavalo de desporto", broodmare: "Égua de cria", pony: "Pónei / Fácil manutenção", draft: "Cavalo de tiro" },
+  zonesTitle: "Pontuação por zona",
+  zonesInstr: "Deslize o marcador de cada zona de 0 a 5. A descrição atualiza-se conforme a pontuação selecionada.",
+  zones: [
+    { key: "neck", name: "Pescoço / Crista", icon: "1" },
+    { key: "withers", name: "Garrote", icon: "2" },
+    { key: "shoulder", name: "Atrás da espádua", icon: "3" },
+    { key: "ribs", name: "Costelas", icon: "4" },
+    { key: "back", name: "Linha do dorso", icon: "5" },
+    { key: "croup", name: "Garupa", icon: "6" },
+    { key: "tail", name: "Base da cauda", icon: "7" }
+  ],
+  zoneDescs: {
+    neck: ["Sem crista. Vértebras cervicais visíveis.", "Estrutura óssea do pescoço visível. Crista não aparente.", "Crista visível, com ligeiro sulco na base.", "Crista bem definida, ligeiramente convexa.", "A crista do pescoço pode ser agarrada com toda a mão e sente-se firme.", "Crista muito proeminente, imersa na massa do pescoço."],
+    withers: ["Muito proeminente. Processos espinhosos visíveis.", "Proeminente. Parte superior da escápula visível.", "Pronunciado e seco.", "Ligeiramente proeminente.", "Integrado no tecido circundante.", "Oculto e envolto numa massa arredondada de gordura."],
+    shoulder: ["Depressão profunda. Espádua proeminente e seca.", "Deprimido.", "Ligeiramente côncavo. Depósito fino de gordura.", "Torna-se plano. Depósito de gordura bem definido.", "Ligeiramente elevado, convexo. Depósito de gordura espesso e mole.", "Claramente convexo. Espádua oculta pela gordura. A massa treme à palpação."],
+    ribs: ["Inserção das costelas nos processos transversos visível. Depressões intercostais muito profundas. Pele seca aderente.", "Muito proeminentes. Pele aderente às costelas.", "Costelas palpáveis sob pele flexível. Ligeiras depressões intercostais.", "Não visíveis. Mal palpáveis.", "Não palpáveis sob o depósito de gordura.", "Espessa camada de gordura que rola sob a mão."],
+    back: ["Processos espinhosos das vértebras lombares muito proeminentes. Sem cobertura de gordura.", "Processos espinhosos claramente palpáveis. Cobertura mínima de gordura.", "Processos espinhosos palpáveis com pressão leve. Camada fina de gordura.", "Processos espinhosos palpáveis apenas com pressão firme. Cobertura de gordura lisa e uniforme.", "Não palpáveis. O dorso parece plano ou ligeiramente arredondado.", "Depósitos espessos de gordura ao longo da coluna. Sulco mediano pode ser visível."],
+    croup: ["Estrutura óssea muito proeminente. Tuberosidades isquiáticas e ilíacas muito proeminentes.", "Pontiaguda. Contornos côncavos.", "Tuberosidades isquiáticas e ilíacas discerníveis.", "Ligeiramente arredondada. Contornos convexos.", "Bem arredondada. Tuberosidades isquiáticas e ilíacas ocultas.", "Arredondada. Sulco mediano formando uma garupa dupla."],
+    tail: ["Vértebras na base da cauda visíveis. Ligamento sacrotuberoso claramente definido.", "Proeminente. Base da cauda claramente definida.", "Claramente definida. Base da cauda claramente visível.", "Coberta. Base da cauda ligeiramente definida. Ligeiro depósito de gordura oculta vértebras e ligamentos.", "Mal definida. Depósito de gordura espesso e mole.", "Massiva. Tecido adiposo formando uma almofada firme à volta da base da cauda."]
+  },
+  sumLabel: "ECC Ponderado",
+  photoTitle: "Fotos",
+  photoInstr: "Adicione fotos do cavalo para esta avaliação (opcional). As fotos são armazenadas localmente no seu navegador.",
+  buttons: { save: "Guardar avaliação", reset: "Repor", export: "Exportar JSON", exportAll: "Exportar tudo", clearAll: "Apagar tudo" },
+  historyTitle: "Avaliações guardadas",
+  emptyHistory: "Ainda sem avaliações guardadas. Complete uma avaliação e guarde-a.",
+  guideIntro: "<strong>Guia de referência</strong> — Descrições detalhadas para cada zona corporal em cada pontuação ECC (0–5).",
+  guideHeaders: { score: "ECC", neck: "Pescoço", withers: "Garrote", shoulder: "Atrás espádua", ribs: "Costelas", back: "Dorso", croup: "Garupa", tail: "Cauda" },
+  interpTitle: "Interpretação ECC",
+  interp: [
+    { range: "> 4,5", label: "Muito gordo", badge: "b-danger", reco: "Perigo — Alto risco de doença metabólica" },
+    { range: "4,0 – 4,5", label: "Gordo", badge: "b-warn", reco: "Precaução — Redução de peso recomendada" },
+    { range: "3,5 – 4,0", label: "Ligeiramente gordo", badge: "b-monitor", reco: "Monitorizar — Ajustar dieta e exercício" },
+    { range: "2,5 – 3,5", label: "Ótimo", badge: "b-safe", reco: "Boa condição — Manter gestão atual" },
+    { range: "2,0 – 2,5", label: "Ligeiramente magro", badge: "b-monitor", reco: "Monitorizar — Aumentar nutrição" },
+    { range: "1,5 – 2,0", label: "Magro", badge: "b-warn", reco: "Precaução — Avaliação veterinária aconselhada" },
+    { range: "< 1,5", label: "Muito magro", badge: "b-danger", reco: "Perigo — Atenção veterinária imediata" }
+  ],
+  formulaTitle: "Fórmula ponderada",
+  formulaText: "ECC = 0,50 × Costelas + 0,15 × Atrás espádua + 0,15 × Pescoço + 0,10 × Garrote + 0,05 × Base cauda + 0,05 × Garupa. A linha do dorso é avaliada qualitativamente e não incluída no cálculo ponderado.",
+  legal: {
+    title: "Aviso legal",
+    text: "Esta ferramenta é fornecida apenas para fins educativos e informativos e não constitui aconselhamento veterinário. Consulte sempre um veterinário qualificado.",
+    data: "Esta aplicação não recolhe, armazena ou transmite quaisquer dados pessoais ou imagens. Toda a informação introduzida permanece exclusivamente no seu dispositivo.",
+    license: "Ferramenta gratuita desenvolvida no âmbito do projeto EUnetHorse (Horizon Europe #101086551). Reprodução permitida com atribuição."
+  },
+  toast: { saved: "Avaliação guardada", cleared: "Todas as avaliações apagadas", resetDone: "Formulário reposto", deleted: "Avaliação eliminada" },
+  confirm: { clearAll: "Apagar todas as avaliações guardadas? Esta ação não pode ser desfeita.", deleteOne: "Eliminar esta avaliação?" },
+  scoreLabels: { min: "0 Caquético", max: "5 Obeso" }
+},
+ro: {
+  meta: { name: "Română", flag: "\u{1F1F7}\u{1F1F4}" },
+  tabs: { assess: "Evaluare", history: "Istoric", guide: "Ghid" },
+  intro: "<strong>Scorul Condiției Corporale (BCS)</strong> — Evaluați cantitatea de țesut adipos al calului prin observare vizuală și palpare. Notați fiecare din cele 7 zone anatomice pe o scară de la 0 (cahexic) la 5 (obez). Sunt permise jumătăți de punct.",
+  horseInfo: "Informații despre cal",
+  fields: { name: "Nume", breed: "Rasă", id: "ID", date: "Data", category: "Categorie", notes: "Note / Observații" },
+  categories: { general: "Cal adult (general)", sport: "Cal de sport", broodmare: "Iapă de prăsilă", pony: "Ponei / Întreținere ușoară", draft: "Cal de tracțiune" },
+  zonesTitle: "Notare pe zone",
+  zonesInstr: "Glisați cursorul fiecărei zone de la 0 la 5. Descrierea se actualizează conform scorului selectat.",
+  zones: [
+    { key: "neck", name: "Gât / Creastă", icon: "1" },
+    { key: "withers", name: "Greabăn", icon: "2" },
+    { key: "shoulder", name: "În spatele umărului", icon: "3" },
+    { key: "ribs", name: "Coaste", icon: "4" },
+    { key: "back", name: "Linia spatelui", icon: "5" },
+    { key: "croup", name: "Crupă", icon: "6" },
+    { key: "tail", name: "Baza cozii", icon: "7" }
+  ],
+  zoneDescs: {
+    neck: ["Fără creastă. Vertebrele cervicale vizibile.", "Structura osoasă a gâtului vizibilă. Creasta neaparentă.", "Creastă vizibilă, cu un ușor șanț la bază.", "Creastă bine definită, ușor convexă.", "Creasta gâtului poate fi apucată cu toată mâna și se simte fermă.", "Creastă foarte proeminentă, scufundată în masa gâtului."],
+    withers: ["Foarte proeminentă. Procesele spinoase vizibile.", "Proeminentă. Partea superioară a scapulei vizibilă.", "Pronunțată și uscată.", "Ușor proeminentă.", "Integrată în țesutul înconjurător.", "Ascunsă și învelită într-o masă rotunjită de grăsime."],
+    shoulder: ["Depresiune profundă. Umăr proeminent și uscat.", "Deprimat.", "Ușor concav. Depozit subțire de grăsime.", "Devine plat. Depozit de grăsime bine definit.", "Ușor ridicat, convex. Depozit gros de grăsime moale.", "Clar convex. Umăr ascuns de grăsime. Masa tremură la palpare."],
+    ribs: ["Atașarea coastelor la procesele transverse vizibilă. Depresiuni intercostale foarte adânci. Piele uscată aderentă.", "Foarte proeminente. Piele aderentă de coaste.", "Coastele se simt sub pielea suplă. Ușoare depresiuni intercostale.", "Nu sunt vizibile. Abia palpabile.", "Nu pot fi palpate sub depozitul de grăsime.", "Strat gros de grăsime care se rostogolește sub mână."],
+    back: ["Procesele spinoase ale vertebrelor lombare foarte proeminente. Fără acoperire de grăsime.", "Procesele spinoase clar palpabile. Acoperire minimă de grăsime.", "Procesele spinoase palpabile cu presiune ușoară. Strat subțire de grăsime.", "Procesele spinoase palpabile doar cu presiune fermă. Acoperire de grăsime netedă și uniformă.", "Nu pot fi palpate. Spatele pare plat sau ușor rotunjit.", "Depozite groase de grăsime de-a lungul coloanei. Șanțul median poate fi vizibil."],
+    croup: ["Structură osoasă foarte proeminentă. Tuberozitățile ischiatice și iliace foarte proeminente.", "Ascuțită. Contururi concave.", "Tuberozitățile ischiatice și iliace discernabile.", "Ușor rotunjită. Contururi convexe.", "Bine rotunjită. Tuberozitățile ascunse.", "Rotunjită. Șanț median formând o crupă dublă."],
+    tail: ["Vertebrele la baza cozii vizibile. Ligamentul sacrotuberos clar definit.", "Proeminentă. Baza cozii clar definită.", "Clar definită. Baza cozii clar vizibilă.", "Acoperită. Baza cozii ușor definită. Un ușor depozit de grăsime ascunde vertebrele și ligamentele.", "Slab definită. Depozit gros de grăsime moale.", "Masivă. Țesut adipos formând o pernă fermă în jurul bazei cozii."]
+  },
+  sumLabel: "BCS Ponderat",
+  photoTitle: "Fotografii",
+  photoInstr: "Adăugați fotografii ale calului pentru această evaluare (opțional). Fotografiile sunt stocate local în browserul dvs.",
+  buttons: { save: "Salvează evaluarea", reset: "Resetează", export: "Exportă JSON", exportAll: "Exportă tot", clearAll: "Șterge tot" },
+  historyTitle: "Evaluări salvate",
+  emptyHistory: "Încă nu sunt evaluări salvate. Completați o evaluare și salvați-o.",
+  guideIntro: "<strong>Ghid de referință</strong> — Descrieri detaliate pentru fiecare zonă corporală la fiecare scor BCS (0–5).",
+  guideHeaders: { score: "BCS", neck: "Gât", withers: "Greabăn", shoulder: "Spatele umăr", ribs: "Coaste", back: "Spate", croup: "Crupă", tail: "Coadă" },
+  interpTitle: "Interpretarea BCS",
+  interp: [
+    { range: "> 4,5", label: "Foarte gras", badge: "b-danger", reco: "Pericol — Risc ridicat de boală metabolică" },
+    { range: "4,0 – 4,5", label: "Gras", badge: "b-warn", reco: "Precauție — Se recomandă reducerea greutății" },
+    { range: "3,5 – 4,0", label: "Ușor gras", badge: "b-monitor", reco: "Monitorizare — Ajustați dieta și exercițiul" },
+    { range: "2,5 – 3,5", label: "Optim", badge: "b-safe", reco: "Condiție bună — Mențineți managementul actual" },
+    { range: "2,0 – 2,5", label: "Ușor slab", badge: "b-monitor", reco: "Monitorizare — Creșteți nutriția" },
+    { range: "1,5 – 2,0", label: "Slab", badge: "b-warn", reco: "Precauție — Se recomandă evaluare veterinară" },
+    { range: "< 1,5", label: "Foarte slab", badge: "b-danger", reco: "Pericol — Atenție veterinară imediată" }
+  ],
+  formulaTitle: "Formula ponderată",
+  formulaText: "BCS = 0,50 × Coaste + 0,15 × Spatele umărului + 0,15 × Gât + 0,10 × Greabăn + 0,05 × Baza cozii + 0,05 × Crupă. Linia spatelui este evaluată calitativ și nu este inclusă în calculul ponderat.",
+  legal: {
+    title: "Aviz legal",
+    text: "Acest instrument este furnizat doar în scopuri educative și informative și nu constituie consiliere veterinară. Consultați întotdeauna un veterinar calificat.",
+    data: "Această aplicație nu colectează, stochează sau transmite date personale sau imagini. Toate informațiile introduse rămân exclusiv pe dispozitivul dvs.",
+    license: "Instrument gratuit dezvoltat în cadrul proiectului EUnetHorse (Horizon Europe #101086551). Reproducere permisă cu atribuire."
+  },
+  toast: { saved: "Evaluare salvată", cleared: "Toate evaluările șterse", resetDone: "Formular resetat", deleted: "Evaluare ștearsă" },
+  confirm: { clearAll: "Ștergeți toate evaluările salvate? Această acțiune nu poate fi anulată.", deleteOne: "Ștergeți această evaluare?" },
+  scoreLabels: { min: "0 Cahexic", max: "5 Obez" }
+}
+};
+
+// ═══════════════════════════════════════════════
+// APP STATE
+// ═══════════════════════════════════════════════
+let currentLang = 'en';
+let zoneScores = {};
+let photos = [];
+let assessments = [];
+let downloadsApi = null;
+
+// Load saved assessments
+try { assessments = JSON.parse(localStorage.getItem('bcs_assessments') || '[]'); } catch(e) { assessments = []; }
+
+// Try to get downloads capability
+(async () => {
+  try {
+    if (window.claude) {
+      downloadsApi = await window.claude.use('downloads');
+      if (downloadsApi) {
+        document.getElementById('btn-export').style.display = '';
+        document.getElementById('btn-export-all').style.display = '';
+      }
+    }
+  } catch(e) {}
+})();
+
+// ═══════════════════════════════════════════════
+// LANGUAGE
+// ═══════════════════════════════════════════════
+function T() { return I18N[currentLang]; }
+
+function initLangSelect() {
+  const sel = document.getElementById('langSelect');
+  const order = ['en','de','es','fr','it','nl','pl','pt','ro'];
+  order.forEach(k => {
+    const o = document.createElement('option');
+    o.value = k;
+    o.textContent = I18N[k].meta.flag + ' ' + I18N[k].meta.name;
+    sel.appendChild(o);
+  });
+  // Try to detect browser language
+  const bl = (navigator.language || '').slice(0,2).toLowerCase();
+  if (I18N[bl]) currentLang = bl;
+  sel.value = currentLang;
+  sel.addEventListener('change', () => { currentLang = sel.value; applyLang(); });
+}
+
+function applyLang() {
+  const t = T();
+  // Tabs
+  document.getElementById('t-assess').textContent = t.tabs.assess;
+  document.getElementById('t-history').textContent = t.tabs.history;
+  document.getElementById('t-guide').textContent = t.tabs.guide;
+  // Intro
+  document.getElementById('intro-card').innerHTML = t.intro;
+  // Horse info
+  document.getElementById('horse-info-title').textContent = t.horseInfo;
+  document.getElementById('lbl-name').textContent = t.fields.name;
+  document.getElementById('lbl-breed').textContent = t.fields.breed;
+  document.getElementById('lbl-id').textContent = t.fields.id;
+  document.getElementById('lbl-date').textContent = t.fields.date;
+  document.getElementById('lbl-category').textContent = t.fields.category;
+  document.getElementById('lbl-notes').textContent = t.fields.notes;
+  // Categories
+  document.getElementById('opt-general').textContent = t.categories.general;
+  document.getElementById('opt-sport').textContent = t.categories.sport;
+  document.getElementById('opt-brood').textContent = t.categories.broodmare;
+  document.getElementById('opt-pony').textContent = t.categories.pony;
+  document.getElementById('opt-draft').textContent = t.categories.draft;
+  // Zones
+  document.getElementById('zones-title').textContent = t.zonesTitle;
+  document.getElementById('zones-instr').textContent = t.zonesInstr;
+  // Summary
+  document.getElementById('sum-label').textContent = t.sumLabel;
+  // Photos
+  document.getElementById('photo-title').textContent = t.photoTitle;
+  document.getElementById('photo-instr').textContent = t.photoInstr;
+  // Buttons
+  document.getElementById('btn-save').textContent = t.buttons.save;
+  document.getElementById('btn-reset').textContent = t.buttons.reset;
+  document.getElementById('btn-export').textContent = t.buttons.export;
+  document.getElementById('btn-export-all').textContent = t.buttons.exportAll;
+  document.getElementById('btn-clear-all').textContent = t.buttons.clearAll;
+  // History
+  document.getElementById('history-title').textContent = t.historyTitle;
+  // Guide
+  document.getElementById('guide-intro').innerHTML = t.guideIntro;
+  document.getElementById('interp-title').textContent = t.interpTitle;
+  document.getElementById('formula-title').textContent = t.formulaTitle;
+  document.getElementById('formula-text').textContent = t.formulaText;
+  // Legal
+  document.getElementById('legal-title').textContent = t.legal.title;
+  document.getElementById('legal-text').textContent = t.legal.text;
+  document.getElementById('legal-data').textContent = t.legal.data;
+  document.getElementById('legal-license').textContent = t.legal.license;
+
+  buildZones();
+  buildGuideTable();
+  buildInterpTable();
+  renderHistory();
+  updateSummary();
+}
+
+// ═══════════════════════════════════════════════
+// ZONES
+// ═══════════════════════════════════════════════
+function buildZones() {
+  const t = T();
+  const grid = document.getElementById('zones-grid');
+  grid.innerHTML = '';
+
+  t.zones.forEach(z => {
+    const score = zoneScores[z.key] !== undefined ? zoneScores[z.key] : -1;
+    const scoreIdx = score >= 0 ? Math.floor(score) : 0;
+    const desc = t.zoneDescs[z.key][scoreIdx] || '';
+
+    const card = document.createElement('div');
+    card.className = 'zone-card' + (score >= 0 ? ' scored' : '');
+    card.innerHTML = `
+      <div class="zone-name">
+        <span class="zone-icon" style="font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--teal);color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center">${z.icon}</span>
+        ${z.name}
+        <span style="margin-left:auto" class="score-val" id="sv-${z.key}">${score >= 0 ? score.toFixed(1) : '—'}</span>
+      </div>
+      <div class="zone-desc" id="zd-${z.key}">${score >= 0 ? desc : ''}</div>
+      <div class="score-slider-row">
+        <input type="range" class="score-slider" min="0" max="50" step="5" value="${score >= 0 ? score * 10 : 0}" data-zone="${z.key}" aria-label="${z.name}">
+      </div>
+      <div class="score-label-row">
+        <span>${t.scoreLabels.min}</span>
+        <span>${t.scoreLabels.max}</span>
+      </div>
+    `;
+    grid.appendChild(card);
+
+    const slider = card.querySelector('.score-slider');
+    slider.addEventListener('input', (e) => {
+      const val = parseInt(e.target.value) / 10;
+      zoneScores[z.key] = val;
+      document.getElementById('sv-' + z.key).textContent = val.toFixed(1);
+      const idx = Math.min(Math.floor(val), 5);
+      document.getElementById('zd-' + z.key).textContent = t.zoneDescs[z.key][idx] || '';
+      card.classList.add('scored');
+      updateSummary();
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════
+// WEIGHTED BCS CALCULATION
+// ═══════════════════════════════════════════════
+function calcWeightedBCS() {
+  const weights = { ribs: 0.50, shoulder: 0.15, neck: 0.15, withers: 0.10, tail: 0.05, croup: 0.05 };
+  let total = 0, wsum = 0;
+  for (const [k, w] of Object.entries(weights)) {
+    if (zoneScores[k] !== undefined && zoneScores[k] >= 0) {
+      total += zoneScores[k] * w;
+      wsum += w;
+    }
+  }
+  if (wsum === 0) return null;
+  return total / wsum * 1; // already weighted to sum to 1
+}
+
+function getBCSClass(bcs) {
+  const t = T();
+  if (bcs > 4.5) return { label: t.interp[0].label, badge: 'b-danger', reco: t.interp[0].reco };
+  if (bcs > 4.0) return { label: t.interp[1].label, badge: 'b-warn', reco: t.interp[1].reco };
+  if (bcs > 3.5) return { label: t.interp[2].label, badge: 'b-monitor', reco: t.interp[2].reco };
+  if (bcs > 2.5) return { label: t.interp[3].label, badge: 'b-safe', reco: t.interp[3].reco };
+  if (bcs > 2.0) return { label: t.interp[4].label, badge: 'b-monitor', reco: t.interp[4].reco };
+  if (bcs > 1.5) return { label: t.interp[5].label, badge: 'b-warn', reco: t.interp[5].reco };
+  return { label: t.interp[6].label, badge: 'b-danger', reco: t.interp[6].reco };
+}
+
+function updateSummary() {
+  const bcs = calcWeightedBCS();
+  const container = document.getElementById('summary-container');
+  if (bcs === null) { container.style.display = 'none'; return; }
+  container.style.display = 'block';
+  const cls = getBCSClass(bcs);
+  document.getElementById('sum-score').textContent = bcs.toFixed(2);
+  document.getElementById('sum-class').innerHTML = `<span class="badge ${cls.badge}">${cls.label}</span>`;
+  document.getElementById('sum-reco').textContent = cls.reco;
+}
+
+// ═══════════════════════════════════════════════
+// PHOTOS
+// ═══════════════════════════════════════════════
+document.getElementById('photo-add').addEventListener('click', () => {
+  document.getElementById('photo-input').click();
+});
+
+document.getElementById('photo-input').addEventListener('change', (e) => {
+  Array.from(e.target.files).forEach(file => {
+    if (photos.length >= 6) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      photos.push(ev.target.result);
+      renderPhotos();
+    };
+    reader.readAsDataURL(file);
+  });
+  e.target.value = '';
+});
+
+function renderPhotos() {
+  const grid = document.getElementById('photo-grid');
+  grid.innerHTML = '';
+  photos.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.className = 'photo-thumb';
+    img.src = src;
+    img.alt = `Photo ${i+1}`;
+    img.addEventListener('click', () => openLightbox(src));
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'position:relative;display:inline-block';
+    const del = document.createElement('button');
+    del.style.cssText = 'position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:50%;border:none;background:rgba(11,46,36,.7);color:#fff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center';
+    del.textContent = '×';
+    del.addEventListener('click', (e) => { e.stopPropagation(); photos.splice(i,1); renderPhotos(); });
+    wrap.appendChild(img);
+    wrap.appendChild(del);
+    grid.appendChild(wrap);
+  });
+  if (photos.length < 6) {
+    const btn = document.createElement('button');
+    btn.className = 'photo-add-btn';
+    btn.textContent = '+';
+    btn.addEventListener('click', () => document.getElementById('photo-input').click());
+    grid.appendChild(btn);
+  }
+}
+
+function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
+  lb.querySelector('img').src = src;
+  lb.classList.add('open');
+}
+document.getElementById('lightbox').addEventListener('click', (e) => {
+  if (e.target.closest('.lightbox-close') || e.target === document.getElementById('lightbox')) {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+});
+
+// ═══════════════════════════════════════════════
+// SAVE / LOAD / EXPORT
+// ═══════════════════════════════════════════════
+function saveAssessment() {
+  const bcs = calcWeightedBCS();
+  if (bcs === null) return;
+
+  const entry = {
+    id: Date.now(),
+    date: document.getElementById('assess-date').value || new Date().toISOString().slice(0,10),
+    name: document.getElementById('horse-name').value || '—',
+    breed: document.getElementById('horse-breed').value || '',
+    horseId: document.getElementById('horse-id').value || '',
+    category: document.getElementById('horse-category').value,
+    zones: { ...zoneScores },
+    bcs: parseFloat(bcs.toFixed(2)),
+    notes: document.getElementById('assess-notes').value,
+    photos: photos.slice(0, 3), // limit stored photos to 3 for storage
+    lang: currentLang
+  };
+
+  assessments.unshift(entry);
+  try { localStorage.setItem('bcs_assessments', JSON.stringify(assessments)); } catch(e) {}
+  showToast(T().toast.saved);
+  renderHistory();
+}
+
+function resetForm() {
+  zoneScores = {};
+  photos = [];
+  document.getElementById('horse-name').value = '';
+  document.getElementById('horse-breed').value = '';
+  document.getElementById('horse-id').value = '';
+  document.getElementById('assess-date').value = '';
+  document.getElementById('assess-notes').value = '';
+  document.getElementById('horse-category').value = 'general';
+  document.getElementById('summary-container').style.display = 'none';
+  buildZones();
+  renderPhotos();
+  showToast(T().toast.resetDone);
+}
+
+async function exportJSON(data, filename) {
+  if (!downloadsApi) return;
+  const json = JSON.stringify(data, null, 2);
+  try {
+    await downloadsApi.save({ filename, data: json });
+  } catch(e) {
+    if (e.code !== 'declined') console.warn('Export failed:', e);
+  }
+}
+
+document.getElementById('btn-save').addEventListener('click', saveAssessment);
+document.getElementById('btn-reset').addEventListener('click', resetForm);
+document.getElementById('btn-export').addEventListener('click', () => {
+  const bcs = calcWeightedBCS();
+  if (bcs === null) return;
+  const data = {
+    date: document.getElementById('assess-date').value || new Date().toISOString().slice(0,10),
+    name: document.getElementById('horse-name').value,
+    zones: { ...zoneScores },
+    bcs: parseFloat(bcs.toFixed(2))
+  };
+  exportJSON(data, 'bcs_assessment.json');
+});
+document.getElementById('btn-export-all').addEventListener('click', () => {
+  exportJSON(assessments, 'bcs_all_assessments.json');
+});
+document.getElementById('btn-clear-all').addEventListener('click', () => {
+  if (!confirm(T().confirm.clearAll)) return;
+  assessments = [];
+  try { localStorage.setItem('bcs_assessments', '[]'); } catch(e) {}
+  renderHistory();
+  showToast(T().toast.cleared);
+});
+
+// ═══════════════════════════════════════════════
+// HISTORY
+// ═══════════════════════════════════════════════
+function renderHistory() {
+  const t = T();
+  const list = document.getElementById('history-list');
+
+  if (assessments.length === 0) {
+    list.innerHTML = `<div class="empty-state">${t.emptyHistory}</div>`;
+    return;
+  }
+
+  list.innerHTML = '';
+  assessments.forEach((a, idx) => {
+    const cls = getBCSClass(a.bcs);
+    const div = document.createElement('div');
+    div.className = 'card history-item';
+
+    let zonesHtml = '';
+    const zoneKeys = ['neck','withers','shoulder','ribs','back','croup','tail'];
+    const zoneNames = t.zones;
+    zoneKeys.forEach((k, i) => {
+      if (a.zones[k] !== undefined && a.zones[k] >= 0) {
+        zonesHtml += `<span class="history-zone-chip">${zoneNames[i] ? zoneNames[i].name : k}: ${a.zones[k].toFixed(1)}</span>`;
+      }
+    });
+
+    let photosHtml = '';
+    if (a.photos && a.photos.length > 0) {
+      photosHtml = '<div class="history-photos">';
+      a.photos.forEach(p => {
+        photosHtml += `<img class="history-photo" src="${p}" alt="Photo" onclick="openLightbox('${p.replace(/'/g, "\\'")}')">`;
+      });
+      photosHtml += '</div>';
+    }
+
+    div.innerHTML = `
+      <div class="history-header">
+        <span class="history-name">${a.name}</span>
+        <span class="history-date">${a.date}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;margin:6px 0">
+        <span class="history-score">${a.bcs.toFixed(2)}</span>
+        <span class="badge ${cls.badge}">${cls.label}</span>
+      </div>
+      <div class="history-zones">${zonesHtml}</div>
+      ${a.notes ? `<p style="font-size:12px;color:var(--ink-soft);margin-top:4px">${a.notes}</p>` : ''}
+      ${photosHtml}
+      <button class="btn btn-danger" style="margin-top:8px;font-size:10px;padding:6px 10px" data-del="${idx}">&times;</button>
+    `;
+
+    div.querySelector('[data-del]').addEventListener('click', () => {
+      if (!confirm(t.confirm.deleteOne)) return;
+      assessments.splice(idx, 1);
+      try { localStorage.setItem('bcs_assessments', JSON.stringify(assessments)); } catch(e) {}
+      renderHistory();
+      showToast(t.toast.deleted);
+    });
+
+    list.appendChild(div);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// GUIDE TABLE
+// ═══════════════════════════════════════════════
+function buildGuideTable() {
+  const t = T();
+  const table = document.getElementById('guide-table');
+  const h = t.guideHeaders;
+  const keys = ['neck','withers','shoulder','ribs','back','croup','tail'];
+
+  let html = `<thead><tr>
+    <th>${h.score}</th>
+    <th>${h.neck}</th><th>${h.withers}</th><th>${h.shoulder}</th>
+    <th>${h.ribs}</th><th>${h.back}</th><th>${h.croup}</th><th>${h.tail}</th>
+  </tr></thead><tbody>`;
+
+  for (let s = 0; s <= 5; s++) {
+    html += `<tr><td class="score-cell">${s}</td>`;
+    keys.forEach(k => {
+      html += `<td>${t.zoneDescs[k][s]}</td>`;
+    });
+    html += '</tr>';
+  }
+  html += '</tbody>';
+  table.innerHTML = html;
+}
+
+function buildInterpTable() {
+  const t = T();
+  const container = document.getElementById('interp-table');
+  let html = '';
+  t.interp.forEach(item => {
+    html += `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)">
+      <span style="min-width:70px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft)">${item.range}</span>
+      <span class="badge ${item.badge}">${item.label}</span>
+      <span style="font-size:12px;color:var(--ink-soft)">${item.reco}</span>
+    </div>`;
+  });
+  container.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ═══════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+document.getElementById('assess-date').value = new Date().toISOString().slice(0,10);
+initLangSelect();
+applyLang();
+</script>

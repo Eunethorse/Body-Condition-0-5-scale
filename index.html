@@ -1004,564 +1004,1986 @@ body {
 // TRANSLATIONS — 9 languages
 // ═══════════════════════════════════════════════
 const I18N = {
-en: {
-  meta: { name: "English", flag: "\u{1F1EC}\u{1F1E7}" },
-  tabs: { assess: "Assessment", history: "History", guide: "Guide" },
-  intro: "<strong>Body Condition Scoring (BCS)</strong> — Assess the amount of adipose tissue in your horse by visual observation and palpation. Score each of the 7 anatomical zones on a scale of 0 (cadaverous) to 5 (obese). Half-point scores are allowed.",
-  horseInfo: "Horse Information",
-  fields: { name: "Name", breed: "Breed", id: "ID", date: "Date", category: "Category", notes: "Notes / Observations" },
-  categories: { general: "Adult horse (general)", sport: "Sport horse", broodmare: "Broodmare", pony: "Pony / Easy keeper", draft: "Draft horse" },
-  zonesTitle: "Zone Scoring",
-  zonesInstr: "Slide each zone's score from 0 to 5. The description updates to match the selected score.",
-  zones: [
-    { key: "neck", name: "Neck / Crest", icon: "1" },
-    { key: "withers", name: "Withers", icon: "2" },
-    { key: "shoulder", name: "Behind the shoulder", icon: "3" },
-    { key: "ribs", name: "Ribs", icon: "4" },
-    { key: "back", name: "Back line", icon: "5" },
-    { key: "croup", name: "Croup / Hindquarters", icon: "6" },
-    { key: "tail", name: "Tail head", icon: "7" }
-  ],
-  zoneDescs: {
-    neck: ["No crest. Cervical vertebrae visible.", "Bony structure of the neck visible. Crest not apparent.", "Crest visible, with a slight groove at its base.", "Well-defined crest, slightly convex.", "Neck crest can be grasped with the whole hand and feels firm.", "Very prominent crest, immersed in the mass of the neck."],
-    withers: ["Very prominent. Spinous processes visible.", "Prominent. Upper part of the shoulder blade visible.", "Pronounced and dry.", "Slightly prominent.", "Blended into surrounding tissue.", "Obscured and enveloped in a rounded mass of fat."],
-    shoulder: ["Deep depression. Prominent, dry shoulder.", "Depressed.", "Slightly concave. Thin fat deposit.", "Becomes flat. Well-defined fat deposit.", "Slightly raised, convex. Thick, soft fat deposit.", "Clearly convex. Shoulder obscured by fat. Mass trembles during palpation."],
-    ribs: ["Attachment of ribs to transverse processes visible. Very deep intercostal depressions. Dry skin tightly adhering.", "Very prominent. Skin tightly adhering to the ribs.", "Ribs can be felt beneath supple skin. Slight intercostal depressions.", "Not visible. Barely palpable.", "Cannot be palpated beneath the fat deposit.", "Thick layer of fat that rolls beneath the hand."],
-    back: ["Spinous processes of lumbar vertebrae very prominent. No fat cover.", "Spinous processes clearly palpable. Minimal fat cover.", "Spinous processes palpable with light pressure. Thin fat layer.", "Spinous processes palpable only with firm pressure. Smooth, even fat cover.", "Cannot be palpated. Back appears flat or slightly rounded.", "Thick fat deposits along the spine. Median groove may be visible."],
-    croup: ["Very prominent bony structure. Points of buttocks and hips very prominent.", "Pointed. Concave contours.", "Points of buttocks and hips discernible.", "Slightly rounded. Convex contours.", "Well rounded. Points of buttocks and hips obscured.", "Rounded. Median groove forming a double croup."],
-    tail: ["Vertebrae at the base of the tail visible. Sacrotuberous ligament clearly defined.", "Prominent. Tail head clearly defined.", "Clearly defined. Tail head clearly visible.", "Covered. Tail head slightly defined. A slight fat deposit obscures vertebrae and ligaments.", "Poorly defined. Thick, soft fat deposit.", "Massive. Fatty tissue forming a firm cushion around the tail head."]
+  "en": {
+    "meta": {
+      "name": "English",
+      "flag": "🇬🇧"
+    },
+    "tabs": {
+      "assess": "Assessment",
+      "history": "History",
+      "guide": "Guide"
+    },
+    "intro": "<strong>Body Condition Scoring (BCS)</strong> — Assess the amount of adipose tissue in your horse by visual observation and palpation. Score each of the 7 anatomical zones on a scale of 0 (cadaverous) to 5 (obese). Half-point scores are allowed.",
+    "horseInfo": "Horse Information",
+    "fields": {
+      "name": "Name",
+      "breed": "Breed",
+      "id": "ID",
+      "date": "Date",
+      "category": "Category",
+      "notes": "Notes / Observations"
+    },
+    "categories": {
+      "general": "Adult horse (general)",
+      "sport": "Sport horse",
+      "broodmare": "Broodmare",
+      "pony": "Pony / Easy keeper",
+      "draft": "Draft horse"
+    },
+    "zonesTitle": "Zone Scoring",
+    "zonesInstr": "Slide each zone's score from 0 to 5. The description updates to match the selected score.",
+    "zones": [
+      {
+        "key": "neck",
+        "name": "Neck / Crest",
+        "icon": "1"
+      },
+      {
+        "key": "withers",
+        "name": "Withers",
+        "icon": "2"
+      },
+      {
+        "key": "shoulder",
+        "name": "Behind the shoulder",
+        "icon": "3"
+      },
+      {
+        "key": "ribs",
+        "name": "Ribs",
+        "icon": "4"
+      },
+      {
+        "key": "back",
+        "name": "Back line",
+        "icon": "5"
+      },
+      {
+        "key": "croup",
+        "name": "Croup / Hindquarters",
+        "icon": "6"
+      },
+      {
+        "key": "tail",
+        "name": "Tail head",
+        "icon": "7"
+      }
+    ],
+    "zoneDescs": {
+      "neck": [
+        "No crest. Cervical vertebrae visible.",
+        "Bony structure of the neck visible. Crest not apparent.",
+        "Crest visible, with a slight groove at its base.",
+        "Well-defined crest, slightly convex.",
+        "Neck crest can be grasped with the whole hand and feels firm.",
+        "Very prominent crest, immersed in the mass of the neck."
+      ],
+      "withers": [
+        "Very prominent. Spinous processes visible.",
+        "Prominent. Upper part of the shoulder blade visible.",
+        "Pronounced and dry.",
+        "Slightly prominent.",
+        "Blended into surrounding tissue.",
+        "Obscured and enveloped in a rounded mass of fat."
+      ],
+      "shoulder": [
+        "Deep depression. Prominent, dry shoulder.",
+        "Depressed.",
+        "Slightly concave. Thin fat deposit.",
+        "Becomes flat. Well-defined fat deposit.",
+        "Slightly raised, convex. Thick, soft fat deposit.",
+        "Clearly convex. Shoulder obscured by fat. Mass trembles during palpation."
+      ],
+      "ribs": [
+        "Attachment of ribs to transverse processes visible. Very deep intercostal depressions. Dry skin tightly adhering.",
+        "Very prominent. Skin tightly adhering to the ribs.",
+        "Ribs can be felt beneath supple skin. Slight intercostal depressions.",
+        "Not visible. Barely palpable.",
+        "Cannot be palpated beneath the fat deposit.",
+        "Thick layer of fat that rolls beneath the hand."
+      ],
+      "back": [
+        "Spinous processes of lumbar vertebrae very prominent. No fat cover.",
+        "Spinous processes clearly palpable. Minimal fat cover.",
+        "Spinous processes palpable with light pressure. Thin fat layer.",
+        "Spinous processes palpable only with firm pressure. Smooth, even fat cover.",
+        "Cannot be palpated. Back appears flat or slightly rounded.",
+        "Thick fat deposits along the spine. Median groove may be visible."
+      ],
+      "croup": [
+        "Very prominent bony structure. Points of buttocks and hips very prominent.",
+        "Pointed. Concave contours.",
+        "Points of buttocks and hips discernible.",
+        "Slightly rounded. Convex contours.",
+        "Well rounded. Points of buttocks and hips obscured.",
+        "Rounded. Median groove forming a double croup."
+      ],
+      "tail": [
+        "Vertebrae at the base of the tail visible. Sacrotuberous ligament clearly defined.",
+        "Prominent. Tail head clearly defined.",
+        "Clearly defined. Tail head clearly visible.",
+        "Covered. Tail head slightly defined. A slight fat deposit obscures vertebrae and ligaments.",
+        "Poorly defined. Thick, soft fat deposit.",
+        "Massive. Fatty tissue forming a firm cushion around the tail head."
+      ]
+    },
+    "sumLabel": "Weighted BCS",
+    "photoTitle": "Photos",
+    "photoInstr": "Add photos of the horse for this assessment (optional). Photos are stored locally in your browser.",
+    "buttons": {
+      "save": "Save assessment",
+      "reset": "Reset",
+      "export": "Export JSON",
+      "exportAll": "Export all",
+      "clearAll": "Clear all"
+    },
+    "historyTitle": "Saved Assessments",
+    "emptyHistory": "No assessments saved yet. Complete an assessment and save it to see it here.",
+    "guideIntro": "<strong>Reference Guide</strong> — Detailed descriptions for each body zone at each BCS score (0–5). Use this as a visual reference while performing your assessment.",
+    "guideHeaders": {
+      "score": "BCS",
+      "neck": "Neck",
+      "withers": "Withers",
+      "shoulder": "Behind shoulder",
+      "ribs": "Ribs",
+      "back": "Back line",
+      "croup": "Croup",
+      "tail": "Tail head"
+    },
+    "interpTitle": "BCS Interpretation",
+    "interp": [
+      {
+        "range": "> 4.5",
+        "label": "Very fat",
+        "badge": "b-danger",
+        "reco": "Danger — High risk of metabolic disease"
+      },
+      {
+        "range": "4.0 – 4.5",
+        "label": "Fat",
+        "badge": "b-warn",
+        "reco": "Caution — Weight reduction recommended"
+      },
+      {
+        "range": "3.5 – 4.0",
+        "label": "Slightly fat",
+        "badge": "b-monitor",
+        "reco": "Monitor — Adjust diet and exercise"
+      },
+      {
+        "range": "2.5 – 3.5",
+        "label": "Optimum",
+        "badge": "b-safe",
+        "reco": "Good condition — Maintain current management"
+      },
+      {
+        "range": "2.0 – 2.5",
+        "label": "Slightly thin",
+        "badge": "b-monitor",
+        "reco": "Monitor — Increase nutrition"
+      },
+      {
+        "range": "1.5 – 2.0",
+        "label": "Thin",
+        "badge": "b-warn",
+        "reco": "Caution — Veterinary assessment advised"
+      },
+      {
+        "range": "< 1.5",
+        "label": "Very thin",
+        "badge": "b-danger",
+        "reco": "Danger — Immediate veterinary attention"
+      }
+    ],
+    "formulaTitle": "Weighted Formula",
+    "formulaText": "BCS = 0.50 × Ribs + 0.15 × Behind shoulder + 0.15 × Neck + 0.10 × Withers + 0.05 × Tail head + 0.05 × Croup. The back line score is used for qualitative assessment and not included in the weighted calculation.",
+    "legal": {
+      "title": "⚖️ Legal Notice (click to expand)",
+      "vetTitle": "Veterinary disclaimer",
+      "vetText": "This tool is provided solely for educational and informational purposes and does not constitute veterinary advice. It should not replace a professional veterinary examination. Always consult a qualified veterinarian for any decisions regarding the health, nutrition and welfare of your horse. The authors and the EUnetHorse project accept no liability for any actions taken based on the results provided by this tool.",
+      "privacyTitle": "Data privacy",
+      "privacyText": "This application does not collect, store or transmit any personal data or images to any server. All information entered remains exclusively on your device.",
+      "licenseTitle": "License",
+      "licenseText": "Free tool developed within the framework of the EUnetHorse project (Horizon Europe #101086551). Reproduction is permitted provided the source is cited. Data provided by IFCE, France. Supervised by Maria João Fradinho.",
+      "euFundingLabel": "Funded by the European Union",
+      "euDisclaimerText": "Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Research Executive Agency (REA). Neither the European Union nor the granting authority can be held responsible for them. Grant Agreement No. 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+    },
+    "toast": {
+      "saved": "Assessment saved",
+      "cleared": "All assessments cleared",
+      "resetDone": "Form reset",
+      "deleted": "Assessment deleted"
+    },
+    "confirm": {
+      "clearAll": "Delete all saved assessments? This cannot be undone.",
+      "deleteOne": "Delete this assessment?"
+    },
+    "scoreLabels": {
+      "min": "0 Cadaverous",
+      "max": "5 Obese"
+    }
   },
-  sumLabel: "Weighted BCS",
-  photoTitle: "Photos",
-  photoInstr: "Add photos of the horse for this assessment (optional). Photos are stored locally in your browser.",
-  buttons: { save: "Save assessment", reset: "Reset", export: "Export JSON", exportAll: "Export all", clearAll: "Clear all" },
-  historyTitle: "Saved Assessments",
-  emptyHistory: "No assessments saved yet. Complete an assessment and save it to see it here.",
-  guideIntro: "<strong>Reference Guide</strong> — Detailed descriptions for each body zone at each BCS score (0–5). Use this as a visual reference while performing your assessment.",
-  guideHeaders: { score: "BCS", neck: "Neck", withers: "Withers", shoulder: "Behind shoulder", ribs: "Ribs", back: "Back line", croup: "Croup", tail: "Tail head" },
-  interpTitle: "BCS Interpretation",
-  interp: [
-    { range: "> 4.5", label: "Very fat", badge: "b-danger", reco: "Danger — High risk of metabolic disease" },
-    { range: "4.0 – 4.5", label: "Fat", badge: "b-warn", reco: "Caution — Weight reduction recommended" },
-    { range: "3.5 – 4.0", label: "Slightly fat", badge: "b-monitor", reco: "Monitor — Adjust diet and exercise" },
-    { range: "2.5 – 3.5", label: "Optimum", badge: "b-safe", reco: "Good condition — Maintain current management" },
-    { range: "2.0 – 2.5", label: "Slightly thin", badge: "b-monitor", reco: "Monitor — Increase nutrition" },
-    { range: "1.5 – 2.0", label: "Thin", badge: "b-warn", reco: "Caution — Veterinary assessment advised" },
-    { range: "< 1.5", label: "Very thin", badge: "b-danger", reco: "Danger — Immediate veterinary attention" }
-  ],
-  formulaTitle: "Weighted Formula",
-  formulaText: "BCS = 0.50 × Ribs + 0.15 × Behind shoulder + 0.15 × Neck + 0.10 × Withers + 0.05 × Tail head + 0.05 × Croup. The back line score is used for qualitative assessment and not included in the weighted calculation.",
-  legal: {
-    title: "⚖️ Legal Notice (click to expand)",
-    vetTitle: "Veterinary disclaimer",
-    vetText: "This tool is provided solely for educational and informational purposes and does not constitute veterinary advice. It should not replace a professional veterinary examination. Always consult a qualified veterinarian for any decisions regarding the health, nutrition and welfare of your horse. The authors and the EUnetHorse project accept no liability for any actions taken based on the results provided by this tool.",
-    privacyTitle: "Data privacy",
-    privacyText: "This application does not collect, store or transmit any personal data or images to any server. All information entered remains exclusively on your device.",
-    licenseTitle: "License",
-    licenseText: "Free tool developed within the framework of the EUnetHorse project (Horizon Europe #101086551). Reproduction is permitted provided the source is cited. Data provided by IFCE, France. Supervised by Maria João Fradinho.",
-    euFundingLabel: "Funded by the European Union",
-    euDisclaimerText: "Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Research Executive Agency (REA). Neither the European Union nor the granting authority can be held responsible for them. Grant Agreement No. 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+  "de": {
+    "meta": {
+      "name": "Deutsch",
+      "flag": "🇩🇪"
+    },
+    "tabs": {
+      "assess": "Bewertung",
+      "history": "Verlauf",
+      "guide": "Leitfaden"
+    },
+    "intro": "<strong>Body Condition Scoring (BCS)</strong> — Beurteilen Sie die Fettreserven Ihres Pferdes durch Anschauen und Abtasten. Bewerten Sie die 7 Körperregionen jeweils auf einer Skala von 0 (extrem abgemagert) bis 5 (stark verfettet). Halbe Punkte sind möglich.",
+    "horseInfo": "Pferdeinformationen",
+    "fields": {
+      "name": "Name",
+      "breed": "Rasse",
+      "id": "ID",
+      "date": "Datum",
+      "category": "Kategorie",
+      "notes": "Notizen / Beobachtungen"
+    },
+    "categories": {
+      "general": "Erwachsenes Pferd (allgemein)",
+      "sport": "Sportpferd",
+      "broodmare": "Zuchtstute",
+      "pony": "Pony / leichtfuttriges Pferd",
+      "draft": "Kaltblut"
+    },
+    "zonesTitle": "Bewertung der Körperregionen",
+    "zonesInstr": "Stellen Sie für jede Körperregion einen Wert von 0 bis 5 ein. Die Beschreibung wird automatisch angepasst.",
+    "zones": [
+      {
+        "key": "neck",
+        "name": "Hals / Kamm",
+        "icon": "1"
+      },
+      {
+        "key": "withers",
+        "name": "Widerrist",
+        "icon": "2"
+      },
+      {
+        "key": "shoulder",
+        "name": "Hinter der Schulter",
+        "icon": "3"
+      },
+      {
+        "key": "ribs",
+        "name": "Rippen",
+        "icon": "4"
+      },
+      {
+        "key": "back",
+        "name": "Rückenlinie",
+        "icon": "5"
+      },
+      {
+        "key": "croup",
+        "name": "Kruppe / Hinterhand",
+        "icon": "6"
+      },
+      {
+        "key": "tail",
+        "name": "Schweifansatz",
+        "icon": "7"
+      }
+    ],
+    "zoneDescs": {
+      "neck": [
+        "Kein Fettkamm vorhanden. Halswirbel sichtbar.",
+        "Knöcherne Halsstruktur sichtbar. Kein Fettkamm erkennbar.",
+        "Fettkamm sichtbar, mit leichter Rinne am Ansatz.",
+        "Deutlich ausgeprägter, leicht gewölbter Fettkamm.",
+        "Der Fettkamm lässt sich mit der ganzen Hand greifen und fühlt sich fest an.",
+        "Sehr ausgeprägter Fettkamm, der mit dem übrigen Hals verschmilzt."
+      ],
+      "withers": [
+        "Sehr stark hervortretend. Dornfortsätze sichtbar.",
+        "Deutlich hervortretend. Oberer Teil des Schulterblatts sichtbar.",
+        "Deutlich ausgeprägt, kaum Fettauflage.",
+        "Leicht hervortretend.",
+        "Geht in das umliegende Gewebe über.",
+        "Durch eine rundliche Fettauflage verdeckt."
+      ],
+      "shoulder": [
+        "Tiefe Einsenkung hinter der Schulter. Schulterknochen treten deutlich hervor.",
+        "Deutlich eingesunken.",
+        "Leicht nach innen gewölbt. Dünne Fettauflage.",
+        "Bereich wird flacher. Gut definierte Fettauflage.",
+        "Leicht vorgewölbt. Dicke, weiche Fettauflage.",
+        "Deutlich vorgewölbt. Schulterkontur durch Fett verdeckt. Fettgewebe bewegt sich beim Abtasten."
+      ],
+      "ribs": [
+        "Rippenansätze an den Querfortsätzen sichtbar. Sehr tiefe Zwischenrippenräume. Trockene, straff anliegende Haut.",
+        "Rippen stehen stark hervor. Haut liegt straff an.",
+        "Rippen unter der geschmeidigen Haut gut tastbar. Leichte Vertiefungen zwischen den Rippen.",
+        "Rippen nicht sichtbar und kaum tastbar.",
+        "Rippen unter der Fettschicht nicht tastbar.",
+        "Dicke, unter der Hand verschiebliche Fettschicht."
+      ],
+      "back": [
+        "Dornfortsätze der Lendenwirbel treten stark hervor. Keine Fettauflage.",
+        "Dornfortsätze deutlich tastbar. Kaum Fettauflage.",
+        "Dornfortsätze bei leichtem Druck tastbar. Dünne Fettschicht.",
+        "Dornfortsätze erst bei kräftigem Druck tastbar. Gleichmäßige Fettauflage.",
+        "Dornfortsätze nicht tastbar. Rücken wirkt flach oder leicht gerundet.",
+        "Starke Fettauflage entlang der Wirbelsäule. Mittige Rinne kann sichtbar sein."
+      ],
+      "croup": [
+        "Knochen treten stark hervor. Sitzbein- und Hüfthöcker deutlich sichtbar.",
+        "Spitze Form mit eingezogenen Konturen.",
+        "Sitzbein- und Hüfthöcker erkennbar.",
+        "Leicht gerundet, mit nach außen gewölbten Konturen.",
+        "Deutlich gerundet. Sitzbein- und Hüfthöcker nicht mehr erkennbar.",
+        "Stark gerundet. Eine mittige Rinne bildet eine Doppelkruppe."
+      ],
+      "tail": [
+        "Wirbel am Schweifansatz sichtbar. Kreuzbein-Sitzbein-Band deutlich erkennbar.",
+        "Schweifansatz tritt deutlich hervor.",
+        "Schweifansatz klar erkennbar.",
+        "Leichte Fettauflage verdeckt teilweise Wirbel und Bänder am Schweifansatz.",
+        "Schweifansatz kaum abgegrenzt. Dicke, weiche Fettauflage.",
+        "Starke Fettansammlung bildet ein festes Polster um den Schweifansatz."
+      ]
+    },
+    "sumLabel": "Gewichteter BCS-Wert",
+    "photoTitle": "Fotos",
+    "photoInstr": "Fügen Sie Fotos des Pferdes für diese Bewertung hinzu (optional). Fotos werden lokal in Ihrem Browser gespeichert.",
+    "buttons": {
+      "save": "Bewertung speichern",
+      "reset": "Zurücksetzen",
+      "export": "JSON exportieren",
+      "exportAll": "Alle exportieren",
+      "clearAll": "Alle löschen"
+    },
+    "historyTitle": "Gespeicherte Bewertungen",
+    "emptyHistory": "Noch keine Bewertungen gespeichert. Führen Sie eine Bewertung durch und speichern Sie sie.",
+    "guideIntro": "<strong>Bewertungshilfe</strong> — Detaillierte Beschreibungen zur Orientierung bei der Beurteilung der Körperregionen für die BCS-Werte von 0 bis 5",
+    "guideHeaders": {
+      "score": "BCS",
+      "neck": "Hals",
+      "withers": "Widerrist",
+      "shoulder": "Hinter der Schulter",
+      "ribs": "Rippen",
+      "back": "Rücken",
+      "croup": "Kruppe",
+      "tail": "Schweifansatz"
+    },
+    "interpTitle": "BCS-Interpretation",
+    "interp": [
+      {
+        "range": "> 4,5",
+        "label": "Stark verfettet",
+        "badge": "b-danger",
+        "reco": "Achtung — Hohes Risiko für Stoffwechselerkrankungen"
+      },
+      {
+        "range": "4,0 – 4,5",
+        "label": "Verfettet",
+        "badge": "b-warn",
+        "reco": "Vorsicht — Gewichtsreduktion empfohlen"
+      },
+      {
+        "range": "3,5 – 4,0",
+        "label": "Leicht verfettet",
+        "badge": "b-monitor",
+        "reco": "Beobachten — Fütterung und Bewegung anpassen"
+      },
+      {
+        "range": "2,5 – 3,5",
+        "label": "Optimal",
+        "badge": "b-safe",
+        "reco": "Gute Körperkondition — Bisheriges Management beibehalten"
+      },
+      {
+        "range": "2,0 – 2,5",
+        "label": "Leicht mager",
+        "badge": "b-monitor",
+        "reco": "Beobachten — Futtermenge erhöhen"
+      },
+      {
+        "range": "1,5 – 2,0",
+        "label": "Mager",
+        "badge": "b-warn",
+        "reco": "Vorsicht — Tierärztliche Untersuchung empfohlen"
+      },
+      {
+        "range": "< 1,5",
+        "label": "Stark abgemagert",
+        "badge": "b-danger",
+        "reco": "Achtung — Umgehend tierärztlich abklären lassen"
+      }
+    ],
+    "formulaTitle": "Formel zur BCS-Berechnung",
+    "formulaText": "BCS = 0,50 × Rippen + 0,15 × Bereich hinter der Schulter + 0,15 × Hals + 0,10 × Widerrist + 0,05 × Schweifansatz + 0,05 × Kruppe. Die Rückenlinie fließt nur in die qualitative Beurteilung ein, nicht in die gewichtete Berechnung.",
+    "legal": {
+      "title": "⚖️ Rechtliche Hinweise (zum Aufklappen klicken)",
+      "vetTitle": "Tierärztlicher Hinweis",
+      "vetText": "Dieses Tool dient ausschließlich der Information und Aufklärung und ersetzt keine tierärztliche Beratung oder Untersuchung. Wenden Sie sich bei Fragen zur Gesundheit, Fütterung und zum Wohlbefinden Ihres Pferdes stets an einen qualifizierten Tierarzt. Die Autoren und das EUnetHorse-Projekt übernehmen keine Haftung für Maßnahmen, die aufgrund der Ergebnisse dieses Tools ergriffen werden.",
+      "privacyTitle": "Datenschutz",
+      "privacyText": "Diese Anwendung erhebt, speichert oder übermittelt keine personenbezogenen Daten oder Bilder an einen Server. Alle eingegebenen Informationen verbleiben ausschließlich auf Ihrem Gerät.",
+      "licenseTitle": "Lizenz",
+      "licenseText": "Kostenloses Tool, entwickelt im Rahmen des EUnetHorse-Projekts (Horizon Europe #101086551). Vervielfältigung unter Angabe der Quelle gestattet. Daten: IFCE, Frankreich. Fachliche Begleitung: Maria João Fradinho.",
+      "euFundingLabel": "Von der Europäischen Union finanziert",
+      "euDisclaimerText": "Finanziert von der Europäischen Union. Die geäußerten Ansichten und Meinungen sind jedoch ausschließlich die der Autorinnen und Autoren und spiegeln nicht unbedingt die Position der Europäischen Union oder der Europäischen Exekutivagentur für Forschung (REA) wider. Weder die Europäische Union noch die Bewilligungsbehörde können dafür verantwortlich gemacht werden. Fördervereinbarung Nr. 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+    },
+    "toast": {
+      "saved": "Bewertung gespeichert",
+      "cleared": "Alle Bewertungen gelöscht",
+      "resetDone": "Formular zurückgesetzt",
+      "deleted": "Bewertung gelöscht"
+    },
+    "confirm": {
+      "clearAll": "Alle gespeicherten Bewertungen löschen? Dies lässt sich nicht rückgängig machen.",
+      "deleteOne": "Diese Bewertung löschen?"
+    },
+    "scoreLabels": {
+      "min": "0 Extrem abgemagert",
+      "max": "5 Stark verfettet"
+    }
   },
-  toast: { saved: "Assessment saved", cleared: "All assessments cleared", resetDone: "Form reset", deleted: "Assessment deleted" },
-  confirm: { clearAll: "Delete all saved assessments? This cannot be undone.", deleteOne: "Delete this assessment?" },
-  scoreLabels: { min: "0 Cadaverous", max: "5 Obese" }
-},
-de: {
-  meta: { name: "Deutsch", flag: "\u{1F1E9}\u{1F1EA}" },
-  tabs: { assess: "Bewertung", history: "Verlauf", guide: "Leitfaden" },
-  intro: "<strong>Body Condition Scoring (BCS)</strong> — Bewerten Sie die Menge an Fettgewebe Ihres Pferdes durch visuelle Beobachtung und Palpation. Bewerten Sie jede der 7 anatomischen Zonen auf einer Skala von 0 (kachektisch) bis 5 (adipös). Halbpunktwertungen sind zulässig.",
-  horseInfo: "Pferdeinformationen",
-  fields: { name: "Name", breed: "Rasse", id: "ID", date: "Datum", category: "Kategorie", notes: "Anmerkungen" },
-  categories: { general: "Erwachsenes Pferd (allgemein)", sport: "Sportpferd", broodmare: "Zuchtstute", pony: "Pony / Leichtfuttrig", draft: "Kaltblut" },
-  zonesTitle: "Zonenbewertung",
-  zonesInstr: "Schieben Sie den Bewertungsregler jeder Zone von 0 bis 5. Die Beschreibung passt sich an die gewählte Punktzahl an.",
-  zones: [
-    { key: "neck", name: "Hals / Kamm", icon: "1" },
-    { key: "withers", name: "Widerrist", icon: "2" },
-    { key: "shoulder", name: "Hinter der Schulter", icon: "3" },
-    { key: "ribs", name: "Rippen", icon: "4" },
-    { key: "back", name: "Rückenlinie", icon: "5" },
-    { key: "croup", name: "Kruppe / Hinterhand", icon: "6" },
-    { key: "tail", name: "Schweifansatz", icon: "7" }
-  ],
-  zoneDescs: {
-    neck: ["Kein Kamm. Halswirbel sichtbar.", "Knochenstruktur des Halses sichtbar. Kamm nicht erkennbar.", "Kamm sichtbar, mit leichter Rinne an der Basis.", "Gut definierter Kamm, leicht konvex.", "Halskamm kann mit der ganzen Hand gegriffen werden und fühlt sich fest an.", "Sehr prominenter Kamm, in die Halsmasse eingebettet."],
-    withers: ["Sehr prominent. Dornfortsätze sichtbar.", "Prominent. Oberer Teil des Schulterblatts sichtbar.", "Ausgeprägt und trocken.", "Leicht prominent.", "In umgebendes Gewebe übergehend.", "Verdeckt und in eine abgerundete Fettmasse eingehüllt."],
-    shoulder: ["Tiefe Vertiefung. Prominente, trockene Schulter.", "Eingesunken.", "Leicht konkav. Dünne Fettauflage.", "Wird flach. Gut definierte Fettauflage.", "Leicht erhaben, konvex. Dicke, weiche Fettauflage.", "Deutlich konvex. Schulter von Fett verdeckt. Masse zittert bei Palpation."],
-    ribs: ["Ansatz der Rippen an den Querfortsätzen sichtbar. Sehr tiefe Interkostalräume. Trockene, eng anliegende Haut.", "Sehr prominent. Haut eng an den Rippen anliegend.", "Rippen unter geschmeidiger Haut tastbar. Leichte Interkostalvertiefungen.", "Nicht sichtbar. Kaum tastbar.", "Unter der Fettschicht nicht tastbar.", "Dicke Fettschicht, die unter der Hand rollt."],
-    back: ["Dornfortsätze der Lendenwirbel sehr prominent. Keine Fettabdeckung.", "Dornfortsätze deutlich tastbar. Minimale Fettabdeckung.", "Dornfortsätze mit leichtem Druck tastbar. Dünne Fettschicht.", "Dornfortsätze nur mit festem Druck tastbar. Glatte, gleichmäßige Fettabdeckung.", "Nicht tastbar. Rücken erscheint flach oder leicht gerundet.", "Dicke Fettablagerungen entlang der Wirbelsäule. Mediane Rinne kann sichtbar sein."],
-    croup: ["Sehr prominente Knochenstruktur. Sitzbeinhöcker und Hüfthöcker sehr prominent.", "Spitz. Konkave Konturen.", "Sitzbeinhöcker und Hüfthöcker erkennbar.", "Leicht gerundet. Konvexe Konturen.", "Gut gerundet. Sitzbeinhöcker und Hüfthöcker verdeckt.", "Gerundet. Mediane Rinne bildet eine Doppelkruppe."],
-    tail: ["Wirbel am Schweifansatz sichtbar. Ligamentum sacrotuberale deutlich definiert.", "Prominent. Schweifansatz deutlich definiert.", "Deutlich definiert. Schweifansatz klar sichtbar.", "Bedeckt. Schweifansatz leicht definiert. Leichte Fettauflage verdeckt Wirbel und Bänder.", "Schlecht definiert. Dicke, weiche Fettauflage.", "Massiv. Fettgewebe bildet ein festes Polster um den Schweifansatz."]
+  "es": {
+    "meta": {
+      "name": "Español",
+      "flag": "🇪🇸"
+    },
+    "tabs": {
+      "assess": "Evaluación",
+      "history": "Historial",
+      "guide": "Guía"
+    },
+    "intro": "<strong>Puntuación de Condición Corporal (BCS)</strong> — Evalúe la cantidad de tejido adiposo de su caballo mediante observación visual y palpación. Puntúe cada una de las 7 zonas anatómicas en una escala de 0 (caquéxico) a 5 (obeso). Se permiten puntuaciones de medio punto.",
+    "horseInfo": "Información del caballo",
+    "fields": {
+      "name": "Nombre",
+      "breed": "Raza",
+      "id": "ID",
+      "date": "Fecha",
+      "category": "Categoría",
+      "notes": "Notas / Observaciones"
+    },
+    "categories": {
+      "general": "Caballo adulto (general)",
+      "sport": "Caballo de deporte",
+      "broodmare": "Yegua de cría",
+      "pony": "Poni / Fácil mantenimiento",
+      "draft": "Caballo de tiro"
+    },
+    "zonesTitle": "Puntuación por zonas",
+    "zonesInstr": "Deslice el marcador de cada zona de 0 a 5. La descripción se actualiza según la puntuación seleccionada.",
+    "zones": [
+      {
+        "key": "neck",
+        "name": "Cuello / Cresta",
+        "icon": "1"
+      },
+      {
+        "key": "withers",
+        "name": "Cruz",
+        "icon": "2"
+      },
+      {
+        "key": "shoulder",
+        "name": "Detrás del hombro",
+        "icon": "3"
+      },
+      {
+        "key": "ribs",
+        "name": "Costillas",
+        "icon": "4"
+      },
+      {
+        "key": "back",
+        "name": "Línea del dorso",
+        "icon": "5"
+      },
+      {
+        "key": "croup",
+        "name": "Grupa / Cuartos traseros",
+        "icon": "6"
+      },
+      {
+        "key": "tail",
+        "name": "Base de la cola",
+        "icon": "7"
+      }
+    ],
+    "zoneDescs": {
+      "neck": [
+        "Sin cresta. Vértebras cervicales visibles.",
+        "Estructura ósea del cuello visible. Cresta no aparente.",
+        "Cresta visible, con un ligero surco en su base.",
+        "Cresta bien definida, ligeramente convexa.",
+        "La cresta del cuello se puede agarrar con toda la mano y se siente firme.",
+        "Cresta muy prominente, inmersa en la masa del cuello."
+      ],
+      "withers": [
+        "Muy prominente. Apófisis espinosas visibles.",
+        "Prominente. Parte superior de la escápula visible.",
+        "Pronunciada y seca.",
+        "Ligeramente prominente.",
+        "Integrada en el tejido circundante.",
+        "Oculta y envuelta en una masa redondeada de grasa."
+      ],
+      "shoulder": [
+        "Depresión profunda. Hombro prominente y seco.",
+        "Deprimido.",
+        "Ligeramente cóncavo. Depósito de grasa fino.",
+        "Se vuelve plano. Depósito de grasa bien definido.",
+        "Ligeramente elevado, convexo. Depósito de grasa grueso y blando.",
+        "Claramente convexo. Hombro oculto por la grasa. La masa tiembla a la palpación."
+      ],
+      "ribs": [
+        "Inserción de las costillas en las apófisis transversas visible. Depresiones intercostales muy profundas. Piel seca adherida.",
+        "Muy prominentes. Piel adherida a las costillas.",
+        "Las costillas se palpan bajo piel flexible. Ligeras depresiones intercostales.",
+        "No visibles. Apenas palpables.",
+        "No se pueden palpar bajo el depósito de grasa.",
+        "Gruesa capa de grasa que rueda bajo la mano."
+      ],
+      "back": [
+        "Apófisis espinosas de las vértebras lumbares muy prominentes. Sin cobertura grasa.",
+        "Apófisis espinosas claramente palpables. Cobertura grasa mínima.",
+        "Apófisis espinosas palpables con presión ligera. Capa fina de grasa.",
+        "Apófisis espinosas palpables solo con presión firme. Cobertura grasa lisa y uniforme.",
+        "No se pueden palpar. El dorso aparece plano o ligeramente redondeado.",
+        "Depósitos gruesos de grasa a lo largo de la columna. Puede ser visible el surco medio."
+      ],
+      "croup": [
+        "Estructura ósea muy prominente. Puntas de las nalgas y caderas muy prominentes.",
+        "Puntiaguda. Contornos cóncavos.",
+        "Puntas de las nalgas y caderas discernibles.",
+        "Ligeramente redondeada. Contornos convexos.",
+        "Bien redondeada. Puntas de las nalgas y caderas ocultas.",
+        "Redondeada. Surco mediano formando una doble grupa."
+      ],
+      "tail": [
+        "Vértebras de la base de la cola visibles. Ligamento sacrotuberoso claramente definido.",
+        "Prominente. Base de la cola claramente definida.",
+        "Claramente definida. Base de la cola claramente visible.",
+        "Cubierta. Base de la cola ligeramente definida. Un ligero depósito de grasa oculta vértebras y ligamentos.",
+        "Mal definida. Depósito de grasa grueso y blando.",
+        "Masiva. Tejido graso formando un cojín firme alrededor de la base de la cola."
+      ]
+    },
+    "sumLabel": "BCS Ponderado",
+    "photoTitle": "Fotos",
+    "photoInstr": "Añada fotos del caballo para esta evaluación (opcional). Las fotos se almacenan localmente en su navegador.",
+    "buttons": {
+      "save": "Guardar evaluación",
+      "reset": "Reiniciar",
+      "export": "Exportar JSON",
+      "exportAll": "Exportar todo",
+      "clearAll": "Borrar todo"
+    },
+    "historyTitle": "Evaluaciones guardadas",
+    "emptyHistory": "Aún no hay evaluaciones guardadas. Complete una evaluación y guárdela para verla aquí.",
+    "guideIntro": "<strong>Guía de referencia</strong> — Descripciones detalladas para cada zona corporal en cada puntuación BCS (0–5).",
+    "guideHeaders": {
+      "score": "BCS",
+      "neck": "Cuello",
+      "withers": "Cruz",
+      "shoulder": "Detrás hombro",
+      "ribs": "Costillas",
+      "back": "Dorso",
+      "croup": "Grupa",
+      "tail": "Cola"
+    },
+    "interpTitle": "Interpretación del BCS",
+    "interp": [
+      {
+        "range": "> 4,5",
+        "label": "Muy gordo",
+        "badge": "b-danger",
+        "reco": "Peligro — Alto riesgo de enfermedad metabólica"
+      },
+      {
+        "range": "4,0 – 4,5",
+        "label": "Gordo",
+        "badge": "b-warn",
+        "reco": "Precaución — Se recomienda reducción de peso"
+      },
+      {
+        "range": "3,5 – 4,0",
+        "label": "Ligeramente gordo",
+        "badge": "b-monitor",
+        "reco": "Vigilar — Ajustar dieta y ejercicio"
+      },
+      {
+        "range": "2,5 – 3,5",
+        "label": "Óptimo",
+        "badge": "b-safe",
+        "reco": "Buena condición — Mantener manejo actual"
+      },
+      {
+        "range": "2,0 – 2,5",
+        "label": "Ligeramente delgado",
+        "badge": "b-monitor",
+        "reco": "Vigilar — Aumentar nutrición"
+      },
+      {
+        "range": "1,5 – 2,0",
+        "label": "Delgado",
+        "badge": "b-warn",
+        "reco": "Precaución — Se aconseja evaluación veterinaria"
+      },
+      {
+        "range": "< 1,5",
+        "label": "Muy delgado",
+        "badge": "b-danger",
+        "reco": "Peligro — Atención veterinaria inmediata"
+      }
+    ],
+    "formulaTitle": "Fórmula ponderada",
+    "formulaText": "BCS = 0,50 × Costillas + 0,15 × Detrás del hombro + 0,15 × Cuello + 0,10 × Cruz + 0,05 × Base de la cola + 0,05 × Grupa. La línea del dorso se evalúa cualitativamente y no se incluye en el cálculo ponderado.",
+    "legal": {
+      "title": "⚖️ Aviso Legal (clic para expandir)",
+      "vetTitle": "Aviso veterinario",
+      "vetText": "Esta herramienta se proporciona con fines educativos e informativos únicamente y no constituye asesoramiento veterinario. No debe sustituir un examen veterinario profesional. Consulte siempre a un veterinario cualificado para cualquier decisión relativa a la salud, nutrición y bienestar de su caballo.",
+      "privacyTitle": "Privacidad de datos",
+      "privacyText": "Esta aplicación no recopila, almacena ni transmite datos personales ni imágenes a ningún servidor. Toda la información introducida permanece exclusivamente en su dispositivo.",
+      "licenseTitle": "Licencia",
+      "licenseText": "Herramienta gratuita desarrollada en el marco del proyecto EUnetHorse (Horizon Europe #101086551). Se permite la reproducción siempre que se cite la fuente. Datos proporcionados por IFCE, Francia. Supervisado por Maria João Fradinho.",
+      "euFundingLabel": "Financiado por la Unión Europea",
+      "euDisclaimerText": "Financiado por la Unión Europea. Las opiniones y puntos de vista expresados son exclusivamente los del autor o autores y no reflejan necesariamente los de la Unión Europea o la Agencia Ejecutiva Europea de Investigación (REA). Acuerdo de subvención n.º 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+    },
+    "toast": {
+      "saved": "Evaluación guardada",
+      "cleared": "Todas las evaluaciones eliminadas",
+      "resetDone": "Formulario reiniciado",
+      "deleted": "Evaluación eliminada"
+    },
+    "confirm": {
+      "clearAll": "¿Eliminar todas las evaluaciones guardadas? Esta acción no se puede deshacer.",
+      "deleteOne": "¿Eliminar esta evaluación?"
+    },
+    "scoreLabels": {
+      "min": "0 Caquéxico",
+      "max": "5 Obeso"
+    }
   },
-  sumLabel: "Gewichteter BCS",
-  photoTitle: "Fotos",
-  photoInstr: "Fügen Sie Fotos des Pferdes für diese Bewertung hinzu (optional). Fotos werden lokal in Ihrem Browser gespeichert.",
-  buttons: { save: "Bewertung speichern", reset: "Zurücksetzen", export: "JSON exportieren", exportAll: "Alle exportieren", clearAll: "Alle löschen" },
-  historyTitle: "Gespeicherte Bewertungen",
-  emptyHistory: "Noch keine Bewertungen gespeichert. Führen Sie eine Bewertung durch und speichern Sie sie.",
-  guideIntro: "<strong>Referenzleitfaden</strong> — Detaillierte Beschreibungen für jede Körperzone bei jedem BCS-Wert (0–5).",
-  guideHeaders: { score: "BCS", neck: "Hals", withers: "Widerrist", shoulder: "Hinter Schulter", ribs: "Rippen", back: "Rücken", croup: "Kruppe", tail: "Schweif" },
-  interpTitle: "BCS-Interpretation",
-  interp: [
-    { range: "> 4,5", label: "Sehr fett", badge: "b-danger", reco: "Gefahr — Hohes Risiko für Stoffwechselerkrankungen" },
-    { range: "4,0 – 4,5", label: "Fett", badge: "b-warn", reco: "Vorsicht — Gewichtsreduktion empfohlen" },
-    { range: "3,5 – 4,0", label: "Leicht fett", badge: "b-monitor", reco: "Beobachten — Fütterung und Bewegung anpassen" },
-    { range: "2,5 – 3,5", label: "Optimal", badge: "b-safe", reco: "Guter Zustand — Aktuelles Management beibehalten" },
-    { range: "2,0 – 2,5", label: "Leicht dünn", badge: "b-monitor", reco: "Beobachten — Ernährung erhöhen" },
-    { range: "1,5 – 2,0", label: "Dünn", badge: "b-warn", reco: "Vorsicht — Tierärztliche Untersuchung empfohlen" },
-    { range: "< 1,5", label: "Sehr dünn", badge: "b-danger", reco: "Gefahr — Sofortige tierärztliche Versorgung" }
-  ],
-  formulaTitle: "Gewichtete Formel",
-  formulaText: "BCS = 0,50 × Rippen + 0,15 × Hinter Schulter + 0,15 × Hals + 0,10 × Widerrist + 0,05 × Schweifansatz + 0,05 × Kruppe. Die Rückenlinie wird qualitativ bewertet und nicht in die gewichtete Berechnung einbezogen.",
-  legal: {
-    title: "⚖️ Rechtshinweis (zum Aufklappen klicken)",
-    vetTitle: "Tierärztlicher Hinweis",
-    vetText: "Dieses Tool dient ausschließlich zu Bildungs- und Informationszwecken und stellt keine tierärztliche Beratung dar. Es sollte eine professionelle tierärztliche Untersuchung nicht ersetzen. Konsultieren Sie immer einen qualifizierten Tierarzt für Entscheidungen bezüglich der Gesundheit, Ernährung und des Wohlergehens Ihres Pferdes.",
-    privacyTitle: "Datenschutz",
-    privacyText: "Diese Anwendung erhebt, speichert oder übermittelt keine personenbezogenen Daten oder Bilder an einen Server. Alle eingegebenen Informationen verbleiben ausschließlich auf Ihrem Gerät.",
-    licenseTitle: "Lizenz",
-    licenseText: "Kostenloses Tool, entwickelt im Rahmen des EUnetHorse-Projekts (Horizon Europe #101086551). Vervielfältigung bei Quellenangabe gestattet. Daten bereitgestellt von IFCE, Frankreich. Betreut von Maria João Fradinho.",
-    euFundingLabel: "Von der Europäischen Union finanziert",
-    euDisclaimerText: "Von der Europäischen Union finanziert. Die geäußerten Ansichten und Meinungen entsprechen jedoch ausschließlich denen des Autors/der Autoren und spiegeln nicht zwingend die der Europäischen Union oder der Europäischen Exekutivagentur für Forschung (REA) wider. Fördervereinbarung Nr. 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+  "fr": {
+    "meta": {
+      "name": "Français",
+      "flag": "🇫🇷"
+    },
+    "tabs": {
+      "assess": "Évaluation",
+      "history": "Historique",
+      "guide": "Guide"
+    },
+    "intro": "<strong>Note d'État Corporel (NEC)</strong> — Évaluez la quantité de tissu adipeux de votre cheval par observation visuelle et palpation. Notez chacune des 7 zones anatomiques sur une échelle de 0 (cadavérique) à 5 (obèse). Les demi-points sont autorisés.",
+    "horseInfo": "Informations sur le cheval",
+    "fields": {
+      "name": "Nom",
+      "breed": "Race",
+      "id": "Identifiant",
+      "date": "Date",
+      "category": "Catégorie",
+      "notes": "Notes / Observations"
+    },
+    "categories": {
+      "general": "Cheval adulte (général)",
+      "sport": "Cheval de sport",
+      "broodmare": "Jument poulinière",
+      "pony": "Poney / Facile d'entretien",
+      "draft": "Cheval de trait"
+    },
+    "zonesTitle": "Notation par zone",
+    "zonesInstr": "Faites glisser le curseur de chaque zone de 0 à 5. La description s'adapte au score sélectionné.",
+    "zones": [
+      {
+        "key": "neck",
+        "name": "Encolure / Crête",
+        "icon": "1"
+      },
+      {
+        "key": "withers",
+        "name": "Garrot",
+        "icon": "2"
+      },
+      {
+        "key": "shoulder",
+        "name": "Arrière de l'épaule",
+        "icon": "3"
+      },
+      {
+        "key": "ribs",
+        "name": "Côtes",
+        "icon": "4"
+      },
+      {
+        "key": "back",
+        "name": "Ligne du dos",
+        "icon": "5"
+      },
+      {
+        "key": "croup",
+        "name": "Croupe",
+        "icon": "6"
+      },
+      {
+        "key": "tail",
+        "name": "Attache de queue",
+        "icon": "7"
+      }
+    ],
+    "zoneDescs": {
+      "neck": [
+        "Pas de crête. Vertèbres cervicales visibles.",
+        "Structure osseuse du cou visible. Crête non apparente.",
+        "Crête visible, avec un léger sillon à sa base.",
+        "Crête bien définie, légèrement convexe.",
+        "La crête de l'encolure peut être saisie à pleine main et paraît ferme.",
+        "Crête très proéminente, noyée dans la masse de l'encolure."
+      ],
+      "withers": [
+        "Très proéminent. Apophyses épineuses visibles.",
+        "Proéminent. Partie supérieure de l'omoplate visible.",
+        "Prononcé et sec.",
+        "Légèrement proéminent.",
+        "Fondu dans les tissus environnants.",
+        "Masqué et enveloppé dans une masse arrondie de graisse."
+      ],
+      "shoulder": [
+        "Dépression profonde. Épaule proéminente et sèche.",
+        "En dépression.",
+        "Légèrement concave. Mince dépôt de graisse.",
+        "Devient plat. Dépôt de graisse bien défini.",
+        "Légèrement surélevé, convexe. Dépôt de graisse épais et mou.",
+        "Nettement convexe. Épaule masquée par la graisse. La masse tremble à la palpation."
+      ],
+      "ribs": [
+        "Attache des côtes aux apophyses transverses visible. Dépressions intercostales très profondes. Peau sèche adhérente.",
+        "Très proéminentes. Peau adhérant étroitement aux côtes.",
+        "Côtes palpables sous une peau souple. Légères dépressions intercostales.",
+        "Non visibles. À peine palpables.",
+        "Non palpables sous le dépôt de graisse.",
+        "Épaisse couche de graisse qui roule sous la main."
+      ],
+      "back": [
+        "Apophyses épineuses des vertèbres lombaires très proéminentes. Aucune couverture graisseuse.",
+        "Apophyses épineuses nettement palpables. Couverture graisseuse minimale.",
+        "Apophyses épineuses palpables avec une pression légère. Mince couche de graisse.",
+        "Apophyses épineuses palpables uniquement avec une pression ferme. Couverture graisseuse lisse et uniforme.",
+        "Non palpables. Le dos paraît plat ou légèrement arrondi.",
+        "Épais dépôts de graisse le long de la colonne. Sillon médian parfois visible."
+      ],
+      "croup": [
+        "Structure osseuse très proéminente. Pointes des fesses et des hanches très proéminentes.",
+        "Pointue. Contours concaves.",
+        "Pointes des fesses et des hanches discernables.",
+        "Légèrement arrondie. Contours convexes.",
+        "Bien arrondie. Pointes des fesses et des hanches masquées.",
+        "Arrondie. Sillon médian formant une double croupe."
+      ],
+      "tail": [
+        "Vertèbres à la base de la queue visibles. Ligament sacro-tubéral nettement défini.",
+        "Proéminente. Attache de queue nettement définie.",
+        "Nettement définie. Attache de queue clairement visible.",
+        "Couverte. Attache de queue légèrement définie. Un léger dépôt de graisse masque vertèbres et ligaments.",
+        "Mal définie. Dépôt de graisse épais et mou.",
+        "Massive. Tissu adipeux formant un coussin ferme autour de l'attache de queue."
+      ]
+    },
+    "sumLabel": "NEC pondérée",
+    "photoTitle": "Photos",
+    "photoInstr": "Ajoutez des photos du cheval pour cette évaluation (optionnel). Les photos sont stockées localement dans votre navigateur.",
+    "buttons": {
+      "save": "Enregistrer",
+      "reset": "Réinitialiser",
+      "export": "Exporter JSON",
+      "exportAll": "Tout exporter",
+      "clearAll": "Tout supprimer"
+    },
+    "historyTitle": "Évaluations enregistrées",
+    "emptyHistory": "Aucune évaluation enregistrée. Effectuez une évaluation et enregistrez-la pour la voir ici.",
+    "guideIntro": "<strong>Guide de référence</strong> — Descriptions détaillées pour chaque zone corporelle à chaque score NEC (0–5).",
+    "guideHeaders": {
+      "score": "NEC",
+      "neck": "Encolure",
+      "withers": "Garrot",
+      "shoulder": "Arr. épaule",
+      "ribs": "Côtes",
+      "back": "Dos",
+      "croup": "Croupe",
+      "tail": "Queue"
+    },
+    "interpTitle": "Interprétation NEC",
+    "interp": [
+      {
+        "range": "> 4,5",
+        "label": "Très gras",
+        "badge": "b-danger",
+        "reco": "Danger — Risque élevé de maladie métabolique"
+      },
+      {
+        "range": "4,0 – 4,5",
+        "label": "Gras",
+        "badge": "b-warn",
+        "reco": "Attention — Réduction de poids recommandée"
+      },
+      {
+        "range": "3,5 – 4,0",
+        "label": "Légèrement gras",
+        "badge": "b-monitor",
+        "reco": "Surveiller — Ajuster alimentation et exercice"
+      },
+      {
+        "range": "2,5 – 3,5",
+        "label": "Optimal",
+        "badge": "b-safe",
+        "reco": "Bon état — Maintenir la gestion actuelle"
+      },
+      {
+        "range": "2,0 – 2,5",
+        "label": "Légèrement maigre",
+        "badge": "b-monitor",
+        "reco": "Surveiller — Augmenter la nutrition"
+      },
+      {
+        "range": "1,5 – 2,0",
+        "label": "Maigre",
+        "badge": "b-warn",
+        "reco": "Attention — Évaluation vétérinaire conseillée"
+      },
+      {
+        "range": "< 1,5",
+        "label": "Très maigre",
+        "badge": "b-danger",
+        "reco": "Danger — Soins vétérinaires immédiats"
+      }
+    ],
+    "formulaTitle": "Formule pondérée",
+    "formulaText": "NEC = 0,50 × Côtes + 0,15 × Arr. épaule + 0,15 × Encolure + 0,10 × Garrot + 0,05 × Attache de queue + 0,05 × Croupe. La ligne du dos est évaluée qualitativement et n'est pas incluse dans le calcul pondéré.",
+    "legal": {
+      "title": "⚖️ Mentions Légales (cliquez pour développer)",
+      "vetTitle": "Avertissement vétérinaire",
+      "vetText": "Cet outil est fourni à des fins éducatives et informatives uniquement et ne constitue pas un avis vétérinaire. Il ne doit pas remplacer un examen vétérinaire professionnel. Consultez toujours un vétérinaire qualifié pour toute décision concernant la santé, la nutrition et le bien-être de votre cheval.",
+      "privacyTitle": "Confidentialité des données",
+      "privacyText": "Cette application ne collecte, ne stocke ni ne transmet de données personnelles ou d'images vers aucun serveur. Toutes les informations saisies restent exclusivement sur votre appareil.",
+      "licenseTitle": "Licence",
+      "licenseText": "Outil gratuit développé dans le cadre du projet EUnetHorse (Horizon Europe #101086551). La reproduction est autorisée à condition de citer la source. Données fournies par l'IFCE, France. Supervisé par Maria João Fradinho.",
+      "euFundingLabel": "Financé par l'Union européenne",
+      "euDisclaimerText": "Financé par l'Union européenne. Les points de vue et les opinions exprimés sont uniquement ceux de l'auteur ou des auteurs et ne reflètent pas nécessairement ceux de l'Union européenne ou de l'Agence exécutive européenne pour la recherche (REA). Convention de subvention n° 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+    },
+    "toast": {
+      "saved": "Évaluation enregistrée",
+      "cleared": "Toutes les évaluations supprimées",
+      "resetDone": "Formulaire réinitialisé",
+      "deleted": "Évaluation supprimée"
+    },
+    "confirm": {
+      "clearAll": "Supprimer toutes les évaluations ? Cette action est irréversible.",
+      "deleteOne": "Supprimer cette évaluation ?"
+    },
+    "scoreLabels": {
+      "min": "0 Cadavérique",
+      "max": "5 Obèse"
+    }
   },
-  toast: { saved: "Bewertung gespeichert", cleared: "Alle Bewertungen gelöscht", resetDone: "Formular zurückgesetzt", deleted: "Bewertung gelöscht" },
-  confirm: { clearAll: "Alle gespeicherten Bewertungen löschen? Dies kann nicht rückgängig gemacht werden.", deleteOne: "Diese Bewertung löschen?" },
-  scoreLabels: { min: "0 Kachektisch", max: "5 Adipös" }
-},
-es: {
-  meta: { name: "Español", flag: "\u{1F1EA}\u{1F1F8}" },
-  tabs: { assess: "Evaluación", history: "Historial", guide: "Guía" },
-  intro: "<strong>Puntuación de Condición Corporal (BCS)</strong> — Evalúe la cantidad de tejido adiposo de su caballo mediante observación visual y palpación. Puntúe cada una de las 7 zonas anatómicas en una escala de 0 (caquéxico) a 5 (obeso). Se permiten puntuaciones de medio punto.",
-  horseInfo: "Información del caballo",
-  fields: { name: "Nombre", breed: "Raza", id: "ID", date: "Fecha", category: "Categoría", notes: "Notas / Observaciones" },
-  categories: { general: "Caballo adulto (general)", sport: "Caballo de deporte", broodmare: "Yegua de cría", pony: "Poni / Fácil mantenimiento", draft: "Caballo de tiro" },
-  zonesTitle: "Puntuación por zonas",
-  zonesInstr: "Deslice el marcador de cada zona de 0 a 5. La descripción se actualiza según la puntuación seleccionada.",
-  zones: [
-    { key: "neck", name: "Cuello / Cresta", icon: "1" },
-    { key: "withers", name: "Cruz", icon: "2" },
-    { key: "shoulder", name: "Detrás del hombro", icon: "3" },
-    { key: "ribs", name: "Costillas", icon: "4" },
-    { key: "back", name: "Línea del dorso", icon: "5" },
-    { key: "croup", name: "Grupa / Cuartos traseros", icon: "6" },
-    { key: "tail", name: "Base de la cola", icon: "7" }
-  ],
-  zoneDescs: {
-    neck: ["Sin cresta. Vértebras cervicales visibles.", "Estructura ósea del cuello visible. Cresta no aparente.", "Cresta visible, con un ligero surco en su base.", "Cresta bien definida, ligeramente convexa.", "La cresta del cuello se puede agarrar con toda la mano y se siente firme.", "Cresta muy prominente, inmersa en la masa del cuello."],
-    withers: ["Muy prominente. Apófisis espinosas visibles.", "Prominente. Parte superior de la escápula visible.", "Pronunciada y seca.", "Ligeramente prominente.", "Integrada en el tejido circundante.", "Oculta y envuelta en una masa redondeada de grasa."],
-    shoulder: ["Depresión profunda. Hombro prominente y seco.", "Deprimido.", "Ligeramente cóncavo. Depósito de grasa fino.", "Se vuelve plano. Depósito de grasa bien definido.", "Ligeramente elevado, convexo. Depósito de grasa grueso y blando.", "Claramente convexo. Hombro oculto por la grasa. La masa tiembla a la palpación."],
-    ribs: ["Inserción de las costillas en las apófisis transversas visible. Depresiones intercostales muy profundas. Piel seca adherida.", "Muy prominentes. Piel adherida a las costillas.", "Las costillas se palpan bajo piel flexible. Ligeras depresiones intercostales.", "No visibles. Apenas palpables.", "No se pueden palpar bajo el depósito de grasa.", "Gruesa capa de grasa que rueda bajo la mano."],
-    back: ["Apófisis espinosas de las vértebras lumbares muy prominentes. Sin cobertura grasa.", "Apófisis espinosas claramente palpables. Cobertura grasa mínima.", "Apófisis espinosas palpables con presión ligera. Capa fina de grasa.", "Apófisis espinosas palpables solo con presión firme. Cobertura grasa lisa y uniforme.", "No se pueden palpar. El dorso aparece plano o ligeramente redondeado.", "Depósitos gruesos de grasa a lo largo de la columna. Puede ser visible el surco medio."],
-    croup: ["Estructura ósea muy prominente. Puntas de las nalgas y caderas muy prominentes.", "Puntiaguda. Contornos cóncavos.", "Puntas de las nalgas y caderas discernibles.", "Ligeramente redondeada. Contornos convexos.", "Bien redondeada. Puntas de las nalgas y caderas ocultas.", "Redondeada. Surco mediano formando una doble grupa."],
-    tail: ["Vértebras de la base de la cola visibles. Ligamento sacrotuberoso claramente definido.", "Prominente. Base de la cola claramente definida.", "Claramente definida. Base de la cola claramente visible.", "Cubierta. Base de la cola ligeramente definida. Un ligero depósito de grasa oculta vértebras y ligamentos.", "Mal definida. Depósito de grasa grueso y blando.", "Masiva. Tejido graso formando un cojín firme alrededor de la base de la cola."]
+  "it": {
+    "meta": {
+      "name": "Italiano",
+      "flag": "🇮🇹"
+    },
+    "tabs": {
+      "assess": "Valutazione",
+      "history": "Storico",
+      "guide": "Guida"
+    },
+    "intro": "<strong>Body Condition Score (BCS)</strong> — Valutate la quantità di tessuto adiposo del vostro cavallo mediante osservazione visiva e palpazione. Assegnate un punteggio a ciascuna delle 7 zone anatomiche su una scala da 0 (cachettico) a 5 (obeso). Sono ammessi mezzi punti.",
+    "horseInfo": "Informazioni sul cavallo",
+    "fields": {
+      "name": "Nome",
+      "breed": "Razza",
+      "id": "ID",
+      "date": "Data",
+      "category": "Categoria",
+      "notes": "Note / Osservazioni"
+    },
+    "categories": {
+      "general": "Cavallo adulto (generale)",
+      "sport": "Cavallo sportivo",
+      "broodmare": "Fattrice",
+      "pony": "Pony / Facile mantenimento",
+      "draft": "Cavallo da tiro"
+    },
+    "zonesTitle": "Punteggio per zona",
+    "zonesInstr": "Spostate il cursore di ogni zona da 0 a 5. La descrizione si aggiorna al punteggio selezionato.",
+    "zones": [
+      {
+        "key": "neck",
+        "name": "Collo / Cresta",
+        "icon": "1"
+      },
+      {
+        "key": "withers",
+        "name": "Garrese",
+        "icon": "2"
+      },
+      {
+        "key": "shoulder",
+        "name": "Dietro la spalla",
+        "icon": "3"
+      },
+      {
+        "key": "ribs",
+        "name": "Costole",
+        "icon": "4"
+      },
+      {
+        "key": "back",
+        "name": "Linea del dorso",
+        "icon": "5"
+      },
+      {
+        "key": "croup",
+        "name": "Groppa",
+        "icon": "6"
+      },
+      {
+        "key": "tail",
+        "name": "Attaccatura della coda",
+        "icon": "7"
+      }
+    ],
+    "zoneDescs": {
+      "neck": [
+        "Nessuna cresta. Vertebre cervicali visibili.",
+        "Struttura ossea del collo visibile. Cresta non apparente.",
+        "Cresta visibile, con un leggero solco alla base.",
+        "Cresta ben definita, leggermente convessa.",
+        "La cresta del collo può essere afferrata con l'intera mano e risulta soda.",
+        "Cresta molto prominente, immersa nella massa del collo."
+      ],
+      "withers": [
+        "Molto prominente. Processi spinosi visibili.",
+        "Prominente. Parte superiore della scapola visibile.",
+        "Pronunciato e asciutto.",
+        "Leggermente prominente.",
+        "Integrato nel tessuto circostante.",
+        "Nascosto e avvolto in una massa arrotondata di grasso."
+      ],
+      "shoulder": [
+        "Depressione profonda. Spalla prominente e asciutta.",
+        "Depresso.",
+        "Leggermente concavo. Sottile deposito di grasso.",
+        "Diventa piatto. Deposito di grasso ben definito.",
+        "Leggermente rialzato, convesso. Deposito di grasso spesso e morbido.",
+        "Chiaramente convesso. Spalla nascosta dal grasso. La massa trema alla palpazione."
+      ],
+      "ribs": [
+        "Inserzione delle costole ai processi trasversi visibile. Depressioni intercostali molto profonde. Pelle secca aderente.",
+        "Molto prominenti. Pelle aderente alle costole.",
+        "Costole palpabili sotto pelle morbida. Leggere depressioni intercostali.",
+        "Non visibili. Appena palpabili.",
+        "Non palpabili sotto il deposito di grasso.",
+        "Spesso strato di grasso che rotola sotto la mano."
+      ],
+      "back": [
+        "Processi spinosi delle vertebre lombari molto prominenti. Nessuna copertura adiposa.",
+        "Processi spinosi chiaramente palpabili. Copertura adiposa minima.",
+        "Processi spinosi palpabili con leggera pressione. Sottile strato di grasso.",
+        "Processi spinosi palpabili solo con pressione decisa. Copertura adiposa liscia e uniforme.",
+        "Non palpabili. Il dorso appare piatto o leggermente arrotondato.",
+        "Spessi depositi di grasso lungo la colonna. Il solco mediano può essere visibile."
+      ],
+      "croup": [
+        "Struttura ossea molto prominente. Punte delle natiche e delle anche molto prominenti.",
+        "Appuntita. Contorni concavi.",
+        "Punte delle natiche e delle anche discernibili.",
+        "Leggermente arrotondata. Contorni convessi.",
+        "Ben arrotondata. Punte delle natiche e delle anche nascoste.",
+        "Arrotondata. Solco mediano che forma una doppia groppa."
+      ],
+      "tail": [
+        "Vertebre alla base della coda visibili. Legamento sacrotuberoso chiaramente definito.",
+        "Prominente. Attaccatura della coda chiaramente definita.",
+        "Chiaramente definita. Attaccatura della coda chiaramente visibile.",
+        "Coperta. Attaccatura leggermente definita. Un leggero deposito di grasso nasconde vertebre e legamenti.",
+        "Mal definita. Deposito di grasso spesso e morbido.",
+        "Massiccia. Tessuto adiposo che forma un cuscino sodo attorno all'attaccatura della coda."
+      ]
+    },
+    "sumLabel": "BCS Ponderato",
+    "photoTitle": "Foto",
+    "photoInstr": "Aggiungete foto del cavallo per questa valutazione (opzionale). Le foto sono archiviate localmente nel vostro browser.",
+    "buttons": {
+      "save": "Salva valutazione",
+      "reset": "Ripristina",
+      "export": "Esporta JSON",
+      "exportAll": "Esporta tutto",
+      "clearAll": "Cancella tutto"
+    },
+    "historyTitle": "Valutazioni salvate",
+    "emptyHistory": "Nessuna valutazione salvata. Completate una valutazione e salvatela.",
+    "guideIntro": "<strong>Guida di riferimento</strong> — Descrizioni dettagliate per ogni zona corporea a ogni punteggio BCS (0–5).",
+    "guideHeaders": {
+      "score": "BCS",
+      "neck": "Collo",
+      "withers": "Garrese",
+      "shoulder": "Dietro spalla",
+      "ribs": "Costole",
+      "back": "Dorso",
+      "croup": "Groppa",
+      "tail": "Coda"
+    },
+    "interpTitle": "Interpretazione BCS",
+    "interp": [
+      {
+        "range": "> 4,5",
+        "label": "Molto grasso",
+        "badge": "b-danger",
+        "reco": "Pericolo — Alto rischio di malattia metabolica"
+      },
+      {
+        "range": "4,0 – 4,5",
+        "label": "Grasso",
+        "badge": "b-warn",
+        "reco": "Attenzione — Riduzione del peso raccomandata"
+      },
+      {
+        "range": "3,5 – 4,0",
+        "label": "Leggermente grasso",
+        "badge": "b-monitor",
+        "reco": "Monitorare — Regolare dieta ed esercizio"
+      },
+      {
+        "range": "2,5 – 3,5",
+        "label": "Ottimale",
+        "badge": "b-safe",
+        "reco": "Buona condizione — Mantenere gestione attuale"
+      },
+      {
+        "range": "2,0 – 2,5",
+        "label": "Leggermente magro",
+        "badge": "b-monitor",
+        "reco": "Monitorare — Aumentare nutrizione"
+      },
+      {
+        "range": "1,5 – 2,0",
+        "label": "Magro",
+        "badge": "b-warn",
+        "reco": "Attenzione — Visita veterinaria consigliata"
+      },
+      {
+        "range": "< 1,5",
+        "label": "Molto magro",
+        "badge": "b-danger",
+        "reco": "Pericolo — Cure veterinarie immediate"
+      }
+    ],
+    "formulaTitle": "Formula ponderata",
+    "formulaText": "BCS = 0,50 × Costole + 0,15 × Dietro spalla + 0,15 × Collo + 0,10 × Garrese + 0,05 × Attaccatura coda + 0,05 × Groppa. La linea del dorso è valutata qualitativamente e non inclusa nel calcolo ponderato.",
+    "legal": {
+      "title": "⚖️ Avviso Legale (clicca per espandere)",
+      "vetTitle": "Avviso veterinario",
+      "vetText": "Questo strumento è fornito esclusivamente a scopo educativo e informativo e non costituisce consulenza veterinaria. Non deve sostituire un esame veterinario professionale. Consultate sempre un veterinario qualificato per qualsiasi decisione riguardante la salute, la nutrizione e il benessere del vostro cavallo.",
+      "privacyTitle": "Privacy dei dati",
+      "privacyText": "Questa applicazione non raccoglie, archivia o trasmette dati personali o immagini ad alcun server. Tutte le informazioni inserite rimangono esclusivamente sul vostro dispositivo.",
+      "licenseTitle": "Licenza",
+      "licenseText": "Strumento gratuito sviluppato nell'ambito del progetto EUnetHorse (Horizon Europe #101086551). La riproduzione è consentita a condizione che la fonte sia citata. Dati forniti da IFCE, Francia. Supervisionato da Maria João Fradinho.",
+      "euFundingLabel": "Finanziato dall'Unione europea",
+      "euDisclaimerText": "Finanziato dall'Unione europea. Le opinioni e i punti di vista espressi sono esclusivamente quelli dell'autore o degli autori e non riflettono necessariamente quelli dell'Unione europea o dell'Agenzia esecutiva europea per la ricerca (REA). Accordo di sovvenzione n. 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+    },
+    "toast": {
+      "saved": "Valutazione salvata",
+      "cleared": "Tutte le valutazioni cancellate",
+      "resetDone": "Modulo ripristinato",
+      "deleted": "Valutazione cancellata"
+    },
+    "confirm": {
+      "clearAll": "Cancellare tutte le valutazioni? Questa azione non può essere annullata.",
+      "deleteOne": "Cancellare questa valutazione?"
+    },
+    "scoreLabels": {
+      "min": "0 Cachettico",
+      "max": "5 Obeso"
+    }
   },
-  sumLabel: "BCS Ponderado",
-  photoTitle: "Fotos",
-  photoInstr: "Añada fotos del caballo para esta evaluación (opcional). Las fotos se almacenan localmente en su navegador.",
-  buttons: { save: "Guardar evaluación", reset: "Reiniciar", export: "Exportar JSON", exportAll: "Exportar todo", clearAll: "Borrar todo" },
-  historyTitle: "Evaluaciones guardadas",
-  emptyHistory: "Aún no hay evaluaciones guardadas. Complete una evaluación y guárdela para verla aquí.",
-  guideIntro: "<strong>Guía de referencia</strong> — Descripciones detalladas para cada zona corporal en cada puntuación BCS (0–5).",
-  guideHeaders: { score: "BCS", neck: "Cuello", withers: "Cruz", shoulder: "Detrás hombro", ribs: "Costillas", back: "Dorso", croup: "Grupa", tail: "Cola" },
-  interpTitle: "Interpretación del BCS",
-  interp: [
-    { range: "> 4,5", label: "Muy gordo", badge: "b-danger", reco: "Peligro — Alto riesgo de enfermedad metabólica" },
-    { range: "4,0 – 4,5", label: "Gordo", badge: "b-warn", reco: "Precaución — Se recomienda reducción de peso" },
-    { range: "3,5 – 4,0", label: "Ligeramente gordo", badge: "b-monitor", reco: "Vigilar — Ajustar dieta y ejercicio" },
-    { range: "2,5 – 3,5", label: "Óptimo", badge: "b-safe", reco: "Buena condición — Mantener manejo actual" },
-    { range: "2,0 – 2,5", label: "Ligeramente delgado", badge: "b-monitor", reco: "Vigilar — Aumentar nutrición" },
-    { range: "1,5 – 2,0", label: "Delgado", badge: "b-warn", reco: "Precaución — Se aconseja evaluación veterinaria" },
-    { range: "< 1,5", label: "Muy delgado", badge: "b-danger", reco: "Peligro — Atención veterinaria inmediata" }
-  ],
-  formulaTitle: "Fórmula ponderada",
-  formulaText: "BCS = 0,50 × Costillas + 0,15 × Detrás del hombro + 0,15 × Cuello + 0,10 × Cruz + 0,05 × Base de la cola + 0,05 × Grupa. La línea del dorso se evalúa cualitativamente y no se incluye en el cálculo ponderado.",
-  legal: {
-    title: "⚖️ Aviso Legal (clic para expandir)",
-    vetTitle: "Aviso veterinario",
-    vetText: "Esta herramienta se proporciona con fines educativos e informativos únicamente y no constituye asesoramiento veterinario. No debe sustituir un examen veterinario profesional. Consulte siempre a un veterinario cualificado para cualquier decisión relativa a la salud, nutrición y bienestar de su caballo.",
-    privacyTitle: "Privacidad de datos",
-    privacyText: "Esta aplicación no recopila, almacena ni transmite datos personales ni imágenes a ningún servidor. Toda la información introducida permanece exclusivamente en su dispositivo.",
-    licenseTitle: "Licencia",
-    licenseText: "Herramienta gratuita desarrollada en el marco del proyecto EUnetHorse (Horizon Europe #101086551). Se permite la reproducción siempre que se cite la fuente. Datos proporcionados por IFCE, Francia. Supervisado por Maria João Fradinho.",
-    euFundingLabel: "Financiado por la Unión Europea",
-    euDisclaimerText: "Financiado por la Unión Europea. Las opiniones y puntos de vista expresados son exclusivamente los del autor o autores y no reflejan necesariamente los de la Unión Europea o la Agencia Ejecutiva Europea de Investigación (REA). Acuerdo de subvención n.º 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+  "be": {
+    "meta": {
+      "name": "Nederlands",
+      "flag": "🇧🇪"
+    },
+    "tabs": {
+      "assess": "Beoordeling",
+      "history": "Geschiedenis",
+      "guide": "Gids"
+    },
+    "intro": "<strong>Body Condition Score (BCS)</strong> — Beoordeel de hoeveelheid vetweefsel van uw paard door visuele observatie en palpatie. Beoordeel elk van de 7 anatomische zones op een schaal van 0 (cachectisch) tot 5 (obees). Halve punten zijn toegestaan.",
+    "horseInfo": "Paardinformatie",
+    "fields": {
+      "name": "Naam",
+      "breed": "Ras",
+      "id": "ID",
+      "date": "Datum",
+      "category": "Categorie",
+      "notes": "Opmerkingen"
+    },
+    "categories": {
+      "general": "Volwassen paard (algemeen)",
+      "sport": "Sportpaard",
+      "broodmare": "Fokmerrie",
+      "pony": "Pony / Houdt gemakkelijk gewicht aan",
+      "draft": "Trekpaard"
+    },
+    "zonesTitle": "Zonebeoordeling",
+    "zonesInstr": "Verschuif de schuifregelaar van elke zone van 0 tot 5. De beschrijving past zich aan de geselecteerde score aan.",
+    "zones": [
+      {
+        "key": "neck",
+        "name": "Hals / Kam",
+        "icon": "1"
+      },
+      {
+        "key": "withers",
+        "name": "Schoft",
+        "icon": "2"
+      },
+      {
+        "key": "shoulder",
+        "name": "Achter de schouder",
+        "icon": "3"
+      },
+      {
+        "key": "ribs",
+        "name": "Ribben",
+        "icon": "4"
+      },
+      {
+        "key": "back",
+        "name": "Ruglijn",
+        "icon": "5"
+      },
+      {
+        "key": "croup",
+        "name": "Kruis / Achterhand",
+        "icon": "6"
+      },
+      {
+        "key": "tail",
+        "name": "Staartaanzet",
+        "icon": "7"
+      }
+    ],
+    "zoneDescs": {
+      "neck": [
+        "Geen kam. Halswervels zichtbaar.",
+        "Botstructuur van de hals zichtbaar. Kam niet zichtbaar.",
+        "Kam zichtbaar, met een lichte groef aan de basis.",
+        "Goed gedefinieerde kam, licht convex.",
+        "Halskam kan met de hele hand worden vastgegrepen en voelt stevig.",
+        "Zeer prominente kam, verzonken in de halsmassa."
+      ],
+      "withers": [
+        "Zeer prominent. Doornuitsteeksels zichtbaar.",
+        "Prominent. Bovenkant van het schouderblad zichtbaar.",
+        "Uitgesproken en droog.",
+        "Licht prominent.",
+        "Opgegaan in omringend weefsel.",
+        "Bedekt en omhuld door een afgeronde vetmassa."
+      ],
+      "shoulder": [
+        "Diepe depressie. Prominente, droge schouder.",
+        "Ingedeukt.",
+        "Licht concaaf. Dunne vetlaag.",
+        "Wordt vlak. Goed gedefinieerde vetlaag.",
+        "Licht verheven, convex. Dikke, zachte vetlaag.",
+        "Duidelijk convex. Schouder bedekt door vet. Massa trilt bij palpatie."
+      ],
+      "ribs": [
+        "Aanhechting van ribben aan dwarsuitsteeksels zichtbaar. Zeer diepe intercostale depressies. Droge, strak aanliggende huid.",
+        "Zeer prominent. Huid strak op de ribben.",
+        "Ribben voelbaar onder soepele huid. Lichte intercostale depressies.",
+        "Niet zichtbaar. Nauwelijks voelbaar.",
+        "Niet voelbaar onder de vetlaag.",
+        "Dikke vetlaag die onder de hand rolt."
+      ],
+      "back": [
+        "Doornuitsteeksels van lendenwervels zeer prominent. Geen vetbedekking.",
+        "Doornuitsteeksels duidelijk voelbaar. Minimale vetbedekking.",
+        "Doornuitsteeksels voelbaar met lichte druk. Dunne vetlaag.",
+        "Doornuitsteeksels alleen voelbaar met stevige druk. Gladde, gelijkmatige vetbedekking.",
+        "Niet voelbaar. Rug lijkt vlak of licht afgerond.",
+        "Dikke vetafzettingen langs de wervelkolom. Mediaangroef kan zichtbaar zijn."
+      ],
+      "croup": [
+        "Zeer prominente botstructuur. Zitbeenknobbels en heupknobbels zeer prominent.",
+        "Puntig. Concave contouren.",
+        "Zitbeenknobbels en heupknobbels waarneembaar.",
+        "Licht afgerond. Convexe contouren.",
+        "Goed afgerond. Zitbeenknobbels en heupknobbels bedekt.",
+        "Afgerond. Mediaangroef vormt een dubbelkruis."
+      ],
+      "tail": [
+        "Wervels aan de staartbasis zichtbaar. Ligamentum sacrotuberale duidelijk gedefinieerd.",
+        "Prominent. Staartaanzet duidelijk gedefinieerd.",
+        "Duidelijk gedefinieerd. Staartaanzet duidelijk zichtbaar.",
+        "Bedekt. Staartaanzet licht gedefinieerd. Lichte vetlaag bedekt wervels en ligamenten.",
+        "Slecht gedefinieerd. Dikke, zachte vetlaag.",
+        "Massief. Vetweefsel vormt een stevig kussen rond de staartaanzet."
+      ]
+    },
+    "sumLabel": "Gewogen BCS",
+    "photoTitle": "Foto's",
+    "photoInstr": "Voeg foto's van het paard toe voor deze beoordeling (optioneel). Foto's worden lokaal in uw browser opgeslagen.",
+    "buttons": {
+      "save": "Beoordeling opslaan",
+      "reset": "Herstellen",
+      "export": "JSON exporteren",
+      "exportAll": "Alles exporteren",
+      "clearAll": "Alles wissen"
+    },
+    "historyTitle": "Opgeslagen beoordelingen",
+    "emptyHistory": "Nog geen beoordelingen opgeslagen. Voer een beoordeling uit en sla deze op.",
+    "guideIntro": "<strong>Referentiegids</strong> — Gedetailleerde beschrijvingen voor elke lichaamszone bij elke BCS-score (0–5). Gebruik deze als visuele referentie tijdens uw beoordeling.",
+    "guideHeaders": {
+      "score": "BCS",
+      "neck": "Hals",
+      "withers": "Schoft",
+      "shoulder": "Achter schouder",
+      "ribs": "Ribben",
+      "back": "Rug",
+      "croup": "Kruis",
+      "tail": "Staart"
+    },
+    "interpTitle": "BCS-interpretatie",
+    "interp": [
+      {
+        "range": "> 4,5",
+        "label": "Zeer vet",
+        "badge": "b-danger",
+        "reco": "Gevaar — Hoog risico op stofwisselingsziekte"
+      },
+      {
+        "range": "4,0 – 4,5",
+        "label": "Vet",
+        "badge": "b-warn",
+        "reco": "Voorzichtig — Gewichtsvermindering aanbevolen"
+      },
+      {
+        "range": "3,5 – 4,0",
+        "label": "Licht vet",
+        "badge": "b-monitor",
+        "reco": "Monitoren — Voeding en beweging aanpassen"
+      },
+      {
+        "range": "2,5 – 3,5",
+        "label": "Optimaal",
+        "badge": "b-safe",
+        "reco": "Goede conditie — Huidig beheer handhaven"
+      },
+      {
+        "range": "2,0 – 2,5",
+        "label": "Licht mager",
+        "badge": "b-monitor",
+        "reco": "Monitoren — Voeding verhogen"
+      },
+      {
+        "range": "1,5 – 2,0",
+        "label": "Mager",
+        "badge": "b-warn",
+        "reco": "Voorzichtig — Diergeneeskundig onderzoek aanbevolen"
+      },
+      {
+        "range": "< 1,5",
+        "label": "Zeer mager",
+        "badge": "b-danger",
+        "reco": "Gevaar — Onmiddellijke diergeneeskundige zorg"
+      }
+    ],
+    "formulaTitle": "Gewogen formule",
+    "formulaText": "BCS = 0,50 × Ribben + 0,15 × Achter schouder + 0,15 × Hals + 0,10 × Schoft + 0,05 × Staartaanzet + 0,05 × Kruis. De ruglijn wordt kwalitatief beoordeeld en niet opgenomen in de gewogen berekening.",
+    "legal": {
+      "title": "⚖️ Juridische Mededeling (klik om uit te vouwen)",
+      "vetTitle": "Veterinaire disclaimer",
+      "vetText": "Dit hulpmiddel is uitsluitend bedoeld voor educatieve en informatieve doeleinden en vormt geen veterinair advies. Het mag een professioneel veterinair onderzoek niet vervangen. Raadpleeg altijd een gekwalificeerde dierenarts voor beslissingen over de gezondheid, voeding en het welzijn van uw paard. De auteurs en het EUnetHorse-project aanvaarden geen enkele aansprakelijkheid voor handelingen die op basis van de resultaten van dit hulpmiddel worden verricht.",
+      "privacyTitle": "Gegevensprivacy",
+      "privacyText": "Deze applicatie verzamelt, bewaart of verzendt geen persoonlijke gegevens of afbeeldingen naar een server. Alle ingevoerde informatie blijft uitsluitend op uw apparaat.",
+      "licenseTitle": "Licentie",
+      "licenseText": "Gratis hulpmiddel ontwikkeld in het kader van het EUnetHorse-project (Horizon Europe #101086551). Reproductie is toegestaan mits bronvermelding. Gegevens verstrekt door IFCE, Frankrijk. Onder toezicht van Maria João Fradinho.",
+      "euFundingLabel": "Gefinancierd door de Europese Unie",
+      "euDisclaimerText": "Gefinancierd door de Europese Unie. De geuite standpunten en meningen zijn uitsluitend die van de auteur(s) en weerspiegelen niet noodzakelijk die van de Europese Unie of het Europees Uitvoerend Agentschap voor onderzoek (REA). Subsidieovereenkomst nr. 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+    },
+    "toast": {
+      "saved": "Beoordeling opgeslagen",
+      "cleared": "Alle beoordelingen gewist",
+      "resetDone": "Formulier resetten",
+      "deleted": "Beoordeling verwijderd"
+    },
+    "confirm": {
+      "clearAll": "Alle opgeslagen beoordelingen verwijderen? Dit kan niet ongedaan worden gemaakt.",
+      "deleteOne": "Deze beoordeling verwijderen?"
+    },
+    "scoreLabels": {
+      "min": "0 Cachectisch",
+      "max": "5 Obees"
+    }
   },
-  toast: { saved: "Evaluación guardada", cleared: "Todas las evaluaciones eliminadas", resetDone: "Formulario reiniciado", deleted: "Evaluación eliminada" },
-  confirm: { clearAll: "¿Eliminar todas las evaluaciones guardadas? Esta acción no se puede deshacer.", deleteOne: "¿Eliminar esta evaluación?" },
-  scoreLabels: { min: "0 Caquéxico", max: "5 Obeso" }
-},
-fr: {
-  meta: { name: "Français", flag: "\u{1F1EB}\u{1F1F7}" },
-  tabs: { assess: "Évaluation", history: "Historique", guide: "Guide" },
-  intro: "<strong>Note d'État Corporel (NEC)</strong> — Évaluez la quantité de tissu adipeux de votre cheval par observation visuelle et palpation. Notez chacune des 7 zones anatomiques sur une échelle de 0 (cadavérique) à 5 (obèse). Les demi-points sont autorisés.",
-  horseInfo: "Informations sur le cheval",
-  fields: { name: "Nom", breed: "Race", id: "Identifiant", date: "Date", category: "Catégorie", notes: "Notes / Observations" },
-  categories: { general: "Cheval adulte (général)", sport: "Cheval de sport", broodmare: "Jument poulinière", pony: "Poney / Facile d'entretien", draft: "Cheval de trait" },
-  zonesTitle: "Notation par zone",
-  zonesInstr: "Faites glisser le curseur de chaque zone de 0 à 5. La description s'adapte au score sélectionné.",
-  zones: [
-    { key: "neck", name: "Encolure / Crête", icon: "1" },
-    { key: "withers", name: "Garrot", icon: "2" },
-    { key: "shoulder", name: "Arrière de l'épaule", icon: "3" },
-    { key: "ribs", name: "Côtes", icon: "4" },
-    { key: "back", name: "Ligne du dos", icon: "5" },
-    { key: "croup", name: "Croupe", icon: "6" },
-    { key: "tail", name: "Attache de queue", icon: "7" }
-  ],
-  zoneDescs: {
-    neck: ["Pas de crête. Vertèbres cervicales visibles.", "Structure osseuse du cou visible. Crête non apparente.", "Crête visible, avec un léger sillon à sa base.", "Crête bien définie, légèrement convexe.", "La crête de l'encolure peut être saisie à pleine main et paraît ferme.", "Crête très proéminente, noyée dans la masse de l'encolure."],
-    withers: ["Très proéminent. Apophyses épineuses visibles.", "Proéminent. Partie supérieure de l'omoplate visible.", "Prononcé et sec.", "Légèrement proéminent.", "Fondu dans les tissus environnants.", "Masqué et enveloppé dans une masse arrondie de graisse."],
-    shoulder: ["Dépression profonde. Épaule proéminente et sèche.", "En dépression.", "Légèrement concave. Mince dépôt de graisse.", "Devient plat. Dépôt de graisse bien défini.", "Légèrement surélevé, convexe. Dépôt de graisse épais et mou.", "Nettement convexe. Épaule masquée par la graisse. La masse tremble à la palpation."],
-    ribs: ["Attache des côtes aux apophyses transverses visible. Dépressions intercostales très profondes. Peau sèche adhérente.", "Très proéminentes. Peau adhérant étroitement aux côtes.", "Côtes palpables sous une peau souple. Légères dépressions intercostales.", "Non visibles. À peine palpables.", "Non palpables sous le dépôt de graisse.", "Épaisse couche de graisse qui roule sous la main."],
-    back: ["Apophyses épineuses des vertèbres lombaires très proéminentes. Aucune couverture graisseuse.", "Apophyses épineuses nettement palpables. Couverture graisseuse minimale.", "Apophyses épineuses palpables avec une pression légère. Mince couche de graisse.", "Apophyses épineuses palpables uniquement avec une pression ferme. Couverture graisseuse lisse et uniforme.", "Non palpables. Le dos paraît plat ou légèrement arrondi.", "Épais dépôts de graisse le long de la colonne. Sillon médian parfois visible."],
-    croup: ["Structure osseuse très proéminente. Pointes des fesses et des hanches très proéminentes.", "Pointue. Contours concaves.", "Pointes des fesses et des hanches discernables.", "Légèrement arrondie. Contours convexes.", "Bien arrondie. Pointes des fesses et des hanches masquées.", "Arrondie. Sillon médian formant une double croupe."],
-    tail: ["Vertèbres à la base de la queue visibles. Ligament sacro-tubéral nettement défini.", "Proéminente. Attache de queue nettement définie.", "Nettement définie. Attache de queue clairement visible.", "Couverte. Attache de queue légèrement définie. Un léger dépôt de graisse masque vertèbres et ligaments.", "Mal définie. Dépôt de graisse épais et mou.", "Massive. Tissu adipeux formant un coussin ferme autour de l'attache de queue."]
+  "pl": {
+    "meta": {
+      "name": "Polski",
+      "flag": "🇵🇱"
+    },
+    "tabs": {
+      "assess": "Ocena",
+      "history": "Historia",
+      "guide": "Przewodnik"
+    },
+    "intro": "<strong>Ocena Kondycji Ciała (BCS)</strong> — Oceń ilość tkanki tłuszczowej konia poprzez obserwację wizualną i palpację. Oceń każdą z 7 stref anatomicznych w skali od 0 (wyniszczony) do 5 (otyły). Dozwolone są połówki punktów.",
+    "horseInfo": "Informacje o koniu",
+    "fields": {
+      "name": "Imię",
+      "breed": "Rasa",
+      "id": "ID",
+      "date": "Data",
+      "category": "Kategoria",
+      "notes": "Uwagi"
+    },
+    "categories": {
+      "general": "Koń dorosły (ogólnie)",
+      "sport": "Koń sportowy",
+      "broodmare": "Klacz hodowlana",
+      "pony": "Kuc / Koń łatwy w utrzymaniu",
+      "draft": "Koń zimnokrwisty"
+    },
+    "zonesTitle": "Ocena stref",
+    "zonesInstr": "Przesuń suwak każdej strefy od 0 do 5. Opis dostosowuje się do wybranej oceny.",
+    "zones": [
+      {
+        "key": "neck",
+        "name": "Szyja / Grzbiet szyi",
+        "icon": "1"
+      },
+      {
+        "key": "withers",
+        "name": "Kłąb",
+        "icon": "2"
+      },
+      {
+        "key": "shoulder",
+        "name": "Za łopatką",
+        "icon": "3"
+      },
+      {
+        "key": "ribs",
+        "name": "Żebra",
+        "icon": "4"
+      },
+      {
+        "key": "back",
+        "name": "Linia grzbietu",
+        "icon": "5"
+      },
+      {
+        "key": "croup",
+        "name": "Zad",
+        "icon": "6"
+      },
+      {
+        "key": "tail",
+        "name": "Nasada ogona",
+        "icon": "7"
+      }
+    ],
+    "zoneDescs": {
+      "neck": [
+        "Brak otłuszczenia szyi. Kręgi szyjne widoczne.",
+        "Struktura kostna szyi widoczna. Grzbiet szyi niewidoczny.",
+        "Grzebień szyi widoczny, z lekkim rowkiem u podstawy.",
+        "Dobrze widoczny grzebień szyi, lekko wypukły.",
+        "Grzebień szyi można chwycić całą dłonią i jest twardy.",
+        "Bardzo wyraźnie zaznaczony grzebień szyi, zagłębiony w otaczającej go masie szyi."
+      ],
+      "withers": [
+        "Bardzo widoczny. Wyrostki kolczyste widoczne.",
+        "Widoczny. Górna część łopatki widoczna.",
+        "Wyraźny i suchy.",
+        "Trochę widoczny",
+        "Wtopiony w otaczające tkanki.",
+        "Zakryty i otoczony zaokrągloną masą tłuszczu."
+      ],
+      "shoulder": [
+        "Głębokie wgłębienie. Widoczna, sucha łopatka.",
+        "Wklęsła.",
+        "Lekko wklęsła. Cienka warstwa tłuszczu.",
+        "Płaska. Dobrze wyczuwalna warstwa tłuszczu.",
+        "Lekko uniesiona, wypukła. Gruba, miękka warstwa tłuszczu.",
+        "Wyraźnie wypukła. Łopatka zakryta tłuszczem. Tkanka drży podczas badania palpacyjnego."
+      ],
+      "ribs": [
+        "Przyczepy żeber do wyrostków poprzecznych widoczne. Bardzo głębokie wgłębienia międzyżebrowe. Sucha, ściśle przylegająca skóra.",
+        "Bardzo prominentne. Skóra ściśle przylegająca do żeber.",
+        "Żebra wyczuwalne pod elastyczną skórą. Lekkie wgłębienia międzyżebrowe.",
+        "Niewidoczne. Ledwo wyczuwalne.",
+        "Niewyczuwalne pod warstwą tłuszczu.",
+        "Gruba warstwa tłuszczu, która toczy się pod ręką."
+      ],
+      "back": [
+        "Wyrostki kolczyste kręgów lędźwiowych bardzo widoczne. Brak pokrycia tłuszczem.",
+        "Wyrostki kolczyste wyraźnie wyczuwalne. Minimalne pokrycie tłuszczem.",
+        "Wyrostki kolczyste wyczuwalne przy lekkim nacisku. Cienka warstwa tłuszczu.",
+        "Wyrostki kolczyste wyczuwalne tylko przy mocnym nacisku. Gładkie, równomierne pokrycie tłuszczem.",
+        "Niewyczuwalne. Grzbiet wydaje się płaski lub lekko zaokrąglony.",
+        "Grube złogi tłuszczu wzdłuż kręgosłupa. Rowek środkowy może być widoczny."
+      ],
+      "croup": [
+        "Bardzo widoczna struktura kostna. Guzy kulszowe i biodrowe bardzo wyraźne.",
+        "Spiczasta. Kontury wklęsłe.",
+        "Guzy kulszowe i biodrowe rozpoznawalne.",
+        "Lekko zaokrąglona. Kontury wypukłe.",
+        "Dobrze zaokrąglona. Guzy kulszowe i biodrowe zakryte.",
+        "Zaokrąglona. Rowek środkowy tworzący rozłupany zad."
+      ],
+      "tail": [
+        "Kręgi u nasady ogona widoczne. Więzadło krzyżowo-guzowe wyraźnie zdefiniowane.",
+        "Prominentna. Nasada ogona wyraźna.",
+        "Wyraźna. Nasada ogona dobrze widoczna.",
+        "Zakryta. Nasada ogona niewyraźna. Lekki złóg tłuszczu zakrywa kręgi i więzadła.",
+        "Słabo wyraźna. Gruba, miękka warstwa tłuszczu.",
+        "Masywna. Tkanka tłuszczowa tworząca twardą poduszkę wokół nasady ogona."
+      ]
+    },
+    "sumLabel": "Ważony BCS",
+    "photoTitle": "Zdjęcia",
+    "photoInstr": "Dodaj zdjęcia konia do tej oceny (opcjonalnie). Zdjęcia są przechowywane lokalnie w przeglądarce.",
+    "buttons": {
+      "save": "Zapisz ocenę",
+      "reset": "Resetuj",
+      "export": "Eksportuj JSON",
+      "exportAll": "Eksportuj wszystko",
+      "clearAll": "Wyczyść wszystko"
+    },
+    "historyTitle": "Zapisane oceny",
+    "emptyHistory": "Brak zapisanych ocen. Wykonaj ocenę i zapisz ją, aby zobaczyć ją tutaj.",
+    "guideIntro": "<strong>Przewodnik referencyjny</strong> — Szczegółowe opisy dla każdej strefy ciała przy każdym wyniku BCS (0–5).",
+    "guideHeaders": {
+      "score": "BCS",
+      "neck": "Szyja",
+      "withers": "Kłąb",
+      "shoulder": "Za łopatką",
+      "ribs": "Żebra",
+      "back": "Grzbiet",
+      "croup": "Zad",
+      "tail": "Ogon"
+    },
+    "interpTitle": "Interpretacja BCS",
+    "interp": [
+      {
+        "range": "> 4,5",
+        "label": "Bardzo otyły",
+        "badge": "b-danger",
+        "reco": "Niebezpieczeństwo — Wysokie ryzyko choroby metabolicznej"
+      },
+      {
+        "range": "4,0 – 4,5",
+        "label": "Otyły",
+        "badge": "b-warn",
+        "reco": "Uwaga! — Zalecana redukcja masy ciała"
+      },
+      {
+        "range": "3,5 – 4,0",
+        "label": "Lekko otyły",
+        "badge": "b-monitor",
+        "reco": "Monitorowanie — Dostosuj dietę i wysiłek"
+      },
+      {
+        "range": "2,5 – 3,5",
+        "label": "Optymalny",
+        "badge": "b-safe",
+        "reco": "Dobra kondycja — Utrzymaj obecne żywienie i wysiłek"
+      },
+      {
+        "range": "2,0 – 2,5",
+        "label": "Lekko chudy",
+        "badge": "b-monitor",
+        "reco": "Monitorowanie — Dostosuj dawkę żywieniową"
+      },
+      {
+        "range": "1,5 – 2,0",
+        "label": "Chudy",
+        "badge": "b-warn",
+        "reco": "Uwaga! — Zalecana ocena weterynaryjna"
+      },
+      {
+        "range": "< 1,5",
+        "label": "Bardzo chudy",
+        "badge": "b-danger",
+        "reco": "Niebezpieczeństwo — Natychmiastowa ocena i opieka weterynaryjna"
+      }
+    ],
+    "formulaTitle": "Formuła ważona",
+    "formulaText": "BCS = 0,50 × Żebra + 0,15 × Za łopatką + 0,15 × Szyja + 0,10 × Kłąb + 0,05 × Nasada ogona + 0,05 × Zad. Linia grzbietu jest oceniana jakościowo i nie jest uwzględniana w obliczeniu ważonym.",
+    "legal": {
+      "title": "⚖️ Nota Prawna (kliknij, aby rozwinać)",
+      "vetTitle": "Zastrzeżenie weterynaryjne",
+      "vetText": "To narzędzie jest udostępniane wyłącznie w celach edukacyjnych i informacyjnych i nie stanowi porady weterynaryjnej. Nie powinno zastępować profesjonalnego badania weterynaryjnego. Zawsze konsultuj się z wykwalifikowanym lekarzem weterynarii w sprawie decyzji dotyczących zdrowia, żywienia i dobrostanu konia.",
+      "privacyTitle": "Prywatność danych",
+      "privacyText": "Ta aplikacja nie zbiera, nie przechowuje ani nie przesyła żadnych danych osobowych ani zdjęć na żaden serwer. Wszystkie wprowadzone informacje pozostają wyłącznie na Twoim urządzeniu.",
+      "licenseTitle": "Licencja",
+      "licenseText": "Bezpłatne narzędzie opracowane w ramach projektu EUnetHorse (Horizon Europe #101086551). Reprodukcja dozwolona pod warunkiem podania źródła. Dane dostarczone przez IFCE, Francja. Pod nadzorem Maria João Fradinho.",
+      "euFundingLabel": "Sfinansowane ze środków Unii Europejskiej",
+      "euDisclaimerText": "Sfinansowane ze środków Unii Europejskiej. Wyrażone poglądy i opinie są jedynie poglądami autora(ów) i niekoniecznie odzwierciedlają poglądy Unii Europejskiej lub Europejskiej Agencji Wykonawczej ds. Badań Naukowych (REA). Umowa o grant nr 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+    },
+    "toast": {
+      "saved": "Ocena zapisana",
+      "cleared": "Wszystkie oceny usunięte",
+      "resetDone": "Formularz zresetowany",
+      "deleted": "Ocena usunięta"
+    },
+    "confirm": {
+      "clearAll": "Usunąć wszystkie zapisane oceny? Tej czynności nie można cofnąć.",
+      "deleteOne": "Usunąć tę ocenę?"
+    },
+    "scoreLabels": {
+      "min": "0 Wyniszczony",
+      "max": "5 Bardzo otyły"
+    }
   },
-  sumLabel: "NEC pondérée",
-  photoTitle: "Photos",
-  photoInstr: "Ajoutez des photos du cheval pour cette évaluation (optionnel). Les photos sont stockées localement dans votre navigateur.",
-  buttons: { save: "Enregistrer", reset: "Réinitialiser", export: "Exporter JSON", exportAll: "Tout exporter", clearAll: "Tout supprimer" },
-  historyTitle: "Évaluations enregistrées",
-  emptyHistory: "Aucune évaluation enregistrée. Effectuez une évaluation et enregistrez-la pour la voir ici.",
-  guideIntro: "<strong>Guide de référence</strong> — Descriptions détaillées pour chaque zone corporelle à chaque score NEC (0–5).",
-  guideHeaders: { score: "NEC", neck: "Encolure", withers: "Garrot", shoulder: "Arr. épaule", ribs: "Côtes", back: "Dos", croup: "Croupe", tail: "Queue" },
-  interpTitle: "Interprétation NEC",
-  interp: [
-    { range: "> 4,5", label: "Très gras", badge: "b-danger", reco: "Danger — Risque élevé de maladie métabolique" },
-    { range: "4,0 – 4,5", label: "Gras", badge: "b-warn", reco: "Attention — Réduction de poids recommandée" },
-    { range: "3,5 – 4,0", label: "Légèrement gras", badge: "b-monitor", reco: "Surveiller — Ajuster alimentation et exercice" },
-    { range: "2,5 – 3,5", label: "Optimal", badge: "b-safe", reco: "Bon état — Maintenir la gestion actuelle" },
-    { range: "2,0 – 2,5", label: "Légèrement maigre", badge: "b-monitor", reco: "Surveiller — Augmenter la nutrition" },
-    { range: "1,5 – 2,0", label: "Maigre", badge: "b-warn", reco: "Attention — Évaluation vétérinaire conseillée" },
-    { range: "< 1,5", label: "Très maigre", badge: "b-danger", reco: "Danger — Soins vétérinaires immédiats" }
-  ],
-  formulaTitle: "Formule pondérée",
-  formulaText: "NEC = 0,50 × Côtes + 0,15 × Arr. épaule + 0,15 × Encolure + 0,10 × Garrot + 0,05 × Attache de queue + 0,05 × Croupe. La ligne du dos est évaluée qualitativement et n'est pas incluse dans le calcul pondéré.",
-  legal: {
-    title: "⚖️ Mentions Légales (cliquez pour développer)",
-    vetTitle: "Avertissement vétérinaire",
-    vetText: "Cet outil est fourni à des fins éducatives et informatives uniquement et ne constitue pas un avis vétérinaire. Il ne doit pas remplacer un examen vétérinaire professionnel. Consultez toujours un vétérinaire qualifié pour toute décision concernant la santé, la nutrition et le bien-être de votre cheval.",
-    privacyTitle: "Confidentialité des données",
-    privacyText: "Cette application ne collecte, ne stocke ni ne transmet de données personnelles ou d'images vers aucun serveur. Toutes les informations saisies restent exclusivement sur votre appareil.",
-    licenseTitle: "Licence",
-    licenseText: "Outil gratuit développé dans le cadre du projet EUnetHorse (Horizon Europe #101086551). La reproduction est autorisée à condition de citer la source. Données fournies par l'IFCE, France. Supervisé par Maria João Fradinho.",
-    euFundingLabel: "Financé par l'Union européenne",
-    euDisclaimerText: "Financé par l'Union européenne. Les points de vue et les opinions exprimés sont uniquement ceux de l'auteur ou des auteurs et ne reflètent pas nécessairement ceux de l'Union européenne ou de l'Agence exécutive européenne pour la recherche (REA). Convention de subvention n° 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+  "pt": {
+    "meta": {
+      "name": "Português",
+      "flag": "🇵🇹"
+    },
+    "tabs": {
+      "assess": "Avaliação",
+      "history": "Histórico",
+      "guide": "Guia"
+    },
+    "intro": "<strong>Escore de Condição Corporal (ECC)</strong> — Avalie a quantidade de tecido adiposo do seu cavalo por observação visual e palpação. Pontue cada uma das 7 zonas anatómicas numa escala de 0 (caquético) a 5 (obeso). Meios pontos são permitidos.",
+    "horseInfo": "Informações do cavalo",
+    "fields": {
+      "name": "Nome",
+      "breed": "Raça",
+      "id": "ID",
+      "date": "Data",
+      "category": "Categoria",
+      "notes": "Notas / Observações"
+    },
+    "categories": {
+      "general": "Cavalo adulto (geral)",
+      "sport": "Cavalo de desporto",
+      "broodmare": "Égua de cria",
+      "pony": "Pónei / Fácil manutenção",
+      "draft": "Cavalo de tiro"
+    },
+    "zonesTitle": "Pontuação por zona",
+    "zonesInstr": "Deslize o marcador de cada zona de 0 a 5. A descrição atualiza-se conforme a pontuação selecionada.",
+    "zones": [
+      {
+        "key": "neck",
+        "name": "Pescoço / Crista",
+        "icon": "1"
+      },
+      {
+        "key": "withers",
+        "name": "Garrote",
+        "icon": "2"
+      },
+      {
+        "key": "shoulder",
+        "name": "Atrás da espádua",
+        "icon": "3"
+      },
+      {
+        "key": "ribs",
+        "name": "Costelas",
+        "icon": "4"
+      },
+      {
+        "key": "back",
+        "name": "Linha do dorso",
+        "icon": "5"
+      },
+      {
+        "key": "croup",
+        "name": "Garupa",
+        "icon": "6"
+      },
+      {
+        "key": "tail",
+        "name": "Base da cauda",
+        "icon": "7"
+      }
+    ],
+    "zoneDescs": {
+      "neck": [
+        "Sem crista. Vértebras cervicais visíveis.",
+        "Estrutura óssea do pescoço visível. Crista não aparente.",
+        "Crista visível, com ligeiro sulco na base.",
+        "Crista bem definida, ligeiramente convexa.",
+        "A crista do pescoço pode ser agarrada com toda a mão e sente-se firme.",
+        "Crista muito proeminente, imersa na massa do pescoço."
+      ],
+      "withers": [
+        "Muito proeminente. Processos espinhosos visíveis.",
+        "Proeminente. Parte superior da escápula visível.",
+        "Pronunciado e seco.",
+        "Ligeiramente proeminente.",
+        "Integrado no tecido circundante.",
+        "Oculto e envolto numa massa arredondada de gordura."
+      ],
+      "shoulder": [
+        "Depressão profunda. Espádua proeminente e seca.",
+        "Deprimido.",
+        "Ligeiramente côncavo. Depósito fino de gordura.",
+        "Torna-se plano. Depósito de gordura bem definido.",
+        "Ligeiramente elevado, convexo. Depósito de gordura espesso e mole.",
+        "Claramente convexo. Espádua oculta pela gordura. A massa treme à palpação."
+      ],
+      "ribs": [
+        "Inserção das costelas nos processos transversos visível. Depressões intercostais muito profundas. Pele seca aderente.",
+        "Muito proeminentes. Pele aderente às costelas.",
+        "Costelas palpáveis sob pele flexível. Ligeiras depressões intercostais.",
+        "Não visíveis. Mal palpáveis.",
+        "Não palpáveis sob o depósito de gordura.",
+        "Espessa camada de gordura que rola sob a mão."
+      ],
+      "back": [
+        "Processos espinhosos das vértebras lombares muito proeminentes. Sem cobertura de gordura.",
+        "Processos espinhosos claramente palpáveis. Cobertura mínima de gordura.",
+        "Processos espinhosos palpáveis com pressão leve. Camada fina de gordura.",
+        "Processos espinhosos palpáveis apenas com pressão firme. Cobertura de gordura lisa e uniforme.",
+        "Não palpáveis. O dorso parece plano ou ligeiramente arredondado.",
+        "Depósitos espessos de gordura ao longo da coluna. Sulco mediano pode ser visível."
+      ],
+      "croup": [
+        "Estrutura óssea muito proeminente. Tuberosidades isquiáticas e ilíacas muito proeminentes.",
+        "Pontiaguda. Contornos côncavos.",
+        "Tuberosidades isquiáticas e ilíacas discerníveis.",
+        "Ligeiramente arredondada. Contornos convexos.",
+        "Bem arredondada. Tuberosidades isquiáticas e ilíacas ocultas.",
+        "Arredondada. Sulco mediano formando uma garupa dupla."
+      ],
+      "tail": [
+        "Vértebras na base da cauda visíveis. Ligamento sacrotuberoso claramente definido.",
+        "Proeminente. Base da cauda claramente definida.",
+        "Claramente definida. Base da cauda claramente visível.",
+        "Coberta. Base da cauda ligeiramente definida. Ligeiro depósito de gordura oculta vértebras e ligamentos.",
+        "Mal definida. Depósito de gordura espesso e mole.",
+        "Massiva. Tecido adiposo formando uma almofada firme à volta da base da cauda."
+      ]
+    },
+    "sumLabel": "ECC Ponderado",
+    "photoTitle": "Fotos",
+    "photoInstr": "Adicione fotos do cavalo para esta avaliação (opcional). As fotos são armazenadas localmente no seu navegador.",
+    "buttons": {
+      "save": "Guardar avaliação",
+      "reset": "Repor",
+      "export": "Exportar JSON",
+      "exportAll": "Exportar tudo",
+      "clearAll": "Apagar tudo"
+    },
+    "historyTitle": "Avaliações guardadas",
+    "emptyHistory": "Ainda sem avaliações guardadas. Complete uma avaliação e guarde-a.",
+    "guideIntro": "<strong>Guia de referência</strong> — Descrições detalhadas para cada zona corporal em cada pontuação ECC (0–5).",
+    "guideHeaders": {
+      "score": "ECC",
+      "neck": "Pescoço",
+      "withers": "Garrote",
+      "shoulder": "Atrás espádua",
+      "ribs": "Costelas",
+      "back": "Dorso",
+      "croup": "Garupa",
+      "tail": "Cauda"
+    },
+    "interpTitle": "Interpretação ECC",
+    "interp": [
+      {
+        "range": "> 4,5",
+        "label": "Muito gordo",
+        "badge": "b-danger",
+        "reco": "Perigo — Alto risco de doença metabólica"
+      },
+      {
+        "range": "4,0 – 4,5",
+        "label": "Gordo",
+        "badge": "b-warn",
+        "reco": "Precaução — Redução de peso recomendada"
+      },
+      {
+        "range": "3,5 – 4,0",
+        "label": "Ligeiramente gordo",
+        "badge": "b-monitor",
+        "reco": "Monitorizar — Ajustar dieta e exercício"
+      },
+      {
+        "range": "2,5 – 3,5",
+        "label": "Ótimo",
+        "badge": "b-safe",
+        "reco": "Boa condição — Manter gestão atual"
+      },
+      {
+        "range": "2,0 – 2,5",
+        "label": "Ligeiramente magro",
+        "badge": "b-monitor",
+        "reco": "Monitorizar — Aumentar nutrição"
+      },
+      {
+        "range": "1,5 – 2,0",
+        "label": "Magro",
+        "badge": "b-warn",
+        "reco": "Precaução — Avaliação veterinária aconselhada"
+      },
+      {
+        "range": "< 1,5",
+        "label": "Muito magro",
+        "badge": "b-danger",
+        "reco": "Perigo — Atenção veterinária imediata"
+      }
+    ],
+    "formulaTitle": "Fórmula ponderada",
+    "formulaText": "ECC = 0,50 × Costelas + 0,15 × Atrás espádua + 0,15 × Pescoço + 0,10 × Garrote + 0,05 × Base cauda + 0,05 × Garupa. A linha do dorso é avaliada qualitativamente e não incluída no cálculo ponderado.",
+    "legal": {
+      "title": "⚖️ Aviso Legal (clique para expandir)",
+      "vetTitle": "Aviso veterinário",
+      "vetText": "Esta ferramenta é fornecida exclusivamente para fins educativos e informativos e não constitui aconselhamento veterinário. Não deve substituir um exame veterinário profissional. Consulte sempre um veterinário qualificado para quaisquer decisões relativas à saúde, nutrição e bem-estar do seu cavalo.",
+      "privacyTitle": "Privacidade de dados",
+      "privacyText": "Esta aplicação não recolhe, armazena nem transmite quaisquer dados pessoais ou imagens para nenhum servidor. Todas as informações introduzidas permanecem exclusivamente no seu dispositivo.",
+      "licenseTitle": "Licença",
+      "licenseText": "Ferramenta gratuita desenvolvida no âmbito do projeto EUnetHorse (Horizon Europe #101086551). Reprodução permitida desde que a fonte seja citada. Dados fornecidos pelo IFCE, França. Supervisionado por Maria João Fradinho.",
+      "euFundingLabel": "Financiado pela União Europeia",
+      "euDisclaimerText": "Financiado pela União Europeia. As opiniões e os pontos de vista expressos são exclusivamente os do(s) autor(es) e não refletem necessariamente os da União Europeia ou da Agência de Execução Europeia da Investigação (REA). Acordo de Subvenção n.º 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+    },
+    "toast": {
+      "saved": "Avaliação guardada",
+      "cleared": "Todas as avaliações apagadas",
+      "resetDone": "Formulário reposto",
+      "deleted": "Avaliação eliminada"
+    },
+    "confirm": {
+      "clearAll": "Apagar todas as avaliações guardadas? Esta ação não pode ser desfeita.",
+      "deleteOne": "Eliminar esta avaliação?"
+    },
+    "scoreLabels": {
+      "min": "0 Caquético",
+      "max": "5 Obeso"
+    }
   },
-  toast: { saved: "Évaluation enregistrée", cleared: "Toutes les évaluations supprimées", resetDone: "Formulaire réinitialisé", deleted: "Évaluation supprimée" },
-  confirm: { clearAll: "Supprimer toutes les évaluations ? Cette action est irréversible.", deleteOne: "Supprimer cette évaluation ?" },
-  scoreLabels: { min: "0 Cadavérique", max: "5 Obèse" }
-},
-it: {
-  meta: { name: "Italiano", flag: "\u{1F1EE}\u{1F1F9}" },
-  tabs: { assess: "Valutazione", history: "Storico", guide: "Guida" },
-  intro: "<strong>Body Condition Score (BCS)</strong> — Valutate la quantità di tessuto adiposo del vostro cavallo mediante osservazione visiva e palpazione. Assegnate un punteggio a ciascuna delle 7 zone anatomiche su una scala da 0 (cachettico) a 5 (obeso). Sono ammessi mezzi punti.",
-  horseInfo: "Informazioni sul cavallo",
-  fields: { name: "Nome", breed: "Razza", id: "ID", date: "Data", category: "Categoria", notes: "Note / Osservazioni" },
-  categories: { general: "Cavallo adulto (generale)", sport: "Cavallo sportivo", broodmare: "Fattrice", pony: "Pony / Facile mantenimento", draft: "Cavallo da tiro" },
-  zonesTitle: "Punteggio per zona",
-  zonesInstr: "Spostate il cursore di ogni zona da 0 a 5. La descrizione si aggiorna al punteggio selezionato.",
-  zones: [
-    { key: "neck", name: "Collo / Cresta", icon: "1" },
-    { key: "withers", name: "Garrese", icon: "2" },
-    { key: "shoulder", name: "Dietro la spalla", icon: "3" },
-    { key: "ribs", name: "Costole", icon: "4" },
-    { key: "back", name: "Linea del dorso", icon: "5" },
-    { key: "croup", name: "Groppa", icon: "6" },
-    { key: "tail", name: "Attaccatura della coda", icon: "7" }
-  ],
-  zoneDescs: {
-    neck: ["Nessuna cresta. Vertebre cervicali visibili.", "Struttura ossea del collo visibile. Cresta non apparente.", "Cresta visibile, con un leggero solco alla base.", "Cresta ben definita, leggermente convessa.", "La cresta del collo può essere afferrata con l'intera mano e risulta soda.", "Cresta molto prominente, immersa nella massa del collo."],
-    withers: ["Molto prominente. Processi spinosi visibili.", "Prominente. Parte superiore della scapola visibile.", "Pronunciato e asciutto.", "Leggermente prominente.", "Integrato nel tessuto circostante.", "Nascosto e avvolto in una massa arrotondata di grasso."],
-    shoulder: ["Depressione profonda. Spalla prominente e asciutta.", "Depresso.", "Leggermente concavo. Sottile deposito di grasso.", "Diventa piatto. Deposito di grasso ben definito.", "Leggermente rialzato, convesso. Deposito di grasso spesso e morbido.", "Chiaramente convesso. Spalla nascosta dal grasso. La massa trema alla palpazione."],
-    ribs: ["Inserzione delle costole ai processi trasversi visibile. Depressioni intercostali molto profonde. Pelle secca aderente.", "Molto prominenti. Pelle aderente alle costole.", "Costole palpabili sotto pelle morbida. Leggere depressioni intercostali.", "Non visibili. Appena palpabili.", "Non palpabili sotto il deposito di grasso.", "Spesso strato di grasso che rotola sotto la mano."],
-    back: ["Processi spinosi delle vertebre lombari molto prominenti. Nessuna copertura adiposa.", "Processi spinosi chiaramente palpabili. Copertura adiposa minima.", "Processi spinosi palpabili con leggera pressione. Sottile strato di grasso.", "Processi spinosi palpabili solo con pressione decisa. Copertura adiposa liscia e uniforme.", "Non palpabili. Il dorso appare piatto o leggermente arrotondato.", "Spessi depositi di grasso lungo la colonna. Il solco mediano può essere visibile."],
-    croup: ["Struttura ossea molto prominente. Punte delle natiche e delle anche molto prominenti.", "Appuntita. Contorni concavi.", "Punte delle natiche e delle anche discernibili.", "Leggermente arrotondata. Contorni convessi.", "Ben arrotondata. Punte delle natiche e delle anche nascoste.", "Arrotondata. Solco mediano che forma una doppia groppa."],
-    tail: ["Vertebre alla base della coda visibili. Legamento sacrotuberoso chiaramente definito.", "Prominente. Attaccatura della coda chiaramente definita.", "Chiaramente definita. Attaccatura della coda chiaramente visibile.", "Coperta. Attaccatura leggermente definita. Un leggero deposito di grasso nasconde vertebre e legamenti.", "Mal definita. Deposito di grasso spesso e morbido.", "Massiccia. Tessuto adiposo che forma un cuscino sodo attorno all'attaccatura della coda."]
-  },
-  sumLabel: "BCS Ponderato",
-  photoTitle: "Foto",
-  photoInstr: "Aggiungete foto del cavallo per questa valutazione (opzionale). Le foto sono archiviate localmente nel vostro browser.",
-  buttons: { save: "Salva valutazione", reset: "Ripristina", export: "Esporta JSON", exportAll: "Esporta tutto", clearAll: "Cancella tutto" },
-  historyTitle: "Valutazioni salvate",
-  emptyHistory: "Nessuna valutazione salvata. Completate una valutazione e salvatela.",
-  guideIntro: "<strong>Guida di riferimento</strong> — Descrizioni dettagliate per ogni zona corporea a ogni punteggio BCS (0–5).",
-  guideHeaders: { score: "BCS", neck: "Collo", withers: "Garrese", shoulder: "Dietro spalla", ribs: "Costole", back: "Dorso", croup: "Groppa", tail: "Coda" },
-  interpTitle: "Interpretazione BCS",
-  interp: [
-    { range: "> 4,5", label: "Molto grasso", badge: "b-danger", reco: "Pericolo — Alto rischio di malattia metabolica" },
-    { range: "4,0 – 4,5", label: "Grasso", badge: "b-warn", reco: "Attenzione — Riduzione del peso raccomandata" },
-    { range: "3,5 – 4,0", label: "Leggermente grasso", badge: "b-monitor", reco: "Monitorare — Regolare dieta ed esercizio" },
-    { range: "2,5 – 3,5", label: "Ottimale", badge: "b-safe", reco: "Buona condizione — Mantenere gestione attuale" },
-    { range: "2,0 – 2,5", label: "Leggermente magro", badge: "b-monitor", reco: "Monitorare — Aumentare nutrizione" },
-    { range: "1,5 – 2,0", label: "Magro", badge: "b-warn", reco: "Attenzione — Visita veterinaria consigliata" },
-    { range: "< 1,5", label: "Molto magro", badge: "b-danger", reco: "Pericolo — Cure veterinarie immediate" }
-  ],
-  formulaTitle: "Formula ponderata",
-  formulaText: "BCS = 0,50 × Costole + 0,15 × Dietro spalla + 0,15 × Collo + 0,10 × Garrese + 0,05 × Attaccatura coda + 0,05 × Groppa. La linea del dorso è valutata qualitativamente e non inclusa nel calcolo ponderato.",
-  legal: {
-    title: "⚖️ Avviso Legale (clicca per espandere)",
-    vetTitle: "Avviso veterinario",
-    vetText: "Questo strumento è fornito esclusivamente a scopo educativo e informativo e non costituisce consulenza veterinaria. Non deve sostituire un esame veterinario professionale. Consultate sempre un veterinario qualificato per qualsiasi decisione riguardante la salute, la nutrizione e il benessere del vostro cavallo.",
-    privacyTitle: "Privacy dei dati",
-    privacyText: "Questa applicazione non raccoglie, archivia o trasmette dati personali o immagini ad alcun server. Tutte le informazioni inserite rimangono esclusivamente sul vostro dispositivo.",
-    licenseTitle: "Licenza",
-    licenseText: "Strumento gratuito sviluppato nell'ambito del progetto EUnetHorse (Horizon Europe #101086551). La riproduzione è consentita a condizione che la fonte sia citata. Dati forniti da IFCE, Francia. Supervisionato da Maria João Fradinho.",
-    euFundingLabel: "Finanziato dall'Unione europea",
-    euDisclaimerText: "Finanziato dall'Unione europea. Le opinioni e i punti di vista espressi sono esclusivamente quelli dell'autore o degli autori e non riflettono necessariamente quelli dell'Unione europea o dell'Agenzia esecutiva europea per la ricerca (REA). Accordo di sovvenzione n. 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
-  },
-  toast: { saved: "Valutazione salvata", cleared: "Tutte le valutazioni cancellate", resetDone: "Modulo ripristinato", deleted: "Valutazione cancellata" },
-  confirm: { clearAll: "Cancellare tutte le valutazioni? Questa azione non può essere annullata.", deleteOne: "Cancellare questa valutazione?" },
-  scoreLabels: { min: "0 Cachettico", max: "5 Obeso" }
-},
-be: {
-  meta: { name: "België", flag: "\u{1F1E7}\u{1F1EA}" },
-  tabs: { assess: "Beoordeling", history: "Geschiedenis", guide: "Gids" },
-  intro: "<strong>Body Condition Score (BCS)</strong> — Beoordeel de hoeveelheid vetweefsel van uw paard door visuele observatie en palpatie. Beoordeel elk van de 7 anatomische zones op een schaal van 0 (cachectisch) tot 5 (obees). Halve punten zijn toegestaan.",
-  horseInfo: "Paardinformatie",
-  fields: { name: "Naam", breed: "Ras", id: "ID", date: "Datum", category: "Categorie", notes: "Opmerkingen" },
-  categories: { general: "Volwassen paard (algemeen)", sport: "Sportpaard", broodmare: "Fokmerrie", pony: "Pony / Makkelijke houder", draft: "Trekpaard" },
-  zonesTitle: "Zonebeoordeling",
-  zonesInstr: "Verschuif de schuifregelaar van elke zone van 0 tot 5. De beschrijving past zich aan de geselecteerde score aan.",
-  zones: [
-    { key: "neck", name: "Hals / Kam", icon: "1" },
-    { key: "withers", name: "Schoft", icon: "2" },
-    { key: "shoulder", name: "Achter de schouder", icon: "3" },
-    { key: "ribs", name: "Ribben", icon: "4" },
-    { key: "back", name: "Ruglijn", icon: "5" },
-    { key: "croup", name: "Kruis / Achterhand", icon: "6" },
-    { key: "tail", name: "Staartaanzet", icon: "7" }
-  ],
-  zoneDescs: {
-    neck: ["Geen kam. Halswervels zichtbaar.", "Botstructuur van de hals zichtbaar. Kam niet zichtbaar.", "Kam zichtbaar, met een lichte groef aan de basis.", "Goed gedefinieerde kam, licht convex.", "Halskam kan met de hele hand worden vastgegrepen en voelt stevig.", "Zeer prominente kam, verzonken in de halsmassa."],
-    withers: ["Zeer prominent. Doornuitsteeksels zichtbaar.", "Prominent. Bovenkant van het schouderblad zichtbaar.", "Uitgesproken en droog.", "Licht prominent.", "Opgegaan in omringend weefsel.", "Bedekt en omhuld door een afgeronde vetmassa."],
-    shoulder: ["Diepe depressie. Prominente, droge schouder.", "Ingedeukt.", "Licht concaaf. Dunne vetlaag.", "Wordt vlak. Goed gedefinieerde vetlaag.", "Licht verheven, convex. Dikke, zachte vetlaag.", "Duidelijk convex. Schouder bedekt door vet. Massa trilt bij palpatie."],
-    ribs: ["Aanhechting van ribben aan dwarsuitsteeksels zichtbaar. Zeer diepe intercostale depressies. Droge, strak aanliggende huid.", "Zeer prominent. Huid strak op de ribben.", "Ribben voelbaar onder soepele huid. Lichte intercostale depressies.", "Niet zichtbaar. Nauwelijks voelbaar.", "Niet voelbaar onder de vetlaag.", "Dikke vetlaag die onder de hand rolt."],
-    back: ["Doornuitsteeksels van lendenwervels zeer prominent. Geen vetbedekking.", "Doornuitsteeksels duidelijk voelbaar. Minimale vetbedekking.", "Doornuitsteeksels voelbaar met lichte druk. Dunne vetlaag.", "Doornuitsteeksels alleen voelbaar met stevige druk. Gladde, gelijkmatige vetbedekking.", "Niet voelbaar. Rug lijkt vlak of licht afgerond.", "Dikke vetafzettingen langs de wervelkolom. Mediaangroef kan zichtbaar zijn."],
-    croup: ["Zeer prominente botstructuur. Zitbeenknobbels en heupknobbels zeer prominent.", "Puntig. Concave contouren.", "Zitbeenknobbels en heupknobbels waarneembaar.", "Licht afgerond. Convexe contouren.", "Goed afgerond. Zitbeenknobbels en heupknobbels bedekt.", "Afgerond. Mediaangroef vormt een dubbelkruis."],
-    tail: ["Wervels aan de staartbasis zichtbaar. Ligamentum sacrotuberale duidelijk gedefinieerd.", "Prominent. Staartaanzet duidelijk gedefinieerd.", "Duidelijk gedefinieerd. Staartaanzet duidelijk zichtbaar.", "Bedekt. Staartaanzet licht gedefinieerd. Lichte vetlaag bedekt wervels en ligamenten.", "Slecht gedefinieerd. Dikke, zachte vetlaag.", "Massief. Vetweefsel vormt een stevig kussen rond de staartaanzet."]
-  },
-  sumLabel: "Gewogen BCS",
-  photoTitle: "Foto's",
-  photoInstr: "Voeg foto's van het paard toe voor deze beoordeling (optioneel). Foto's worden lokaal in uw browser opgeslagen.",
-  buttons: { save: "Beoordeling opslaan", reset: "Herstellen", export: "JSON exporteren", exportAll: "Alles exporteren", clearAll: "Alles wissen" },
-  historyTitle: "Opgeslagen beoordelingen",
-  emptyHistory: "Nog geen beoordelingen opgeslagen. Voer een beoordeling uit en sla deze op.",
-  guideIntro: "<strong>Referentiegids</strong> — Gedetailleerde beschrijvingen voor elke lichaamszone bij elke BCS-score (0–5).",
-  guideHeaders: { score: "BCS", neck: "Hals", withers: "Schoft", shoulder: "Achter schouder", ribs: "Ribben", back: "Rug", croup: "Kruis", tail: "Staart" },
-  interpTitle: "BCS-interpretatie",
-  interp: [
-    { range: "> 4,5", label: "Zeer vet", badge: "b-danger", reco: "Gevaar — Hoog risico op stofwisselingsziekte" },
-    { range: "4,0 – 4,5", label: "Vet", badge: "b-warn", reco: "Voorzichtig — Gewichtsvermindering aanbevolen" },
-    { range: "3,5 – 4,0", label: "Licht vet", badge: "b-monitor", reco: "Monitoren — Voeding en beweging aanpassen" },
-    { range: "2,5 – 3,5", label: "Optimaal", badge: "b-safe", reco: "Goede conditie — Huidig beheer handhaven" },
-    { range: "2,0 – 2,5", label: "Licht mager", badge: "b-monitor", reco: "Monitoren — Voeding verhogen" },
-    { range: "1,5 – 2,0", label: "Mager", badge: "b-warn", reco: "Voorzichtig — Diergeneeskundig onderzoek aanbevolen" },
-    { range: "< 1,5", label: "Zeer mager", badge: "b-danger", reco: "Gevaar — Onmiddellijke diergeneeskundige zorg" }
-  ],
-  formulaTitle: "Gewogen formule",
-  formulaText: "BCS = 0,50 × Ribben + 0,15 × Achter schouder + 0,15 × Hals + 0,10 × Schoft + 0,05 × Staartaanzet + 0,05 × Kruis. De ruglijn wordt kwalitatief beoordeeld en niet opgenomen in de gewogen berekening.",
-  legal: {
-    title: "⚖️ Juridische Mededeling (klik om uit te vouwen)",
-    vetTitle: "Veterinaire disclaimer",
-    vetText: "Dit hulpmiddel is uitsluitend bedoeld voor educatieve en informatieve doeleinden en vormt geen veterinair advies. Het mag een professioneel veterinair onderzoek niet vervangen. Raadpleeg altijd een gekwalificeerde dierenarts voor beslissingen over de gezondheid, voeding en het welzijn van uw paard.",
-    privacyTitle: "Gegevensprivacy",
-    privacyText: "Deze applicatie verzamelt, bewaart of verzendt geen persoonlijke gegevens of afbeeldingen naar een server. Alle ingevoerde informatie blijft uitsluitend op uw apparaat.",
-    licenseTitle: "Licentie",
-    licenseText: "Gratis hulpmiddel ontwikkeld in het kader van het EUnetHorse-project (Horizon Europe #101086551). Reproductie is toegestaan mits bronvermelding. Gegevens verstrekt door IFCE, Frankrijk. Onder toezicht van Maria João Fradinho.",
-    euFundingLabel: "Gefinancierd door de Europese Unie",
-    euDisclaimerText: "Gefinancierd door de Europese Unie. De geuite standpunten en meningen zijn uitsluitend die van de auteur(s) en weerspiegelen niet noodzakelijk die van de Europese Unie of het Europees Uitvoerend Agentschap voor onderzoek (REA). Subsidieovereenkomst nr. 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
-  },
-  toast: { saved: "Beoordeling opgeslagen", cleared: "Alle beoordelingen gewist", resetDone: "Formulier hersteld", deleted: "Beoordeling verwijderd" },
-  confirm: { clearAll: "Alle opgeslagen beoordelingen verwijderen? Dit kan niet ongedaan worden gemaakt.", deleteOne: "Deze beoordeling verwijderen?" },
-  scoreLabels: { min: "0 Cachectisch", max: "5 Obees" }
-},
-pl: {
-  meta: { name: "Polski", flag: "\u{1F1F5}\u{1F1F1}" },
-  tabs: { assess: "Ocena", history: "Historia", guide: "Przewodnik" },
-  intro: "<strong>Ocena Kondycji Ciała (BCS)</strong> — Oceń ilość tkanki tłuszczowej konia poprzez obserwację wizualną i palpację. Oceń każdą z 7 stref anatomicznych w skali od 0 (wyniszczony) do 5 (otyły). Dozwolone są połówki punktów.",
-  horseInfo: "Informacje o koniu",
-  fields: { name: "Imię", breed: "Rasa", id: "ID", date: "Data", category: "Kategoria", notes: "Uwagi" },
-  categories: { general: "Koń dorosły (ogólnie)", sport: "Koń sportowy", broodmare: "Klacz hodowlana", pony: "Kuc / Łatwy w utrzymaniu", draft: "Koń zimnokrwisty" },
-  zonesTitle: "Ocena stref",
-  zonesInstr: "Przesuń suwak każdej strefy od 0 do 5. Opis dostosowuje się do wybranej oceny.",
-  zones: [
-    { key: "neck", name: "Szyja / Grzbiet szyi", icon: "1" },
-    { key: "withers", name: "Kłąb", icon: "2" },
-    { key: "shoulder", name: "Za łopatką", icon: "3" },
-    { key: "ribs", name: "Żebra", icon: "4" },
-    { key: "back", name: "Linia grzbietu", icon: "5" },
-    { key: "croup", name: "Zad", icon: "6" },
-    { key: "tail", name: "Nasada ogona", icon: "7" }
-  ],
-  zoneDescs: {
-    neck: ["Brak grzbietu szyi. Kręgi szyjne widoczne.", "Struktura kostna szyi widoczna. Grzbiet szyi niewidoczny.", "Grzbiet szyi widoczny, z lekkim rowkiem u podstawy.", "Dobrze zdefiniowany grzbiet szyi, lekko wypukły.", "Grzbiet szyi można chwycić całą dłonią i jest twardy.", "Bardzo prominentny grzbiet szyi, zanurzony w masie szyi."],
-    withers: ["Bardzo prominentny. Wyrostki kolczyste widoczne.", "Prominentny. Górna część łopatki widoczna.", "Wyraźny i suchy.", "Lekko prominentny.", "Wtopiony w otaczające tkanki.", "Zakryty i otoczony zaokrągloną masą tłuszczu."],
-    shoulder: ["Głębokie wgłębienie. Prominentna, sucha łopatka.", "Wklęsła.", "Lekko wklęsła. Cienka warstwa tłuszczu.", "Staje się płaska. Dobrze zdefiniowana warstwa tłuszczu.", "Lekko uniesiona, wypukła. Gruba, miękka warstwa tłuszczu.", "Wyraźnie wypukła. Łopatka zakryta tłuszczem. Masa drży przy palpacji."],
-    ribs: ["Przyczepy żeber do wyrostków poprzecznych widoczne. Bardzo głębokie wgłębienia międzyżebrowe. Sucha, ściśle przylegająca skóra.", "Bardzo prominentne. Skóra ściśle przylegająca do żeber.", "Żebra wyczuwalne pod elastyczną skórą. Lekkie wgłębienia międzyżebrowe.", "Niewidoczne. Ledwo wyczuwalne.", "Niewyczuwalne pod warstwą tłuszczu.", "Gruba warstwa tłuszczu, która toczy się pod ręką."],
-    back: ["Wyrostki kolczyste kręgów lędźwiowych bardzo prominentne. Brak pokrycia tłuszczem.", "Wyrostki kolczyste wyraźnie wyczuwalne. Minimalne pokrycie tłuszczem.", "Wyrostki kolczyste wyczuwalne przy lekkim nacisku. Cienka warstwa tłuszczu.", "Wyrostki kolczyste wyczuwalne tylko przy mocnym nacisku. Gładkie, równomierne pokrycie tłuszczem.", "Niewyczuwalne. Grzbiet wydaje się płaski lub lekko zaokrąglony.", "Grube złogi tłuszczu wzdłuż kręgosłupa. Rowek środkowy może być widoczny."],
-    croup: ["Bardzo prominentna struktura kostna. Guzy kulszowe i biodrowe bardzo prominentne.", "Spiczasta. Kontury wklęsłe.", "Guzy kulszowe i biodrowe rozpoznawalne.", "Lekko zaokrąglona. Kontury wypukłe.", "Dobrze zaokrąglona. Guzy kulszowe i biodrowe zakryte.", "Zaokrąglona. Rowek środkowy tworzący podwójny zad."],
-    tail: ["Kręgi u nasady ogona widoczne. Więzadło krzyżowo-guzowe wyraźnie zdefiniowane.", "Prominentna. Nasada ogona wyraźnie zdefiniowana.", "Wyraźnie zdefiniowana. Nasada ogona dobrze widoczna.", "Pokryta. Nasada ogona lekko zdefiniowana. Lekki złóg tłuszczu zakrywa kręgi i więzadła.", "Słabo zdefiniowana. Gruba, miękka warstwa tłuszczu.", "Masywna. Tkanka tłuszczowa tworząca twardą poduszkę wokół nasady ogona."]
-  },
-  sumLabel: "Ważony BCS",
-  photoTitle: "Zdjęcia",
-  photoInstr: "Dodaj zdjęcia konia do tej oceny (opcjonalnie). Zdjęcia są przechowywane lokalnie w przeglądarce.",
-  buttons: { save: "Zapisz ocenę", reset: "Resetuj", export: "Eksportuj JSON", exportAll: "Eksportuj wszystko", clearAll: "Wyczyść wszystko" },
-  historyTitle: "Zapisane oceny",
-  emptyHistory: "Brak zapisanych ocen. Wykonaj ocenę i zapisz ją, aby zobaczyć ją tutaj.",
-  guideIntro: "<strong>Przewodnik referencyjny</strong> — Szczegółowe opisy dla każdej strefy ciała przy każdym wyniku BCS (0–5).",
-  guideHeaders: { score: "BCS", neck: "Szyja", withers: "Kłąb", shoulder: "Za łopatką", ribs: "Żebra", back: "Grzbiet", croup: "Zad", tail: "Ogon" },
-  interpTitle: "Interpretacja BCS",
-  interp: [
-    { range: "> 4,5", label: "Bardzo tłusty", badge: "b-danger", reco: "Niebezpieczeństwo — Wysokie ryzyko choroby metabolicznej" },
-    { range: "4,0 – 4,5", label: "Tłusty", badge: "b-warn", reco: "Ostrożność — Zalecana redukcja masy ciała" },
-    { range: "3,5 – 4,0", label: "Lekko tłusty", badge: "b-monitor", reco: "Monitorowanie — Dostosuj dietę i ćwiczenia" },
-    { range: "2,5 – 3,5", label: "Optymalny", badge: "b-safe", reco: "Dobra kondycja — Utrzymaj obecne zarządzanie" },
-    { range: "2,0 – 2,5", label: "Lekko chudy", badge: "b-monitor", reco: "Monitorowanie — Zwiększ żywienie" },
-    { range: "1,5 – 2,0", label: "Chudy", badge: "b-warn", reco: "Ostrożność — Zalecana ocena weterynaryjna" },
-    { range: "< 1,5", label: "Bardzo chudy", badge: "b-danger", reco: "Niebezpieczeństwo — Natychmiastowa opieka weterynaryjna" }
-  ],
-  formulaTitle: "Formuła ważona",
-  formulaText: "BCS = 0,50 × Żebra + 0,15 × Za łopatką + 0,15 × Szyja + 0,10 × Kłąb + 0,05 × Nasada ogona + 0,05 × Zad. Linia grzbietu jest oceniana jakościowo i nie jest uwzględniana w obliczeniu ważonym.",
-  legal: {
-    title: "⚖️ Nota Prawna (kliknij, aby rozwinać)",
-    vetTitle: "Zastrzeżenie weterynaryjne",
-    vetText: "To narzędzie jest udostępniane wyłącznie w celach edukacyjnych i informacyjnych i nie stanowi porady weterynaryjnej. Nie powinno zastępować profesjonalnego badania weterynaryjnego. Zawsze konsultuj się z wykwalifikowanym lekarzem weterynarii w sprawie decyzji dotyczących zdrowia, żywienia i dobrostanu konia.",
-    privacyTitle: "Prywatność danych",
-    privacyText: "Ta aplikacja nie zbiera, nie przechowuje ani nie przesyła żadnych danych osobowych ani zdjęć na żaden serwer. Wszystkie wprowadzone informacje pozostają wyłącznie na Twoim urządzeniu.",
-    licenseTitle: "Licencja",
-    licenseText: "Bezpłatne narzędzie opracowane w ramach projektu EUnetHorse (Horizon Europe #101086551). Reprodukcja dozwolona pod warunkiem podania źródła. Dane dostarczone przez IFCE, Francja. Pod nadzorem Maria João Fradinho.",
-    euFundingLabel: "Sfinansowane ze środków Unii Europejskiej",
-    euDisclaimerText: "Sfinansowane ze środków Unii Europejskiej. Wyrażone poglądy i opinie są jedynie poglądami autora(ów) i niekoniecznie odzwierciedlają poglądy Unii Europejskiej lub Europejskiej Agencji Wykonawczej ds. Badań Naukowych (REA). Umowa o grant nr 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
-  },
-  toast: { saved: "Ocena zapisana", cleared: "Wszystkie oceny usunięte", resetDone: "Formularz zresetowany", deleted: "Ocena usunięta" },
-  confirm: { clearAll: "Usunąć wszystkie zapisane oceny? Tej czynności nie można cofnąć.", deleteOne: "Usunąć tę ocenę?" },
-  scoreLabels: { min: "0 Wyniszczony", max: "5 Otyły" }
-},
-pt: {
-  meta: { name: "Português", flag: "\u{1F1F5}\u{1F1F9}" },
-  tabs: { assess: "Avaliação", history: "Histórico", guide: "Guia" },
-  intro: "<strong>Escore de Condição Corporal (ECC)</strong> — Avalie a quantidade de tecido adiposo do seu cavalo por observação visual e palpação. Pontue cada uma das 7 zonas anatómicas numa escala de 0 (caquético) a 5 (obeso). Meios pontos são permitidos.",
-  horseInfo: "Informações do cavalo",
-  fields: { name: "Nome", breed: "Raça", id: "ID", date: "Data", category: "Categoria", notes: "Notas / Observações" },
-  categories: { general: "Cavalo adulto (geral)", sport: "Cavalo de desporto", broodmare: "Égua de cria", pony: "Pónei / Fácil manutenção", draft: "Cavalo de tiro" },
-  zonesTitle: "Pontuação por zona",
-  zonesInstr: "Deslize o marcador de cada zona de 0 a 5. A descrição atualiza-se conforme a pontuação selecionada.",
-  zones: [
-    { key: "neck", name: "Pescoço / Crista", icon: "1" },
-    { key: "withers", name: "Garrote", icon: "2" },
-    { key: "shoulder", name: "Atrás da espádua", icon: "3" },
-    { key: "ribs", name: "Costelas", icon: "4" },
-    { key: "back", name: "Linha do dorso", icon: "5" },
-    { key: "croup", name: "Garupa", icon: "6" },
-    { key: "tail", name: "Base da cauda", icon: "7" }
-  ],
-  zoneDescs: {
-    neck: ["Sem crista. Vértebras cervicais visíveis.", "Estrutura óssea do pescoço visível. Crista não aparente.", "Crista visível, com ligeiro sulco na base.", "Crista bem definida, ligeiramente convexa.", "A crista do pescoço pode ser agarrada com toda a mão e sente-se firme.", "Crista muito proeminente, imersa na massa do pescoço."],
-    withers: ["Muito proeminente. Processos espinhosos visíveis.", "Proeminente. Parte superior da escápula visível.", "Pronunciado e seco.", "Ligeiramente proeminente.", "Integrado no tecido circundante.", "Oculto e envolto numa massa arredondada de gordura."],
-    shoulder: ["Depressão profunda. Espádua proeminente e seca.", "Deprimido.", "Ligeiramente côncavo. Depósito fino de gordura.", "Torna-se plano. Depósito de gordura bem definido.", "Ligeiramente elevado, convexo. Depósito de gordura espesso e mole.", "Claramente convexo. Espádua oculta pela gordura. A massa treme à palpação."],
-    ribs: ["Inserção das costelas nos processos transversos visível. Depressões intercostais muito profundas. Pele seca aderente.", "Muito proeminentes. Pele aderente às costelas.", "Costelas palpáveis sob pele flexível. Ligeiras depressões intercostais.", "Não visíveis. Mal palpáveis.", "Não palpáveis sob o depósito de gordura.", "Espessa camada de gordura que rola sob a mão."],
-    back: ["Processos espinhosos das vértebras lombares muito proeminentes. Sem cobertura de gordura.", "Processos espinhosos claramente palpáveis. Cobertura mínima de gordura.", "Processos espinhosos palpáveis com pressão leve. Camada fina de gordura.", "Processos espinhosos palpáveis apenas com pressão firme. Cobertura de gordura lisa e uniforme.", "Não palpáveis. O dorso parece plano ou ligeiramente arredondado.", "Depósitos espessos de gordura ao longo da coluna. Sulco mediano pode ser visível."],
-    croup: ["Estrutura óssea muito proeminente. Tuberosidades isquiáticas e ilíacas muito proeminentes.", "Pontiaguda. Contornos côncavos.", "Tuberosidades isquiáticas e ilíacas discerníveis.", "Ligeiramente arredondada. Contornos convexos.", "Bem arredondada. Tuberosidades isquiáticas e ilíacas ocultas.", "Arredondada. Sulco mediano formando uma garupa dupla."],
-    tail: ["Vértebras na base da cauda visíveis. Ligamento sacrotuberoso claramente definido.", "Proeminente. Base da cauda claramente definida.", "Claramente definida. Base da cauda claramente visível.", "Coberta. Base da cauda ligeiramente definida. Ligeiro depósito de gordura oculta vértebras e ligamentos.", "Mal definida. Depósito de gordura espesso e mole.", "Massiva. Tecido adiposo formando uma almofada firme à volta da base da cauda."]
-  },
-  sumLabel: "ECC Ponderado",
-  photoTitle: "Fotos",
-  photoInstr: "Adicione fotos do cavalo para esta avaliação (opcional). As fotos são armazenadas localmente no seu navegador.",
-  buttons: { save: "Guardar avaliação", reset: "Repor", export: "Exportar JSON", exportAll: "Exportar tudo", clearAll: "Apagar tudo" },
-  historyTitle: "Avaliações guardadas",
-  emptyHistory: "Ainda sem avaliações guardadas. Complete uma avaliação e guarde-a.",
-  guideIntro: "<strong>Guia de referência</strong> — Descrições detalhadas para cada zona corporal em cada pontuação ECC (0–5).",
-  guideHeaders: { score: "ECC", neck: "Pescoço", withers: "Garrote", shoulder: "Atrás espádua", ribs: "Costelas", back: "Dorso", croup: "Garupa", tail: "Cauda" },
-  interpTitle: "Interpretação ECC",
-  interp: [
-    { range: "> 4,5", label: "Muito gordo", badge: "b-danger", reco: "Perigo — Alto risco de doença metabólica" },
-    { range: "4,0 – 4,5", label: "Gordo", badge: "b-warn", reco: "Precaução — Redução de peso recomendada" },
-    { range: "3,5 – 4,0", label: "Ligeiramente gordo", badge: "b-monitor", reco: "Monitorizar — Ajustar dieta e exercício" },
-    { range: "2,5 – 3,5", label: "Ótimo", badge: "b-safe", reco: "Boa condição — Manter gestão atual" },
-    { range: "2,0 – 2,5", label: "Ligeiramente magro", badge: "b-monitor", reco: "Monitorizar — Aumentar nutrição" },
-    { range: "1,5 – 2,0", label: "Magro", badge: "b-warn", reco: "Precaução — Avaliação veterinária aconselhada" },
-    { range: "< 1,5", label: "Muito magro", badge: "b-danger", reco: "Perigo — Atenção veterinária imediata" }
-  ],
-  formulaTitle: "Fórmula ponderada",
-  formulaText: "ECC = 0,50 × Costelas + 0,15 × Atrás espádua + 0,15 × Pescoço + 0,10 × Garrote + 0,05 × Base cauda + 0,05 × Garupa. A linha do dorso é avaliada qualitativamente e não incluída no cálculo ponderado.",
-  legal: {
-    title: "⚖️ Aviso Legal (clique para expandir)",
-    vetTitle: "Aviso veterinário",
-    vetText: "Esta ferramenta é fornecida exclusivamente para fins educativos e informativos e não constitui aconselhamento veterinário. Não deve substituir um exame veterinário profissional. Consulte sempre um veterinário qualificado para quaisquer decisões relativas à saúde, nutrição e bem-estar do seu cavalo.",
-    privacyTitle: "Privacidade de dados",
-    privacyText: "Esta aplicação não recolhe, armazena nem transmite quaisquer dados pessoais ou imagens para nenhum servidor. Todas as informações introduzidas permanecem exclusivamente no seu dispositivo.",
-    licenseTitle: "Licença",
-    licenseText: "Ferramenta gratuita desenvolvida no âmbito do projeto EUnetHorse (Horizon Europe #101086551). Reprodução permitida desde que a fonte seja citada. Dados fornecidos pelo IFCE, França. Supervisionado por Maria João Fradinho.",
-    euFundingLabel: "Financiado pela União Europeia",
-    euDisclaimerText: "Financiado pela União Europeia. As opiniões e os pontos de vista expressos são exclusivamente os do(s) autor(es) e não refletem necessariamente os da União Europeia ou da Agência de Execução Europeia da Investigação (REA). Acordo de Subvenção n.º 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
-  },
-  toast: { saved: "Avaliação guardada", cleared: "Todas as avaliações apagadas", resetDone: "Formulário reposto", deleted: "Avaliação eliminada" },
-  confirm: { clearAll: "Apagar todas as avaliações guardadas? Esta ação não pode ser desfeita.", deleteOne: "Eliminar esta avaliação?" },
-  scoreLabels: { min: "0 Caquético", max: "5 Obeso" }
-},
-ro: {
-  meta: { name: "Română", flag: "\u{1F1F7}\u{1F1F4}" },
-  tabs: { assess: "Evaluare", history: "Istoric", guide: "Ghid" },
-  intro: "<strong>Scorul Condiției Corporale (BCS)</strong> — Evaluați cantitatea de țesut adipos al calului prin observare vizuală și palpare. Notați fiecare din cele 7 zone anatomice pe o scară de la 0 (cahexic) la 5 (obez). Sunt permise jumătăți de punct.",
-  horseInfo: "Informații despre cal",
-  fields: { name: "Nume", breed: "Rasă", id: "ID", date: "Data", category: "Categorie", notes: "Note / Observații" },
-  categories: { general: "Cal adult (general)", sport: "Cal de sport", broodmare: "Iapă de prăsilă", pony: "Ponei / Întreținere ușoară", draft: "Cal de tracțiune" },
-  zonesTitle: "Notare pe zone",
-  zonesInstr: "Glisați cursorul fiecărei zone de la 0 la 5. Descrierea se actualizează conform scorului selectat.",
-  zones: [
-    { key: "neck", name: "Gât / Creastă", icon: "1" },
-    { key: "withers", name: "Greabăn", icon: "2" },
-    { key: "shoulder", name: "În spatele umărului", icon: "3" },
-    { key: "ribs", name: "Coaste", icon: "4" },
-    { key: "back", name: "Linia spatelui", icon: "5" },
-    { key: "croup", name: "Crupă", icon: "6" },
-    { key: "tail", name: "Baza cozii", icon: "7" }
-  ],
-  zoneDescs: {
-    neck: ["Fără creastă. Vertebrele cervicale vizibile.", "Structura osoasă a gâtului vizibilă. Creasta neaparentă.", "Creastă vizibilă, cu un ușor șanț la bază.", "Creastă bine definită, ușor convexă.", "Creasta gâtului poate fi apucată cu toată mâna și se simte fermă.", "Creastă foarte proeminentă, scufundată în masa gâtului."],
-    withers: ["Foarte proeminentă. Procesele spinoase vizibile.", "Proeminentă. Partea superioară a scapulei vizibilă.", "Pronunțată și uscată.", "Ușor proeminentă.", "Integrată în țesutul înconjurător.", "Ascunsă și învelită într-o masă rotunjită de grăsime."],
-    shoulder: ["Depresiune profundă. Umăr proeminent și uscat.", "Deprimat.", "Ușor concav. Depozit subțire de grăsime.", "Devine plat. Depozit de grăsime bine definit.", "Ușor ridicat, convex. Depozit gros de grăsime moale.", "Clar convex. Umăr ascuns de grăsime. Masa tremură la palpare."],
-    ribs: ["Atașarea coastelor la procesele transverse vizibilă. Depresiuni intercostale foarte adânci. Piele uscată aderentă.", "Foarte proeminente. Piele aderentă de coaste.", "Coastele se simt sub pielea suplă. Ușoare depresiuni intercostale.", "Nu sunt vizibile. Abia palpabile.", "Nu pot fi palpate sub depozitul de grăsime.", "Strat gros de grăsime care se rostogolește sub mână."],
-    back: ["Procesele spinoase ale vertebrelor lombare foarte proeminente. Fără acoperire de grăsime.", "Procesele spinoase clar palpabile. Acoperire minimă de grăsime.", "Procesele spinoase palpabile cu presiune ușoară. Strat subțire de grăsime.", "Procesele spinoase palpabile doar cu presiune fermă. Acoperire de grăsime netedă și uniformă.", "Nu pot fi palpate. Spatele pare plat sau ușor rotunjit.", "Depozite groase de grăsime de-a lungul coloanei. Șanțul median poate fi vizibil."],
-    croup: ["Structură osoasă foarte proeminentă. Tuberozitățile ischiatice și iliace foarte proeminente.", "Ascuțită. Contururi concave.", "Tuberozitățile ischiatice și iliace discernabile.", "Ușor rotunjită. Contururi convexe.", "Bine rotunjită. Tuberozitățile ascunse.", "Rotunjită. Șanț median formând o crupă dublă."],
-    tail: ["Vertebrele la baza cozii vizibile. Ligamentul sacrotuberos clar definit.", "Proeminentă. Baza cozii clar definită.", "Clar definită. Baza cozii clar vizibilă.", "Acoperită. Baza cozii ușor definită. Un ușor depozit de grăsime ascunde vertebrele și ligamentele.", "Slab definită. Depozit gros de grăsime moale.", "Masivă. Țesut adipos formând o pernă fermă în jurul bazei cozii."]
-  },
-  sumLabel: "BCS Ponderat",
-  photoTitle: "Fotografii",
-  photoInstr: "Adăugați fotografii ale calului pentru această evaluare (opțional). Fotografiile sunt stocate local în browserul dvs.",
-  buttons: { save: "Salvează evaluarea", reset: "Resetează", export: "Exportă JSON", exportAll: "Exportă tot", clearAll: "Șterge tot" },
-  historyTitle: "Evaluări salvate",
-  emptyHistory: "Încă nu sunt evaluări salvate. Completați o evaluare și salvați-o.",
-  guideIntro: "<strong>Ghid de referință</strong> — Descrieri detaliate pentru fiecare zonă corporală la fiecare scor BCS (0–5).",
-  guideHeaders: { score: "BCS", neck: "Gât", withers: "Greabăn", shoulder: "Spatele umăr", ribs: "Coaste", back: "Spate", croup: "Crupă", tail: "Coadă" },
-  interpTitle: "Interpretarea BCS",
-  interp: [
-    { range: "> 4,5", label: "Foarte gras", badge: "b-danger", reco: "Pericol — Risc ridicat de boală metabolică" },
-    { range: "4,0 – 4,5", label: "Gras", badge: "b-warn", reco: "Precauție — Se recomandă reducerea greutății" },
-    { range: "3,5 – 4,0", label: "Ușor gras", badge: "b-monitor", reco: "Monitorizare — Ajustați dieta și exercițiul" },
-    { range: "2,5 – 3,5", label: "Optim", badge: "b-safe", reco: "Condiție bună — Mențineți managementul actual" },
-    { range: "2,0 – 2,5", label: "Ușor slab", badge: "b-monitor", reco: "Monitorizare — Creșteți nutriția" },
-    { range: "1,5 – 2,0", label: "Slab", badge: "b-warn", reco: "Precauție — Se recomandă evaluare veterinară" },
-    { range: "< 1,5", label: "Foarte slab", badge: "b-danger", reco: "Pericol — Atenție veterinară imediată" }
-  ],
-  formulaTitle: "Formula ponderată",
-  formulaText: "BCS = 0,50 × Coaste + 0,15 × Spatele umărului + 0,15 × Gât + 0,10 × Greabăn + 0,05 × Baza cozii + 0,05 × Crupă. Linia spatelui este evaluată calitativ și nu este inclusă în calculul ponderat.",
-  legal: {
-    title: "⚖️ Aviz Legal (clic pentru a extinde)",
-    vetTitle: "Avertisment veterinar",
-    vetText: "Acest instrument este furnizat exclusiv în scopuri educative și informative și nu constituie consiliere veterinară. Nu trebuie să înlocuiască un examen veterinar profesional. Consultați întotdeauna un veterinar calificat pentru orice decizii privind sănătatea, nutriția și bunăstarea calului dumneavoastră.",
-    privacyTitle: "Confidențialitatea datelor",
-    privacyText: "Această aplicație nu colectează, stochează sau transmite date personale sau imagini către niciun server. Toate informațiile introduse rămân exclusiv pe dispozitivul dumneavoastră.",
-    licenseTitle: "Licență",
-    licenseText: "Instrument gratuit dezvoltat în cadrul proiectului EUnetHorse (Horizon Europe #101086551). Reproducerea este permisă cu condiția citării sursei. Date furnizate de IFCE, Franța. Supervizat de Maria João Fradinho.",
-    euFundingLabel: "Finanțat de Uniunea Europeană",
-    euDisclaimerText: "Finanțat de Uniunea Europeană. Punctele de vedere și opiniile exprimate aparțin exclusiv autorului(ilor) și nu reflectă neapărat cele ale Uniunii Europene sau ale Agenției Executive Europene pentru Cercetare (REA). Acord de grant nr. 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
-  },
-  toast: { saved: "Evaluare salvată", cleared: "Toate evaluările șterse", resetDone: "Formular resetat", deleted: "Evaluare ștearsă" },
-  confirm: { clearAll: "Ștergeți toate evaluările salvate? Această acțiune nu poate fi anulată.", deleteOne: "Ștergeți această evaluare?" },
-  scoreLabels: { min: "0 Cahexic", max: "5 Obez" }
-}
+  "ro": {
+    "meta": {
+      "name": "Română",
+      "flag": "🇷🇴"
+    },
+    "tabs": {
+      "assess": "Evaluare",
+      "history": "Istoric",
+      "guide": "Ghid"
+    },
+    "intro": "<strong>Scorul Condiției Corporale (BCS)</strong> — Evaluați cantitatea de țesut adipos al calului prin observare vizuală și palpare. Notați fiecare din cele 7 zone anatomice pe o scară de la 0 (cahexic) la 5 (obez). Sunt permise jumătăți de punct.",
+    "horseInfo": "Informații despre cal",
+    "fields": {
+      "name": "Nume",
+      "breed": "Rasă",
+      "id": "ID",
+      "date": "Data",
+      "category": "Categorie",
+      "notes": "Note / Observații"
+    },
+    "categories": {
+      "general": "Cal adult (general)",
+      "sport": "Cal de sport",
+      "broodmare": "Iapă de prăsilă",
+      "pony": "Ponei / Întreținere ușoară",
+      "draft": "Cal de tracțiune"
+    },
+    "zonesTitle": "Notare pe zone",
+    "zonesInstr": "Glisați cursorul fiecărei zone de la 0 la 5. Descrierea se actualizează conform scorului selectat.",
+    "zones": [
+      {
+        "key": "neck",
+        "name": "Gât / Creastă",
+        "icon": "1"
+      },
+      {
+        "key": "withers",
+        "name": "Greabăn",
+        "icon": "2"
+      },
+      {
+        "key": "shoulder",
+        "name": "În spatele umărului",
+        "icon": "3"
+      },
+      {
+        "key": "ribs",
+        "name": "Coaste",
+        "icon": "4"
+      },
+      {
+        "key": "back",
+        "name": "Linia spatelui",
+        "icon": "5"
+      },
+      {
+        "key": "croup",
+        "name": "Crupă",
+        "icon": "6"
+      },
+      {
+        "key": "tail",
+        "name": "Baza cozii",
+        "icon": "7"
+      }
+    ],
+    "zoneDescs": {
+      "neck": [
+        "Fără creastă. Vertebrele cervicale vizibile.",
+        "Structura osoasă a gâtului vizibilă. Creasta neaparentă.",
+        "Creastă vizibilă, cu un ușor șanț la bază.",
+        "Creastă bine definită, ușor convexă.",
+        "Creasta gâtului poate fi apucată cu toată mâna și se simte fermă.",
+        "Creastă foarte proeminentă, scufundată în masa gâtului."
+      ],
+      "withers": [
+        "Foarte proeminentă. Procesele spinoase vizibile.",
+        "Proeminentă. Partea superioară a scapulei vizibilă.",
+        "Pronunțată și uscată.",
+        "Ușor proeminentă.",
+        "Integrată în țesutul înconjurător.",
+        "Ascunsă și învelită într-o masă rotunjită de grăsime."
+      ],
+      "shoulder": [
+        "Depresiune profundă. Umăr proeminent și uscat.",
+        "Deprimat.",
+        "Ușor concav. Depozit subțire de grăsime.",
+        "Devine plat. Depozit de grăsime bine definit.",
+        "Ușor ridicat, convex. Depozit gros de grăsime moale.",
+        "Clar convex. Umăr ascuns de grăsime. Masa tremură la palpare."
+      ],
+      "ribs": [
+        "Atașarea coastelor la procesele transverse vizibilă. Depresiuni intercostale foarte adânci. Piele uscată aderentă.",
+        "Foarte proeminente. Piele aderentă de coaste.",
+        "Coastele se simt sub pielea suplă. Ușoare depresiuni intercostale.",
+        "Nu sunt vizibile. Abia palpabile.",
+        "Nu pot fi palpate sub depozitul de grăsime.",
+        "Strat gros de grăsime care se rostogolește sub mână."
+      ],
+      "back": [
+        "Procesele spinoase ale vertebrelor lombare foarte proeminente. Fără acoperire de grăsime.",
+        "Procesele spinoase clar palpabile. Acoperire minimă de grăsime.",
+        "Procesele spinoase palpabile cu presiune ușoară. Strat subțire de grăsime.",
+        "Procesele spinoase palpabile doar cu presiune fermă. Acoperire de grăsime netedă și uniformă.",
+        "Nu pot fi palpate. Spatele pare plat sau ușor rotunjit.",
+        "Depozite groase de grăsime de-a lungul coloanei. Șanțul median poate fi vizibil."
+      ],
+      "croup": [
+        "Structură osoasă foarte proeminentă. Tuberozitățile ischiatice și iliace foarte proeminente.",
+        "Ascuțită. Contururi concave.",
+        "Tuberozitățile ischiatice și iliace discernabile.",
+        "Ușor rotunjită. Contururi convexe.",
+        "Bine rotunjită. Tuberozitățile ascunse.",
+        "Rotunjită. Șanț median formând o crupă dublă."
+      ],
+      "tail": [
+        "Vertebrele la baza cozii vizibile. Ligamentul sacrotuberos clar definit.",
+        "Proeminentă. Baza cozii clar definită.",
+        "Clar definită. Baza cozii clar vizibilă.",
+        "Acoperită. Baza cozii ușor definită. Un ușor depozit de grăsime ascunde vertebrele și ligamentele.",
+        "Slab definită. Depozit gros de grăsime moale.",
+        "Masivă. Țesut adipos formând o pernă fermă în jurul bazei cozii."
+      ]
+    },
+    "sumLabel": "BCS Ponderat",
+    "photoTitle": "Fotografii",
+    "photoInstr": "Adăugați fotografii ale calului pentru această evaluare (opțional). Fotografiile sunt stocate local în browserul dvs.",
+    "buttons": {
+      "save": "Salvează evaluarea",
+      "reset": "Resetează",
+      "export": "Exportă JSON",
+      "exportAll": "Exportă tot",
+      "clearAll": "Șterge tot"
+    },
+    "historyTitle": "Evaluări salvate",
+    "emptyHistory": "Încă nu sunt evaluări salvate. Completați o evaluare și salvați-o.",
+    "guideIntro": "<strong>Ghid de referință</strong> — Descrieri detaliate pentru fiecare zonă corporală la fiecare scor BCS (0–5).",
+    "guideHeaders": {
+      "score": "BCS",
+      "neck": "Gât",
+      "withers": "Greabăn",
+      "shoulder": "Spatele umăr",
+      "ribs": "Coaste",
+      "back": "Spate",
+      "croup": "Crupă",
+      "tail": "Coadă"
+    },
+    "interpTitle": "Interpretarea BCS",
+    "interp": [
+      {
+        "range": "> 4,5",
+        "label": "Foarte gras",
+        "badge": "b-danger",
+        "reco": "Pericol — Risc ridicat de boală metabolică"
+      },
+      {
+        "range": "4,0 – 4,5",
+        "label": "Gras",
+        "badge": "b-warn",
+        "reco": "Precauție — Se recomandă reducerea greutății"
+      },
+      {
+        "range": "3,5 – 4,0",
+        "label": "Ușor gras",
+        "badge": "b-monitor",
+        "reco": "Monitorizare — Ajustați dieta și exercițiul"
+      },
+      {
+        "range": "2,5 – 3,5",
+        "label": "Optim",
+        "badge": "b-safe",
+        "reco": "Condiție bună — Mențineți managementul actual"
+      },
+      {
+        "range": "2,0 – 2,5",
+        "label": "Ușor slab",
+        "badge": "b-monitor",
+        "reco": "Monitorizare — Creșteți nutriția"
+      },
+      {
+        "range": "1,5 – 2,0",
+        "label": "Slab",
+        "badge": "b-warn",
+        "reco": "Precauție — Se recomandă evaluare veterinară"
+      },
+      {
+        "range": "< 1,5",
+        "label": "Foarte slab",
+        "badge": "b-danger",
+        "reco": "Pericol — Atenție veterinară imediată"
+      }
+    ],
+    "formulaTitle": "Formula ponderată",
+    "formulaText": "BCS = 0,50 × Coaste + 0,15 × Spatele umărului + 0,15 × Gât + 0,10 × Greabăn + 0,05 × Baza cozii + 0,05 × Crupă. Linia spatelui este evaluată calitativ și nu este inclusă în calculul ponderat.",
+    "legal": {
+      "title": "⚖️ Aviz Legal (clic pentru a extinde)",
+      "vetTitle": "Avertisment veterinar",
+      "vetText": "Acest instrument este furnizat exclusiv în scopuri educative și informative și nu constituie consiliere veterinară. Nu trebuie să înlocuiască un examen veterinar profesional. Consultați întotdeauna un veterinar calificat pentru orice decizii privind sănătatea, nutriția și bunăstarea calului dumneavoastră.",
+      "privacyTitle": "Confidențialitatea datelor",
+      "privacyText": "Această aplicație nu colectează, stochează sau transmite date personale sau imagini către niciun server. Toate informațiile introduse rămân exclusiv pe dispozitivul dumneavoastră.",
+      "licenseTitle": "Licență",
+      "licenseText": "Instrument gratuit dezvoltat în cadrul proiectului EUnetHorse (Horizon Europe #101086551). Reproducerea este permisă cu condiția citării sursei. Date furnizate de IFCE, Franța. Supervizat de Maria João Fradinho.",
+      "euFundingLabel": "Finanțat de Uniunea Europeană",
+      "euDisclaimerText": "Finanțat de Uniunea Europeană. Punctele de vedere și opiniile exprimate aparțin exclusiv autorului(ilor) și nu reflectă neapărat cele ale Uniunii Europene sau ale Agenției Executive Europene pentru Cercetare (REA). Acord de grant nr. 101086551 · Horizon Europe · HORIZON-CL6-2022-GOVERNANCE-01."
+    },
+    "toast": {
+      "saved": "Evaluare salvată",
+      "cleared": "Toate evaluările șterse",
+      "resetDone": "Formular resetat",
+      "deleted": "Evaluare ștearsă"
+    },
+    "confirm": {
+      "clearAll": "Ștergeți toate evaluările salvate? Această acțiune nu poate fi anulată.",
+      "deleteOne": "Ștergeți această evaluare?"
+    },
+    "scoreLabels": {
+      "min": "0 Cahexic",
+      "max": "5 Obez"
+    }
+  }
 };
 
 // ═══════════════════════════════════════════════
@@ -1576,27 +2998,28 @@ let downloadsApi = null;
 // Load saved assessments
 try { assessments = JSON.parse(localStorage.getItem('bcs_assessments') || '[]'); } catch(e) { assessments = []; }
 
-// Try to get downloads capability
+// Export buttons are always available: use the Claude downloads capability when present,
+// otherwise a normal browser download (e.g. on eunethorse.eu).
+document.getElementById('btn-export').style.display = '';
+document.getElementById('btn-export-all').style.display = '';
 (async () => {
   try {
-    if (window.claude) {
+    if (window.claude && typeof window.claude.use === 'function') {
       downloadsApi = await window.claude.use('downloads');
-      if (downloadsApi) {
-        document.getElementById('btn-export').style.display = '';
-        document.getElementById('btn-export-all').style.display = '';
-      }
     }
-  } catch(e) {}
+  } catch(e) { downloadsApi = null; }
 })();
 
 // ═══════════════════════════════════════════════
 // LANGUAGE
 // ═══════════════════════════════════════════════
+// Finnish (draft translation, pending native review)
+I18N.fi = {"meta":{"name":"Suomi","flag":"🇫🇮"},"tabs":{"assess":"Arviointi","history":"Historia","guide":"Opas"},"intro":"<strong>Kuntoluokitus (BCS)</strong> — Arvioi hevosesi rasvakudoksen määrä silmämääräisesti ja tunnustelemalla. Pisteytä kukin seitsemästä anatomisesta alueesta asteikolla 0 (riutunut) – 5 (lihava). Puolikkaat pisteet ovat sallittuja.","horseInfo":"Hevosen tiedot","fields":{"name":"Nimi","breed":"Rotu","id":"Tunniste","date":"Päivämäärä","category":"Luokka","notes":"Muistiinpanot / havainnot"},"categories":{"general":"Aikuinen hevonen (yleinen)","sport":"Urheiluhevonen","broodmare":"Siitostamma","pony":"Poni / helppo pitäjä","draft":"Työhevonen"},"zonesTitle":"Alueiden pisteytys","zonesInstr":"Liu'uta kunkin alueen pisteet välille 0–5. Kuvaus päivittyy valitun pistemäärän mukaan.","zones":[{"key":"neck","name":"Kaula / harja","icon":"1"},{"key":"withers","name":"Säkä","icon":"2"},{"key":"shoulder","name":"Lavan takana","icon":"3"},{"key":"ribs","name":"Kylkiluut","icon":"4"},{"key":"back","name":"Selkälinja","icon":"5"},{"key":"croup","name":"Lautanen / takaosa","icon":"6"},{"key":"tail","name":"Hännäntyvi","icon":"7"}],"zoneDescs":{"neck":["Ei harjaa. Kaulanikamat näkyvät.","Kaulan luurakenne näkyy. Harja ei erotu.","Harja näkyy, ja sen tyvessä on lievä uurre.","Selvästi erottuva, hieman kupera harja.","Harjaan saa otteen koko kädellä, ja se tuntuu kiinteältä.","Hyvin korostunut harja, joka on uponnut kaulan massaan."],"withers":["Hyvin korostunut. Okahaarakkeet näkyvät.","Korostunut. Lapaluun yläosa näkyy.","Selvästi erottuva ja kuiva.","Hieman korostunut.","Sulautunut ympäröivään kudokseen.","Peittynyt pyöreän rasvamassan alle."],"shoulder":["Syvä kuoppa. Korostunut, kuiva lapa.","Painunut.","Hieman kovera. Ohut rasvakerros.","Muuttuu tasaiseksi. Selvä rasvakerros.","Hieman koholla, kupera. Paksu, pehmeä rasvakerros.","Selvästi kupera. Lapa peittynyt rasvaan. Massa hytkyy tunnusteltaessa."],"ribs":["Kylkiluiden kiinnityskohdat poikkihaarakkeisiin näkyvät. Hyvin syvät kylkiluiden väliset kuopat. Kuiva iho tiukasti kiinni.","Hyvin korostuneet. Iho tiukasti kiinni kylkiluissa.","Kylkiluut tuntuvat joustavan ihon alla. Lievät kylkiluiden väliset kuopat.","Eivät näy. Tuntuvat tuskin.","Eivät tunnu rasvakerroksen alla.","Paksu rasvakerros, joka liikkuu käden alla."],"back":["Lannenikamien okahaarakkeet hyvin korostuneet. Ei rasvapeitettä.","Okahaarakkeet tuntuvat selvästi. Vähäinen rasvapeite.","Okahaarakkeet tuntuvat kevyesti painettaessa. Ohut rasvakerros.","Okahaarakkeet tuntuvat vain voimakkaasti painettaessa. Sileä, tasainen rasvapeite.","Eivät tunnu. Selkä näyttää tasaiselta tai hieman pyöreältä.","Paksut rasvakertymät selkärangan varrella. Keskiuurre voi näkyä."],"croup":["Hyvin korostunut luurakenne. Istuinkyhmyt ja lonkkakyhmyt hyvin korostuneet.","Terävä. Koverat ääriviivat.","Istuinkyhmyt ja lonkkakyhmyt erottuvat.","Hieman pyöristynyt. Kuperat ääriviivat.","Hyvin pyöristynyt. Istuinkyhmyt ja lonkkakyhmyt peittyneet.","Pyöreä. Keskiuurre muodostaa kaksoislautasen."],"tail":["Hännäntyven nikamat näkyvät. Ristiluu-istuinkyhmyside erottuu selvästi.","Korostunut. Hännäntyvi erottuu selvästi.","Selvästi erottuva. Hännäntyvi näkyy selvästi.","Peittynyt. Hännäntyvi erottuu hieman. Lievä rasvakerros peittää nikamat ja siteet.","Huonosti erottuva. Paksu, pehmeä rasvakerros.","Massiivinen. Rasvakudos muodostaa kiinteän pehmusteen hännäntyven ympärille."]},"sumLabel":"Painotettu BCS","photoTitle":"Valokuvat","photoInstr":"Lisää hevosesta valokuvia tähän arviointiin (valinnainen). Kuvat tallennetaan paikallisesti selaimeesi.","buttons":{"save":"Tallenna arviointi","reset":"Tyhjennä","export":"Vie JSON","exportAll":"Vie kaikki","clearAll":"Poista kaikki"},"historyTitle":"Tallennetut arvioinnit","emptyHistory":"Tallennettuja arviointeja ei vielä ole. Tee arviointi ja tallenna se, niin se näkyy täällä.","guideIntro":"<strong>Viiteopas</strong> — Yksityiskohtaiset kuvaukset kustakin kehon alueesta jokaisella BCS-pistemäärällä (0–5). Käytä tätä visuaalisena tukena arvioinnin aikana.","guideHeaders":{"score":"BCS","neck":"Kaula","withers":"Säkä","shoulder":"Lavan takana","ribs":"Kylkiluut","back":"Selkälinja","croup":"Lautanen","tail":"Hännäntyvi"},"interpTitle":"BCS:n tulkinta","interp":[{"range":"> 4,5","label":"Erittäin lihava","badge":"b-danger","reco":"Vaara — suuri aineenvaihduntasairauksien riski"},{"range":"4,0 – 4,5","label":"Lihava","badge":"b-warn","reco":"Varoitus — painonpudotusta suositellaan"},{"range":"3,5 – 4,0","label":"Hieman lihava","badge":"b-monitor","reco":"Seuraa — muuta ruokintaa ja liikuntaa"},{"range":"2,5 – 3,5","label":"Ihanteellinen","badge":"b-safe","reco":"Hyvä kunto — jatka nykyistä hoitoa"},{"range":"2,0 – 2,5","label":"Hieman laiha","badge":"b-monitor","reco":"Seuraa — lisää ruokintaa"},{"range":"1,5 – 2,0","label":"Laiha","badge":"b-warn","reco":"Varoitus — eläinlääkärin arvio suositeltava"},{"range":"< 1,5","label":"Erittäin laiha","badge":"b-danger","reco":"Vaara — välitön eläinlääkärin hoito"}],"formulaTitle":"Painotettu kaava","formulaText":"BCS = 0,50 × kylkiluut + 0,15 × lavan takana + 0,15 × kaula + 0,10 × säkä + 0,05 × hännäntyvi + 0,05 × lautanen. Selkälinjan pisteitä käytetään laadulliseen arviointiin, eikä niitä lasketa mukaan painotettuun tulokseen.","legal":{"title":"⚖️ Oikeudellinen huomautus (avaa napsauttamalla)","vetTitle":"Eläinlääketieteellinen vastuuvapauslauseke","vetText":"Tämä työkalu on tarkoitettu ainoastaan opetus- ja tiedotuskäyttöön, eikä se ole eläinlääketieteellistä neuvontaa. Se ei korvaa eläinlääkärin tekemää tutkimusta. Käänny aina pätevän eläinlääkärin puoleen kaikissa hevosesi terveyttä, ruokintaa ja hyvinvointia koskevissa päätöksissä. Tekijät ja EUnetHorse-hanke eivät vastaa mistään toimista, jotka perustuvat tämän työkalun antamiin tuloksiin.","privacyTitle":"Tietosuoja","privacyText":"Tämä sovellus ei kerää, tallenna eikä lähetä henkilötietoja tai kuvia millekään palvelimelle. Kaikki syötetyt tiedot pysyvät ainoastaan omalla laitteellasi.","licenseTitle":"Lisenssi","licenseText":"Maksuton työkalu, joka on kehitetty EUnetHorse-hankkeessa (Horisontti Eurooppa #101086551). Kopiointi on sallittu, kun lähde mainitaan. Aineisto: IFCE, Ranska. Valvonta: Maria João Fradinho.","euFundingLabel":"Euroopan unionin rahoittama","euDisclaimerText":"Euroopan unionin rahoittama. Esitetyt näkemykset ja mielipiteet ovat ainoastaan tekijöiden omia eivätkä välttämättä vastaa Euroopan unionin tai Euroopan tutkimuksen toimeenpanoviraston (REA) näkemyksiä. Euroopan unioni tai myöntävä viranomainen eivät ole niistä vastuussa. Avustussopimus nro 101086551 · Horisontti Eurooppa · HORIZON-CL6-2022-GOVERNANCE-01."},"toast":{"saved":"Arviointi tallennettu","cleared":"Kaikki arvioinnit poistettu","resetDone":"Lomake tyhjennetty","deleted":"Arviointi poistettu"},"confirm":{"clearAll":"Poistetaanko kaikki tallennetut arvioinnit? Toimintoa ei voi perua.","deleteOne":"Poistetaanko tämä arviointi?"},"scoreLabels":{"min":"0 Riutunut","max":"5 Lihava"}};
 function T() { return I18N[currentLang]; }
 
 function initLangSelect() {
   const sel = document.getElementById('langSelect');
-  const order = ['en','be','de','es','fr','it','pl','pt','ro'];
+  const order = ['en','be','de','es','fi','fr','it','pl','pt','ro'];
   order.forEach(k => {
     const o = document.createElement('option');
     o.value = k;
@@ -1604,7 +3027,8 @@ function initLangSelect() {
     sel.appendChild(o);
   });
   // Try to detect browser language
-  const bl = (navigator.language || '').slice(0,2).toLowerCase();
+  let bl = (navigator.language || '').slice(0,2).toLowerCase();
+  if (bl === 'nl') bl = 'be';
   if (I18N[bl]) currentLang = bl;
   sel.value = currentLang;
   sel.addEventListener('change', () => { currentLang = sel.value; applyLang(); });
@@ -1612,6 +3036,7 @@ function initLangSelect() {
 
 function applyLang() {
   const t = T();
+  document.documentElement.lang = currentLang === 'be' ? 'nl-BE' : currentLang;
   // Tabs
   document.getElementById('t-assess').textContent = t.tabs.assess;
   document.getElementById('t-history').textContent = t.tabs.history;
@@ -1857,13 +3282,20 @@ function resetForm() {
 }
 
 async function exportJSON(data, filename) {
-  if (!downloadsApi) return;
   const json = JSON.stringify(data, null, 2);
-  try {
-    await downloadsApi.save({ filename, data: json });
-  } catch(e) {
-    if (e.code !== 'declined') console.warn('Export failed:', e);
+  if (downloadsApi) {
+    try {
+      await downloadsApi.save({ filename, data: json });
+    } catch(e) {
+      if (e.code !== 'declined') console.warn('Export failed:', e);
+    }
+    return;
   }
+  const url = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.style.display = 'none';
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1500);
 }
 
 document.getElementById('btn-save').addEventListener('click', saveAssessment);
